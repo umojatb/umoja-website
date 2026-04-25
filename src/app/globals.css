@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+ * Umoja Africa — Design tokens
+ *
+ * Tokens are declared inline so they expand into utility class output
+ * (e.g. `bg-primary-700`, `font-heading`, `p-2`) rather than resolving via a
+ * runtime CSS custom property. Values that must stay dynamic at runtime
+ * (background, foreground, font vars from next/font) are wired through
+ * `var(--token)` references defined on `:root` below.
+ * ------------------------------------------------------------------------- */
+@theme inline {
+  /* Surface */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Primary — Umoja navy (#003366 anchored at 700) */
+  --color-primary-50: #e6eef5;
+  --color-primary-100: #ccddeb;
+  --color-primary-200: #99bad6;
+  --color-primary-300: #6698c2;
+  --color-primary-400: #3375ad;
+  --color-primary-500: #00528f;
+  --color-primary-600: #00407a;
+  --color-primary-700: #003366;
+  --color-primary-800: #00264d;
+  --color-primary-900: #001a33;
+  --color-primary-950: #000d1a;
+
+  /* Secondary — Umoja gold (#C5A059 anchored at 500) */
+  --color-secondary-50: #fbf7ee;
+  --color-secondary-100: #f6eedc;
+  --color-secondary-200: #eeddb9;
+  --color-secondary-300: #e5cc97;
+  --color-secondary-400: #ddbb74;
+  --color-secondary-500: #c5a059;
+  --color-secondary-600: #a88746;
+  --color-secondary-700: #806735;
+  --color-secondary-800: #594824;
+  --color-secondary-900: #332912;
+  --color-secondary-950: #1a1409;
+
+  /* Neutral — slate-derived grayscale */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+  --color-neutral-950: #020617;
+
+  /* Typography */
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-manrope);
+
+  /* Spacing — 8px system (overrides Tailwind's 4px default).
+     Every spacing/sizing utility (`p-*`, `m-*`, `gap-*`, `w-*`, etc.) becomes
+     a multiple of 8px: `p-1` = 8px, `p-2` = 16px, `p-4` = 32px, ... */
+  --spacing: 0.5rem;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #020617;
+    --foreground: #f8fafc;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), var(--font-sans), ui-sans-serif,
+      system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+}
