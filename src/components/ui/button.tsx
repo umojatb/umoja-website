@@ -1,7 +1,12 @@
 import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "outline-inverted"
+  | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
 
 const baseClasses =
@@ -16,6 +21,8 @@ const variantClasses: Record<ButtonVariant, string> = {
     "bg-secondary-500 text-primary-900 hover:bg-secondary-600 focus-visible:outline-secondary-500",
   outline:
     "border border-primary-700 text-primary-700 hover:bg-primary-50 focus-visible:outline-primary-700",
+  "outline-inverted":
+    "border border-white/40 text-white hover:bg-white/10 focus-visible:outline-white",
   ghost:
     "text-primary-700 hover:bg-primary-50 focus-visible:outline-primary-700",
 };
