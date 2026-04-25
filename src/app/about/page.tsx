@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
 
@@ -216,29 +215,11 @@ function LeadershipSection() {
 
 function JoinUsCTASection() {
   return (
-    <Section variant="dark">
-      <Heading
-        level={2}
-        align="center"
-        tone="inverted"
-        description="Whether you give or get involved, your support compounds. Start where it fits."
-      >
-        Join us in this work
-      </Heading>
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-        <Link
-          href="/donate"
-          className={buttonStyles({ variant: "secondary", size: "lg" })}
-        >
-          Donate
-        </Link>
-        <Link
-          href="/get-involved"
-          className={buttonStyles({ variant: "outline-inverted", size: "lg" })}
-        >
-          Get Involved
-        </Link>
-      </div>
-    </Section>
+    <CTASection
+      heading="Join us in this work"
+      description="Whether you give or get involved, your support compounds. Start where it fits."
+      primary={{ label: "Donate", href: "/donate" }}
+      secondary={{ label: "Get Involved", href: "/get-involved" }}
+    />
   );
 }

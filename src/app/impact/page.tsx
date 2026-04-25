@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
 
@@ -211,29 +210,11 @@ function TransparencySection() {
 
 function ImpactCTASection() {
   return (
-    <Section variant="dark">
-      <Heading
-        level={2}
-        align="center"
-        tone="inverted"
-        description="Every dollar enters the system you just read about — tracked, audited, and reported on a published cadence."
-      >
-        Donate with full transparency
-      </Heading>
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-        <Link
-          href="/donate"
-          className={buttonStyles({ variant: "secondary", size: "lg" })}
-        >
-          Donate
-        </Link>
-        <Link
-          href="/annual-reports"
-          className={buttonStyles({ variant: "outline-inverted", size: "lg" })}
-        >
-          Read our reports
-        </Link>
-      </div>
-    </Section>
+    <CTASection
+      heading="Donate with full transparency"
+      description="Every dollar enters the system you just read about — tracked, audited, and reported on a published cadence."
+      primary={{ label: "Donate", href: "/donate" }}
+      secondary={{ label: "Read our reports", href: "/annual-reports" }}
+    />
   );
 }
