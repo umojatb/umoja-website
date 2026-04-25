@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
 
@@ -185,29 +184,11 @@ function SelectionSection() {
 
 function ProgramsCTASection() {
   return (
-    <Section variant="dark">
-      <Heading
-        level={2}
-        align="center"
-        tone="inverted"
-        description="Fund the next cohort of scholarships, or partner with us as a school, employer, or institution."
-      >
-        Help us reach the next cohort
-      </Heading>
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-        <Link
-          href="/donate"
-          className={buttonStyles({ variant: "secondary", size: "lg" })}
-        >
-          Donate
-        </Link>
-        <Link
-          href="/partner"
-          className={buttonStyles({ variant: "outline-inverted", size: "lg" })}
-        >
-          Partner
-        </Link>
-      </div>
-    </Section>
+    <CTASection
+      heading="Help us reach the next cohort"
+      description="Fund the next cohort of scholarships, or partner with us as a school, employer, or institution."
+      primary={{ label: "Donate", href: "/donate" }}
+      secondary={{ label: "Partner", href: "/partner" }}
+    />
   );
 }
