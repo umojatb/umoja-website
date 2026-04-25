@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { buttonStyles } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { mainNav, donateHref, type NavItem } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
@@ -32,7 +33,7 @@ export function Navbar() {
 
         <Link
           href={donateHref}
-          className="inline-flex h-5 items-center justify-center rounded-full bg-secondary-500 px-3 text-sm font-semibold text-primary-900 transition-colors hover:bg-secondary-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-500"
+          className={buttonStyles({ variant: "secondary", size: "md" })}
         >
           Donate
         </Link>
