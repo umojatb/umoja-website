@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { buttonStyles } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { HeroVideo } from "@/components/hero-video";
 import { Section } from "@/components/ui/section";
 
 export default function HomePage() {
@@ -10,7 +10,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <IntroSection />
-      <LayeredMetricsSection />
+      <OpportunityGapSection />
       <KeyStatementSection />
       <ApproachStorySection />
       <LongViewSection />
@@ -21,56 +21,51 @@ export default function HomePage() {
 
 function HeroSection() {
   return (
-    <Section variant="brand" as="header" className="py-16 md:py-24">
-      <div className="relative min-h-[420px] overflow-hidden rounded-2xl bg-gradient-to-br from-primary-700 via-primary-500 to-secondary-400 shadow-2xl md:min-h-[520px]">
-        {/* Drop the hero clip in /public/hero.mp4 (or update the src). The
-            gradient above shows through while the source resolves or if
-            playback is unavailable. */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-        <div aria-hidden className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 flex items-center">
-          <div className="max-w-xl px-6 text-white md:px-12">
-            <p className="mb-4 font-heading text-xs uppercase tracking-widest">
-              Umoja Africa
-            </p>
-            <h1 className="font-heading text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
-              Empowering Africa Through <em>Education</em>
-            </h1>
-            <p className="mt-4 text-white/80 md:text-lg">
-              A continent-wide effort to give every young African the
-              foundation, scholarships, and mentorship they deserve — built
-              alongside the communities we serve.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-2">
-              <Link
-                href="/donate"
-                className={buttonStyles({ variant: "secondary", size: "lg" })}
-              >
-                Donate
-              </Link>
-              <Link
-                href="/get-involved"
-                className={buttonStyles({
-                  variant: "outline-inverted",
-                  size: "lg",
-                })}
-              >
-                Get Involved
-              </Link>
-            </div>
+    <section className="relative w-full min-h-[80dvh] overflow-hidden bg-gradient-to-br from-primary-700 via-primary-500 to-secondary-400 md:min-h-[90dvh]">
+      {/* Drop the hero clip in /public/hero.mp4 and a still frame in
+          /public/hero-poster.webp (then pass it via the poster prop). The
+          section gradient shows through until either resolves. */}
+      <HeroVideo
+        src="/hero.mp4"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-tr from-black/70 via-black/35 to-black/10"
+      />
+      <div className="absolute inset-0 z-10 flex items-center pt-24 md:pt-32">
+        <div className="max-w-2xl px-6 text-white md:pl-16">
+          <p className="mb-4 font-heading text-xs uppercase tracking-widest">
+            Umoja Africa
+          </p>
+          <h1 className="font-heading text-4xl font-semibold leading-tight tracking-tight md:text-6xl lg:text-7xl">
+            Empowering Africa Through Education
+          </h1>
+          <p className="mt-4 md:text-lg">
+            A continent-wide effort to give every young African the
+            foundation, scholarships, and mentorship they deserve — built
+            alongside the communities we serve.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-2 md:mt-8">
+            <Link
+              href="/donate"
+              className={buttonStyles({ variant: "secondary", size: "lg" })}
+            >
+              Donate
+            </Link>
+            <Link
+              href="/get-involved"
+              className={buttonStyles({
+                variant: "outline-inverted",
+                size: "lg",
+              })}
+            >
+              Get Involved
+            </Link>
           </div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }
 
@@ -89,46 +84,28 @@ function IntroSection() {
   );
 }
 
-function LayeredMetricsSection() {
+function OpportunityGapSection() {
   return (
-    <Section variant="muted" className="py-16">
-      <div className="rounded-2xl bg-white p-6 shadow-sm md:p-8">
-        <Heading
-          level={2}
-          eyebrow="The opportunity gap"
-          description="Across Africa, millions of young people are ready to learn — and the systems around them are still catching up. We close that distance, one community partnership at a time."
-        >
-          Talent is everywhere. Opportunity is not.
-        </Heading>
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <Card>
-            <p className="font-heading text-4xl font-bold text-primary-700">
-              100M+
-            </p>
-            <p className="mt-1 text-sm text-neutral-600">
-              School-age children across the continent without consistent
-              access to quality learning resources.
-            </p>
-          </Card>
-          <Card>
-            <p className="font-heading text-4xl font-bold text-primary-700">
-              1 in 3
-            </p>
-            <p className="mt-1 text-sm text-neutral-600">
-              Adults who still cannot read or write fluently in their primary
-              language.
-            </p>
-          </Card>
-          <Card>
-            <p className="font-heading text-4xl font-bold text-primary-700">
-              200+
-            </p>
-            <p className="mt-1 text-sm text-neutral-600">
-              Community-led schools we partner with across six countries — and
-              counting.
-            </p>
-          </Card>
-        </div>
+    <Section variant="muted" className="py-16 md:py-20">
+      <Heading
+        level={2}
+        eyebrow="The opportunity gap"
+        description="Across Africa, millions of young people are ready to learn — and the systems around them are still catching up. We close that distance, one community partnership at a time."
+      >
+        Talent is everywhere. Opportunity is not.
+      </Heading>
+
+      <div className="mt-12 grid gap-6 md:mt-16 md:grid-cols-[auto_1fr] md:items-end md:gap-12">
+        <p className="font-heading text-7xl font-semibold leading-none tracking-tight text-primary-700 md:text-8xl lg:text-9xl">
+          100M+
+        </p>
+        <p className="max-w-prose text-base leading-relaxed text-neutral-700 md:text-lg">
+          school-age children across the continent without consistent access to
+          quality learning resources. One in three adults still cannot read or
+          write fluently in their primary language; today we partner with{" "}
+          <span className="font-medium text-primary-700">200+</span>{" "}
+          community-led schools across six countries — and counting.
+        </p>
       </div>
     </Section>
   );
@@ -137,37 +114,33 @@ function LayeredMetricsSection() {
 function KeyStatementSection() {
   return (
     <Section variant="brand" className="py-20 md:py-28 rounded-t-3xl">
-      <Heading level={2} align="center" tone="inverted" display>
-        Talent doesn’t choose its address. We don’t ask it to.
-      </Heading>
+      <div className="max-w-3xl">
+        <Heading level={2} tone="inverted" display>
+          Talent doesn’t choose its address. We don’t ask it to.
+        </Heading>
+      </div>
     </Section>
   );
 }
 
 function ApproachStorySection() {
   return (
-    <Section className="py-16">
-      <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
-        <div
-          aria-hidden
-          className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary-700 via-primary-500 to-secondary-400 shadow-2xl"
-        />
-        <div>
-          <Heading
-            level={2}
-            eyebrow="Our approach"
-            description="We don’t parachute in. We build long-term partnerships that put scholarships and mentorship in the hands of the people closest to the work."
+    <Section className="py-16 md:py-20">
+      <div className="max-w-2xl md:ml-auto">
+        <Heading
+          level={2}
+          eyebrow="Our approach"
+          description="We don’t parachute in. We build long-term partnerships that put scholarships and mentorship in the hands of the people closest to the work."
+        >
+          Sustained access. Sustained presence.
+        </Heading>
+        <div className="mt-6">
+          <Link
+            href="/programs"
+            className={buttonStyles({ variant: "outline", size: "md" })}
           >
-            Sustained access. Sustained presence.
-          </Heading>
-          <div className="mt-6">
-            <Link
-              href="/programs"
-              className={buttonStyles({ variant: "outline", size: "md" })}
-            >
-              See how it works
-            </Link>
-          </div>
+            See how it works
+          </Link>
         </div>
       </div>
     </Section>
@@ -176,23 +149,17 @@ function ApproachStorySection() {
 
 function LongViewSection() {
   return (
-    <Section className="py-16">
-      <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
-        <div
-          aria-hidden
-          className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-secondary-300 via-secondary-400 to-primary-500 shadow-2xl"
-        />
-        <div>
-          <Heading level={2} eyebrow="The long view">
-            Each gift reaches a <em>person</em>, not a number.
-          </Heading>
-          <p className="mt-3 max-w-prose text-base leading-relaxed text-neutral-700 md:text-lg">
-            We’re built deliberately small. Every donor sees the cohort their
-            gift funds, every volunteer is paired with a scholar by name, and
-            every partnership is reviewed each year by the same small team.
-            When that changes, it’ll be because we decided it should.
-          </p>
-        </div>
+    <Section className="py-16 md:py-20">
+      <div className="max-w-2xl border-l-2 border-secondary-500 pl-6 md:pl-10">
+        <Heading level={2} eyebrow="The long view">
+          Each gift reaches a <em>person</em>, not a number.
+        </Heading>
+        <p className="mt-3 max-w-prose text-base leading-relaxed text-neutral-700 md:text-lg">
+          We’re built deliberately small. Every donor sees the cohort their
+          gift funds, every volunteer is paired with a scholar by name, and
+          every partnership is reviewed each year by the same small team.
+          When that changes, it’ll be because we decided it should.
+        </p>
       </div>
     </Section>
   );

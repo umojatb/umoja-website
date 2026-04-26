@@ -168,7 +168,7 @@ function PledgeStatementSection() {
 function FundsAllocationSection() {
   return (
     <Section variant="muted">
-      <div className="mx-auto max-w-5xl rounded-2xl bg-white p-6 shadow-sm md:p-9">
+      <div className="mx-auto max-w-5xl rounded-2xl bg-background p-6 shadow-sm md:p-9">
         <Heading
           level={2}
           eyebrow="Where the money goes"
