@@ -11,6 +11,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <OpportunityGapSection />
+      <KeyStatementSection />
       <ApproachSection />
       <CallToActionSection />
     </>
@@ -36,7 +37,7 @@ function HeroSection() {
           eyebrow="Umoja Africa"
           description="A continent-wide effort to give every young African the foundation, scholarships, and mentorship they deserve — built alongside the communities we serve."
         >
-          Empowering Africa Through Education
+          Empowering Africa Through <em>Education</em>
         </Heading>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
           <Link
@@ -138,6 +139,16 @@ function ApproachSection() {
           </div>
         </div>
       </div>
+    </Section>
+  );
+}
+
+function KeyStatementSection() {
+  return (
+    <Section variant="brand">
+      <Heading level={2} align="center" tone="inverted" display>
+        Talent doesn’t choose its address. We don’t ask it to.
+      </Heading>
     </Section>
   );
 }

@@ -112,6 +112,7 @@ export default function GetInvolvedPage() {
       <PathSelectionSection />
       <WhyItMattersSection />
       <VolunteerDetailsSection />
+      <ThreePathsAnchorSection />
       <PartnershipDetailsSection />
       <ClosingCTASection />
     </>
@@ -219,6 +220,29 @@ function VolunteerDetailsSection() {
             <p className="mt-2 text-sm text-neutral-600">{option.body}</p>
           </Card>
         ))}
+      </div>
+    </Section>
+  );
+}
+
+function ThreePathsAnchorSection() {
+  return (
+    <Section variant="brand">
+      <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+        <div
+          aria-hidden
+          className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-secondary-300 via-secondary-400 to-secondary-500 shadow-2xl"
+        />
+        <div>
+          <Heading level={2} tone="inverted" eyebrow="From the work">
+            All three paths build the same program.
+          </Heading>
+          <p className="mt-3 text-base leading-relaxed text-neutral-200 md:text-lg">
+            Money funds the scholarship. Time builds the relationship.
+            Partnership scales both. Each contributor changes the program in
+            a different way — and the program needs all of them.
+          </p>
+        </div>
       </div>
     </Section>
   );

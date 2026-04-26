@@ -79,6 +79,7 @@ export default function ProgramsPage() {
       <ProgramsHero />
       <CoreProgramsSection />
       <HowItWorksSection />
+      <ContinuitySection />
       <SelectionSection />
       <ProgramsCTASection />
     </>
@@ -158,12 +159,37 @@ function HowItWorksSection() {
   );
 }
 
+function ContinuitySection() {
+  return (
+    <Section>
+      <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+        <div>
+          <Heading level={2} eyebrow="Why this works">
+            Continuity is the program.
+          </Heading>
+          <p className="mt-3 text-base leading-relaxed text-neutral-700 md:text-lg">
+            Most scholarships end the day a student receives them. Ours start
+            there. The relationship — termly check-ins, mentor pairings,
+            alumni who come back to select the next cohort — is what turns
+            one funded year into a generation of funded learners.
+          </p>
+        </div>
+        <div
+          aria-hidden
+          className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-secondary-300 via-secondary-400 to-primary-500 shadow-2xl"
+        />
+      </div>
+    </Section>
+  );
+}
+
 function SelectionSection() {
   return (
-    <Section variant="muted">
+    <Section variant="brand">
       <Heading
         level={2}
         eyebrow="Student selection"
+        tone="inverted"
         description="Four guarantees that shape every scholarship decision. Selection happens with — not at — the communities involved."
       >
         How we choose scholars
