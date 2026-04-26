@@ -25,8 +25,8 @@ type HeadingProps = {
 };
 
 const sizeByLevel: Record<HeadingLevel, string> = {
-  1: "text-4xl md:text-5xl lg:text-6xl",
-  2: "text-3xl md:text-4xl",
+  1: "text-4xl md:text-5xl lg:text-6xl xl:text-7xl",
+  2: "text-3xl md:text-4xl lg:text-5xl",
   3: "text-2xl md:text-3xl",
 };
 
