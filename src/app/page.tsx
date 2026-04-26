@@ -60,7 +60,7 @@ function HeroSection() {
 
 function OpportunityGapSection() {
   return (
-    <Section variant="muted">
+    <Section variant="muted" className="py-8 md:py-10">
       <Heading
         level={2}
         eyebrow="The opportunity gap"
@@ -145,7 +145,7 @@ function ApproachSection() {
 
 function KeyStatementSection() {
   return (
-    <Section variant="brand" className="py-20 md:py-28">
+    <Section variant="brand" className="py-20 md:py-28 rounded-t-3xl">
       <Heading level={2} align="center" tone="inverted" display>
         Talent doesn’t choose its address. We don’t ask it to.
       </Heading>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
-import { Container } from "@/components/ui/container";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
@@ -132,7 +131,7 @@ function KeyMetricsSection() {
 
 function StoriesSection() {
   return (
-    <Section>
+    <Section className="py-8 md:py-10">
       <Heading
         level={2}
         eyebrow="Stories from the cohort"
@@ -158,7 +157,7 @@ function StoriesSection() {
 
 function PledgeStatementSection() {
   return (
-    <Section variant="brand" className="py-20 md:py-28">
+    <Section variant="brand" className="py-20 md:py-28 rounded-t-3xl">
       <Heading level={2} align="center" tone="inverted" display>
         We don’t promise — we <em>publish</em>.
       </Heading>
@@ -201,7 +200,7 @@ function FundsAllocationSection() {
 function TransparencySection() {
   return (
     <Section variant="inset">
-      <Container>
+      <div className="ml-auto mr-0 max-w-4xl px-3 sm:px-4 md:mr-12 lg:mr-20">
         <div className="grid gap-6 lg:grid-cols-5 lg:gap-12">
           <Heading level={2} eyebrow="Transparency" className="lg:col-span-2">
             What we publish, and how often
@@ -221,7 +220,7 @@ function TransparencySection() {
             </p>
           </div>
         </div>
-      </Container>
+      </div>
     </Section>
   );
 }
