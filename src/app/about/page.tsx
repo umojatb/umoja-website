@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
-import { Container } from "@/components/ui/container";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
@@ -88,47 +87,44 @@ function AboutHero() {
 function OurStorySection() {
   return (
     <Section variant="inset">
-      <Container>
-        <div className="mx-auto max-w-5xl rounded-2xl bg-white p-5 shadow-sm md:p-7">
-          <div className="grid gap-6 lg:grid-cols-5 lg:gap-12">
-            <Heading level={2} eyebrow="Our story" className="lg:col-span-2">
-              From a single classroom in <em>Congo</em>
-            </Heading>
-            <div className="space-y-3 text-base leading-relaxed text-neutral-700 md:text-lg lg:col-span-3">
-              <p>
-                Umoja Africa began in eastern Congo, where co-founders Baka
-                and Tessy grew up watching brilliant classmates fall out of
-                school — not because they couldn’t keep up, but because the
-                system around them couldn’t keep them. School fees,
-                transport, books, a single bad season for a family — any one
-                of those could end an education that would have changed a
-                community.
-              </p>
-              <p>
-                They started with one student. One scholarship, one set of
-                fees, one young person their teachers and neighbours had
-                identified as ready. They learned what worked, what didn’t,
-                and what the people closest to the work had been telling them
-                all along: scholarships matter, but presence matters more.
-              </p>
-              <p>
-                Today Umoja Africa runs on the same principle. We invest in
-                young Africans the way Baka and Tessy invested in that first
-                student — with full funding, real mentorship, and a
-                relationship that doesn’t end at graduation. The geography
-                expands, but the standard doesn’t.
-              </p>
-            </div>
+      <div className="ml-0 mr-auto max-w-4xl px-3 sm:px-4 md:ml-12 lg:ml-20">
+        <div className="grid gap-6 lg:grid-cols-5 lg:gap-12">
+          <Heading level={2} eyebrow="Our story" className="lg:col-span-2">
+            From a single classroom in <em>Congo</em>
+          </Heading>
+          <div className="space-y-3 text-base leading-relaxed text-neutral-700 md:text-lg lg:col-span-3">
+            <p>
+              Umoja Africa began in eastern Congo, where co-founders Baka
+              and Tessy grew up watching brilliant classmates fall out of
+              school — not because they couldn’t keep up, but because the
+              system around them couldn’t keep them. School fees, transport,
+              books, a single bad season for a family — any one of those
+              could end an education that would have changed a community.
+            </p>
+            <p>
+              They started with one student. One scholarship, one set of
+              fees, one young person their teachers and neighbours had
+              identified as ready. They learned what worked, what didn’t,
+              and what the people closest to the work had been telling them
+              all along: scholarships matter, but presence matters more.
+            </p>
+            <p>
+              Today Umoja Africa runs on the same principle. We invest in
+              young Africans the way Baka and Tessy invested in that first
+              student — with full funding, real mentorship, and a
+              relationship that doesn’t end at graduation. The geography
+              expands, but the standard doesn’t.
+            </p>
           </div>
         </div>
-      </Container>
+      </div>
     </Section>
   );
 }
 
 function VisionMissionSection() {
   return (
-    <Section variant="brand">
+    <Section variant="brand" className="-mt-4 md:-mt-8">
       <Heading level={2} eyebrow="What we stand for" tone="inverted" display>
         Vision &amp; mission
       </Heading>
@@ -183,7 +179,7 @@ function CoreValuesSection() {
 
 function LeadershipSection() {
   return (
-    <Section>
+    <Section className="py-8 md:py-10">
       <Heading
         level={2}
         eyebrow="Leadership"

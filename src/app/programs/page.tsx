@@ -127,7 +127,7 @@ function CoreProgramsSection() {
 
 function HowItWorksSection() {
   return (
-    <Section>
+    <Section className="py-12 md:py-16">
       <Heading
         level={2}
         eyebrow="How it works"
@@ -185,7 +185,7 @@ function ContinuitySection() {
 
 function SelectionSection() {
   return (
-    <Section variant="brand">
+    <Section variant="brand" className="py-16 md:py-20">
       <Heading
         level={2}
         eyebrow="Student selection"

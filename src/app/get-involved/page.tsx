@@ -47,23 +47,6 @@ const PATHS: readonly Path[] = [
   },
 ];
 
-type Pillar = { readonly title: string; readonly body: string };
-
-const PILLARS: readonly Pillar[] = [
-  {
-    title: "Money funds the scholarship",
-    body: "Every dollar covers fees, books, transport, or living costs for a scholar in active program. The most direct contribution.",
-  },
-  {
-    title: "Time builds the relationship",
-    body: "Mentors, tutors, and workshop leaders are the part of Umoja that money can’t replace. Hours given are hours invested in a specific scholar.",
-  },
-  {
-    title: "Partnership scales both",
-    body: "Schools, employers, and institutions multiply the program’s reach — opening doors, hosting cohorts, and sustaining commitments over years.",
-  },
-];
-
 type VolunteerOption = {
   readonly title: string;
   readonly commitment: string;
@@ -176,23 +159,15 @@ function PathSelectionSection() {
 
 function WhyItMattersSection() {
   return (
-    <Section>
-      <Heading
-        level={2}
-        eyebrow="Why it matters"
-        description="Not every contribution is the same — and that’s the point. The program needs all three to work."
-      >
-        Each path moves the program
-      </Heading>
-      <div className="mt-6 grid gap-3 sm:grid-cols-3">
-        {PILLARS.map((pillar) => (
-          <Card key={pillar.title}>
-            <h3 className="font-heading text-base font-semibold text-primary-900">
-              {pillar.title}
-            </h3>
-            <p className="mt-1 text-sm text-neutral-600">{pillar.body}</p>
-          </Card>
-        ))}
+    <Section className="py-8 md:py-10">
+      <div className="mx-auto max-w-prose">
+        <Heading
+          level={2}
+          eyebrow="Why it matters"
+          description="Money funds the scholarship; time builds the relationship; partnership scales both. Each contributor changes the program in a different way — and the program needs all three to work."
+        >
+          Each path moves the program
+        </Heading>
       </div>
     </Section>
   );
@@ -227,7 +202,7 @@ function VolunteerDetailsSection() {
 
 function ThreePathsAnchorSection() {
   return (
-    <Section variant="brand">
+    <Section variant="brand" className="-mt-4 md:-mt-8">
       <div className="grid items-center gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
         <div
           aria-hidden
