@@ -162,7 +162,7 @@ function HowItWorksSection() {
 function ContinuitySection() {
   return (
     <Section>
-      <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+      <div className="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-12">
         <div>
           <Heading level={2} eyebrow="Why this works">
             Continuity is the program.
@@ -194,7 +194,7 @@ function SelectionSection() {
       >
         How we choose scholars
       </Heading>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 grid gap-3 md:grid-cols-2">
         {CRITERIA.map((criterion) => (
           <Card key={criterion.title}>
             <h3 className="font-heading text-lg font-semibold text-primary-900">

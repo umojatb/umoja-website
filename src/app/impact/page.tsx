@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
+import { Container } from "@/components/ui/container";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
@@ -103,7 +104,7 @@ function ImpactHero() {
 function KeyMetricsSection() {
   return (
     <Section variant="muted">
-      <div className="mx-auto max-w-5xl rounded-2xl bg-white p-5 shadow-sm md:p-7">
+      <div className="mx-auto max-w-5xl rounded-2xl bg-neutral-50 p-6 shadow-sm md:p-8">
         <Heading
           level={2}
           eyebrow="Key metrics"
@@ -157,7 +158,7 @@ function StoriesSection() {
 
 function PledgeStatementSection() {
   return (
-    <Section variant="brand">
+    <Section variant="brand" className="py-20 md:py-28">
       <Heading level={2} align="center" tone="inverted" display>
         We don’t promise — we <em>publish</em>.
       </Heading>
@@ -168,7 +169,7 @@ function PledgeStatementSection() {
 function FundsAllocationSection() {
   return (
     <Section variant="muted">
-      <div className="mx-auto max-w-5xl rounded-2xl bg-white p-5 shadow-sm md:p-7">
+      <div className="mx-auto max-w-5xl rounded-2xl bg-white p-6 shadow-sm md:p-9">
         <Heading
           level={2}
           eyebrow="Where the money goes"
@@ -199,26 +200,28 @@ function FundsAllocationSection() {
 
 function TransparencySection() {
   return (
-    <Section>
-      <div className="grid gap-6 lg:grid-cols-5 lg:gap-12">
-        <Heading level={2} eyebrow="Transparency" className="lg:col-span-2">
-          What we publish, and how often
-        </Heading>
-        <div className="space-y-3 text-base leading-relaxed text-neutral-700 md:text-lg lg:col-span-3">
-          <p>
-            Umoja Africa publishes a full impact report each year — covering
-            scholar outcomes, an independent financial audit, the partner
-            directory, and what changed in our strategy. Quarterly updates
-            fill in the months between.
-          </p>
-          <p>
-            We commit to honest accounting: when something underperforms, we
-            say so; when we change strategy, we explain why; when a donor
-            asks to see the books, we open them. Our reports remain freely
-            available — linked from this page once published.
-          </p>
+    <Section variant="inset">
+      <Container>
+        <div className="grid gap-6 lg:grid-cols-5 lg:gap-12">
+          <Heading level={2} eyebrow="Transparency" className="lg:col-span-2">
+            What we publish, and how often
+          </Heading>
+          <div className="space-y-3 text-base leading-relaxed text-neutral-700 md:text-lg lg:col-span-3">
+            <p>
+              Umoja Africa publishes a full impact report each year —
+              covering scholar outcomes, an independent financial audit, the
+              partner directory, and what changed in our strategy. Quarterly
+              updates fill in the months between.
+            </p>
+            <p>
+              We commit to honest accounting: when something underperforms,
+              we say so; when we change strategy, we explain why; when a
+              donor asks to see the books, we open them. Our reports remain
+              freely available — linked from this page once published.
+            </p>
+          </div>
         </div>
-      </div>
+      </Container>
     </Section>
   );
 }
