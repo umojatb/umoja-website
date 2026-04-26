@@ -228,13 +228,13 @@ function VolunteerDetailsSection() {
 function ThreePathsAnchorSection() {
   return (
     <Section variant="brand">
-      <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+      <div className="grid items-center gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
         <div
           aria-hidden
           className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-secondary-300 via-secondary-400 to-secondary-500 shadow-2xl"
         />
         <div>
-          <Heading level={2} tone="inverted" eyebrow="From the work">
+          <Heading level={2} tone="inverted" eyebrow="From the work" display>
             All three paths build the same program.
           </Heading>
           <p className="mt-3 text-base leading-relaxed text-neutral-200 md:text-lg">

@@ -104,7 +104,7 @@ function OpportunityGapSection() {
 function ApproachSection() {
   return (
     <Section>
-      <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+      <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
         <div
           aria-hidden
           className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary-700 via-primary-500 to-secondary-400 shadow-2xl"
@@ -145,7 +145,7 @@ function ApproachSection() {
 
 function KeyStatementSection() {
   return (
-    <Section variant="brand">
+    <Section variant="brand" className="py-20 md:py-28">
       <Heading level={2} align="center" tone="inverted" display>
         Talent doesn’t choose its address. We don’t ask it to.
       </Heading>
