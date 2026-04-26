@@ -55,7 +55,7 @@ export function Heading({
         <p
           className={cn(
             "font-heading text-sm font-semibold uppercase tracking-[0.2em]",
-            isInverted ? "text-secondary-400" : "text-secondary-500",
+            isInverted ? "text-secondary-400" : "text-secondary-700",
           )}
         >
           {eyebrow}

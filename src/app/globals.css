@@ -40,21 +40,24 @@
   --color-secondary-900: #332912;
   --color-secondary-950: #1a1409;
 
-  /* Neutral — slate-derived grayscale */
-  --color-neutral-50: #f8fafc;
-  --color-neutral-100: #f1f5f9;
-  --color-neutral-200: #e2e8f0;
-  --color-neutral-300: #cbd5e1;
-  --color-neutral-400: #94a3b8;
-  --color-neutral-500: #64748b;
-  --color-neutral-600: #475569;
-  --color-neutral-700: #334155;
-  --color-neutral-800: #1e293b;
-  --color-neutral-900: #0f172a;
-  --color-neutral-950: #020617;
+  /* Neutral — navy-tinted grayscale.
+     Hue locked to 255 (the brand navy region). Lightness mirrors Tailwind
+     slate so existing contrast ratios are preserved; chroma is bumped at the
+     light end so surfaces carry a whisper of brand. */
+  --color-neutral-50: oklch(98.4% 0.008 255);
+  --color-neutral-100: oklch(96.8% 0.012 255);
+  --color-neutral-200: oklch(92.9% 0.016 255);
+  --color-neutral-300: oklch(86.9% 0.022 255);
+  --color-neutral-400: oklch(70.4% 0.04 255);
+  --color-neutral-500: oklch(55.4% 0.046 255);
+  --color-neutral-600: oklch(44.5% 0.046 255);
+  --color-neutral-700: oklch(37.1% 0.045 255);
+  --color-neutral-800: oklch(27.9% 0.041 255);
+  --color-neutral-900: oklch(20.8% 0.04 255);
+  --color-neutral-950: oklch(12.9% 0.04 255);
 
   /* Typography */
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-ibm-plex-sans);
   --font-heading: var(--font-manrope);
 
   /* Spacing — 8px system (overrides Tailwind's 4px default).
@@ -64,15 +67,8 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    --foreground: #f8fafc;
-  }
+  --background: oklch(99% 0.005 255);
+  --foreground: oklch(20.8% 0.04 255);
 }
 
 @layer base {
