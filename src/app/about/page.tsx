@@ -86,36 +86,34 @@ function AboutHero() {
 
 function OurStorySection() {
   return (
-    <Section variant="inset">
-      <div className="ml-0 mr-auto max-w-4xl px-3 sm:px-4 md:ml-12 lg:ml-20">
-        <div className="grid gap-6 lg:grid-cols-5 lg:gap-12">
-          <Heading level={2} eyebrow="Our story" className="lg:col-span-2">
-            From a single classroom in <em>Congo</em>
-          </Heading>
-          <div className="space-y-3 text-base leading-relaxed text-neutral-700 md:text-lg lg:col-span-3">
-            <p>
-              Umoja Africa began in eastern Congo, where co-founders Baka
-              and Tessy grew up watching brilliant classmates fall out of
-              school — not because they couldn’t keep up, but because the
-              system around them couldn’t keep them. School fees, transport,
-              books, a single bad season for a family — any one of those
-              could end an education that would have changed a community.
-            </p>
-            <p>
-              They started with one student. One scholarship, one set of
-              fees, one young person their teachers and neighbours had
-              identified as ready. They learned what worked, what didn’t,
-              and what the people closest to the work had been telling them
-              all along: scholarships matter, but presence matters more.
-            </p>
-            <p>
-              Today Umoja Africa runs on the same principle. We invest in
-              young Africans the way Baka and Tessy invested in that first
-              student — with full funding, real mentorship, and a
-              relationship that doesn’t end at graduation. The geography
-              expands, but the standard doesn’t.
-            </p>
-          </div>
+    <Section variant="soft">
+      <div className="grid gap-6 lg:grid-cols-5 lg:gap-12">
+        <Heading level={2} eyebrow="Our story" className="lg:col-span-2">
+          From a single classroom in <em>Congo</em>
+        </Heading>
+        <div className="space-y-3 text-base leading-relaxed text-neutral-700 md:text-lg lg:col-span-3">
+          <p>
+            Umoja Africa began in eastern Congo, where co-founders Baka
+            and Tessy grew up watching brilliant classmates fall out of
+            school — not because they couldn’t keep up, but because the
+            system around them couldn’t keep them. School fees, transport,
+            books, a single bad season for a family — any one of those
+            could end an education that would have changed a community.
+          </p>
+          <p>
+            They started with one student. One scholarship, one set of
+            fees, one young person their teachers and neighbours had
+            identified as ready. They learned what worked, what didn’t,
+            and what the people closest to the work had been telling them
+            all along: scholarships matter, but presence matters more.
+          </p>
+          <p>
+            Today Umoja Africa runs on the same principle. We invest in
+            young Africans the way Baka and Tessy invested in that first
+            student — with full funding, real mentorship, and a
+            relationship that doesn’t end at graduation. The geography
+            expands, but the standard doesn’t.
+          </p>
         </div>
       </div>
     </Section>

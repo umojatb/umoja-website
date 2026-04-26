@@ -60,7 +60,11 @@ export function Section({
   const skipContainer = bare || variant === "inset";
   return (
     <Component
-      className={cn("py-10 md:py-14", variantClasses[variant], className)}
+      className={cn(
+        "py-10 md:py-14 lg:py-20",
+        variantClasses[variant],
+        className,
+      )}
       {...rest}
     >
       {skipContainer ? (

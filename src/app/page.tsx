@@ -21,47 +21,43 @@ export default function HomePage() {
 
 function HeroSection() {
   return (
-    <section className="relative w-full min-h-[80dvh] overflow-hidden bg-gradient-to-br from-primary-700 via-primary-500 to-secondary-400 md:min-h-[90dvh]">
-      {/* Drop the hero clip in /public/hero.mp4 and a still frame in
-          /public/hero-poster.webp (then pass it via the poster prop). The
-          section gradient shows through until either resolves. */}
-      <HeroVideo
-        src="/hero.mp4"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-gradient-to-tr from-black/70 via-black/35 to-black/10"
-      />
-      <div className="absolute inset-0 z-10 flex items-center pt-24 md:pt-32">
-        <div className="max-w-2xl px-6 text-white md:pl-16">
-          <p className="mb-4 font-heading text-xs uppercase tracking-widest">
-            Umoja Africa
-          </p>
-          <h1 className="font-heading text-4xl font-semibold leading-tight tracking-tight md:text-6xl lg:text-7xl">
-            Empowering Africa Through Education
-          </h1>
-          <p className="mt-4 md:text-lg">
-            A continent-wide effort to give every young African the
-            foundation, scholarships, and mentorship they deserve — built
-            alongside the communities we serve.
-          </p>
-          <div className="mt-6 flex flex-wrap items-center gap-2 md:mt-8">
-            <Link
-              href="/donate"
-              className={buttonStyles({ variant: "secondary", size: "lg" })}
-            >
-              Donate
-            </Link>
-            <Link
-              href="/get-involved"
-              className={buttonStyles({
-                variant: "outline-inverted",
-                size: "lg",
-              })}
-            >
-              Get Involved
-            </Link>
+    <section className="w-full bg-primary-700 py-6 md:py-8 lg:py-10">
+      <div className="relative mx-auto w-[92%] min-h-[60vh] max-w-7xl overflow-hidden rounded-[2rem] md:min-h-[64vh] lg:min-h-[68vh]">
+        <HeroVideo
+          src="/hero.mp4"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"
+        />
+        <div className="absolute inset-0 z-10 flex items-center">
+          <div className="max-w-xl px-6 md:max-w-2xl md:px-16 lg:max-w-3xl">
+            <h1 className="font-heading text-4xl font-extrabold uppercase leading-tight text-white md:text-6xl">
+              Empowering Africa Through Education
+            </h1>
+            <p className="mt-6 text-white/80 md:text-lg">
+              A continent-wide effort to give every young African the
+              foundation, scholarships, and mentorship they deserve — built
+              alongside the communities we serve.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-10">
+              <Link
+                href="/donate"
+                className={buttonStyles({ variant: "secondary", size: "lg" })}
+              >
+                Donate
+              </Link>
+              <Link
+                href="/get-involved"
+                className={buttonStyles({
+                  variant: "outline-inverted",
+                  size: "lg",
+                })}
+              >
+                Get Involved
+              </Link>
+            </div>
           </div>
         </div>
       </div>
