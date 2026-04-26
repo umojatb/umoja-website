@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Container } from "@/components/ui/container";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
@@ -11,9 +10,9 @@ export default function HomePage() {
     <>
       <HeroSection />
       <IntroSection />
-      <ApproachStorySection />
-      <KeyStatementSection />
       <LayeredMetricsSection />
+      <KeyStatementSection />
+      <ApproachStorySection />
       <LongViewSection />
       <CallToActionSection />
     </>
@@ -22,40 +21,37 @@ export default function HomePage() {
 
 function HeroSection() {
   return (
-    <Section
-      bare
-      as="header"
-      className="relative isolate overflow-hidden bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700"
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_45%_at_20%_30%,rgba(197,160,89,0.22),transparent_70%)]"
-      />
-      <Container className="relative py-24 md:py-32">
-        <Heading
-          level={1}
-          align="center"
-          tone="inverted"
-          eyebrow="Umoja Africa"
-          description="A continent-wide effort to give every young African the foundation, scholarships, and mentorship they deserve — built alongside the communities we serve."
-        >
-          Empowering Africa Through <em>Education</em>
-        </Heading>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-          <Link
-            href="/donate"
-            className={buttonStyles({ variant: "secondary", size: "lg" })}
+    <Section variant="brand" as="header" className="py-16 md:py-24">
+      <div className="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-12">
+        <div className="max-w-xl">
+          <Heading
+            level={1}
+            tone="inverted"
+            eyebrow="Umoja Africa"
+            description="A continent-wide effort to give every young African the foundation, scholarships, and mentorship they deserve — built alongside the communities we serve."
           >
-            Donate
-          </Link>
-          <Link
-            href="/get-involved"
-            className={buttonStyles({ variant: "outline-inverted", size: "lg" })}
-          >
-            Get Involved
-          </Link>
+            Empowering Africa Through <em>Education</em>
+          </Heading>
+          <div className="mt-6 flex flex-wrap items-center gap-2">
+            <Link
+              href="/donate"
+              className={buttonStyles({ variant: "secondary", size: "lg" })}
+            >
+              Donate
+            </Link>
+            <Link
+              href="/get-involved"
+              className={buttonStyles({ variant: "outline-inverted", size: "lg" })}
+            >
+              Get Involved
+            </Link>
+          </div>
         </div>
-      </Container>
+        <div
+          aria-hidden
+          className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-secondary-200 via-secondary-300 to-secondary-500 shadow-2xl"
+        />
+      </div>
     </Section>
   );
 }
@@ -75,50 +71,10 @@ function IntroSection() {
   );
 }
 
-function ApproachStorySection() {
-  return (
-    <Section className="py-16">
-      <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
-        <div
-          aria-hidden
-          className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary-700 via-primary-500 to-secondary-400 shadow-2xl"
-        />
-        <div>
-          <Heading
-            level={2}
-            eyebrow="Our approach"
-            description="We don’t parachute in. We build long-term partnerships that put scholarships and mentorship in the hands of the people closest to the work."
-          >
-            Sustained access. Sustained presence.
-          </Heading>
-          <div className="mt-6">
-            <Link
-              href="/programs"
-              className={buttonStyles({ variant: "outline", size: "md" })}
-            >
-              See how it works
-            </Link>
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-function KeyStatementSection() {
-  return (
-    <Section variant="brand" className="py-24 md:py-32 rounded-t-3xl">
-      <Heading level={2} align="center" tone="inverted" display>
-        Talent doesn’t choose its address. We don’t ask it to.
-      </Heading>
-    </Section>
-  );
-}
-
 function LayeredMetricsSection() {
   return (
     <Section variant="muted" className="py-16">
-      <div className="rounded-2xl bg-white p-6 shadow-sm md:p-10">
+      <div className="rounded-2xl bg-white p-6 shadow-sm md:p-8">
         <Heading
           level={2}
           eyebrow="The opportunity gap"
@@ -154,6 +110,46 @@ function LayeredMetricsSection() {
               counting.
             </p>
           </Card>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+function KeyStatementSection() {
+  return (
+    <Section variant="brand" className="py-20 md:py-28 rounded-t-3xl">
+      <Heading level={2} align="center" tone="inverted" display>
+        Talent doesn’t choose its address. We don’t ask it to.
+      </Heading>
+    </Section>
+  );
+}
+
+function ApproachStorySection() {
+  return (
+    <Section className="py-16">
+      <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+        <div
+          aria-hidden
+          className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary-700 via-primary-500 to-secondary-400 shadow-2xl"
+        />
+        <div>
+          <Heading
+            level={2}
+            eyebrow="Our approach"
+            description="We don’t parachute in. We build long-term partnerships that put scholarships and mentorship in the hands of the people closest to the work."
+          >
+            Sustained access. Sustained presence.
+          </Heading>
+          <div className="mt-6">
+            <Link
+              href="/programs"
+              className={buttonStyles({ variant: "outline", size: "md" })}
+            >
+              See how it works
+            </Link>
+          </div>
         </div>
       </div>
     </Section>
