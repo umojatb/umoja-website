@@ -22,35 +22,53 @@ export default function HomePage() {
 function HeroSection() {
   return (
     <Section variant="brand" as="header" className="py-16 md:py-24">
-      <div className="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-12">
-        <div className="max-w-xl">
-          <Heading
-            level={1}
-            tone="inverted"
-            eyebrow="Umoja Africa"
-            description="A continent-wide effort to give every young African the foundation, scholarships, and mentorship they deserve — built alongside the communities we serve."
-          >
-            Empowering Africa Through <em>Education</em>
-          </Heading>
-          <div className="mt-6 flex flex-wrap items-center gap-2">
-            <Link
-              href="/donate"
-              className={buttonStyles({ variant: "secondary", size: "lg" })}
-            >
-              Donate
-            </Link>
-            <Link
-              href="/get-involved"
-              className={buttonStyles({ variant: "outline-inverted", size: "lg" })}
-            >
-              Get Involved
-            </Link>
+      <div className="relative min-h-[420px] overflow-hidden rounded-2xl bg-gradient-to-br from-primary-700 via-primary-500 to-secondary-400 shadow-2xl md:min-h-[520px]">
+        {/* Drop the hero clip in /public/hero.mp4 (or update the src). The
+            gradient above shows through while the source resolves or if
+            playback is unavailable. */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
+        <div aria-hidden className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="max-w-xl px-6 text-white md:px-12">
+            <p className="mb-4 font-heading text-xs uppercase tracking-widest">
+              Umoja Africa
+            </p>
+            <h1 className="font-heading text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
+              Empowering Africa Through <em>Education</em>
+            </h1>
+            <p className="mt-4 text-white/80 md:text-lg">
+              A continent-wide effort to give every young African the
+              foundation, scholarships, and mentorship they deserve — built
+              alongside the communities we serve.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-2">
+              <Link
+                href="/donate"
+                className={buttonStyles({ variant: "secondary", size: "lg" })}
+              >
+                Donate
+              </Link>
+              <Link
+                href="/get-involved"
+                className={buttonStyles({
+                  variant: "outline-inverted",
+                  size: "lg",
+                })}
+              >
+                Get Involved
+              </Link>
+            </div>
           </div>
         </div>
-        <div
-          aria-hidden
-          className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-secondary-200 via-secondary-300 to-secondary-500 shadow-2xl"
-        />
       </div>
     </Section>
   );
