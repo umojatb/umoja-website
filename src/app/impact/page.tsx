@@ -77,6 +77,7 @@ export default function ImpactPage() {
       <ImpactHero />
       <KeyMetricsSection />
       <StoriesSection />
+      <PledgeStatementSection />
       <FundsAllocationSection />
       <TransparencySection />
       <ImpactCTASection />
@@ -102,25 +103,27 @@ function ImpactHero() {
 function KeyMetricsSection() {
   return (
     <Section variant="muted">
-      <Heading
-        level={2}
-        eyebrow="Key metrics"
-        description="Real numbers replace these placeholders with each quarterly update. We won’t inflate them; if a quarter is slow, we’ll say so."
-      >
-        What we measure
-      </Heading>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {METRICS.map((metric) => (
-          <Card key={metric.label}>
-            <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-secondary-500">
-              {metric.label}
-            </p>
-            <p className="mt-2 font-heading text-3xl font-bold text-primary-700">
-              {metric.statement}
-            </p>
-            <p className="mt-2 text-sm text-neutral-600">{metric.body}</p>
-          </Card>
-        ))}
+      <div className="mx-auto max-w-5xl rounded-2xl bg-white p-5 shadow-sm md:p-7">
+        <Heading
+          level={2}
+          eyebrow="Key metrics"
+          description="Real numbers replace these placeholders with each quarterly update. We won’t inflate them; if a quarter is slow, we’ll say so."
+        >
+          What we measure
+        </Heading>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {METRICS.map((metric) => (
+            <Card key={metric.label}>
+              <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-secondary-500">
+                {metric.label}
+              </p>
+              <p className="mt-2 font-heading text-3xl font-bold text-primary-700">
+                {metric.statement}
+              </p>
+              <p className="mt-2 text-sm text-neutral-600">{metric.body}</p>
+            </Card>
+          ))}
+        </div>
       </div>
     </Section>
   );
@@ -152,31 +155,43 @@ function StoriesSection() {
   );
 }
 
+function PledgeStatementSection() {
+  return (
+    <Section variant="brand">
+      <Heading level={2} align="center" tone="inverted" display>
+        We don’t promise — we <em>publish</em>.
+      </Heading>
+    </Section>
+  );
+}
+
 function FundsAllocationSection() {
   return (
     <Section variant="muted">
-      <Heading
-        level={2}
-        eyebrow="Where the money goes"
-        description="Our commitment for every dollar received. Audited actuals — with the full breakdown by program, geography, and cohort — publish each year in our annual impact report."
-      >
-        How funds are used
-      </Heading>
-      <div className="mt-6 grid gap-3 sm:grid-cols-3">
-        {FUND_BUCKETS.map((bucket) => (
-          <Card key={bucket.category}>
-            <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-secondary-500">
-              {bucket.category}
-            </p>
-            <p className="mt-2 font-heading text-4xl font-bold text-primary-700">
-              {bucket.target}
-            </p>
-            <p className="text-xs uppercase tracking-wider text-neutral-500">
-              target allocation
-            </p>
-            <p className="mt-3 text-sm text-neutral-600">{bucket.body}</p>
-          </Card>
-        ))}
+      <div className="mx-auto max-w-5xl rounded-2xl bg-white p-5 shadow-sm md:p-7">
+        <Heading
+          level={2}
+          eyebrow="Where the money goes"
+          description="Our commitment for every dollar received. Audited actuals — with the full breakdown by program, geography, and cohort — publish each year in our annual impact report."
+        >
+          How funds are used
+        </Heading>
+        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          {FUND_BUCKETS.map((bucket) => (
+            <Card key={bucket.category}>
+              <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-secondary-500">
+                {bucket.category}
+              </p>
+              <p className="mt-2 font-heading text-4xl font-bold text-primary-700">
+                {bucket.target}
+              </p>
+              <p className="text-xs uppercase tracking-wider text-neutral-500">
+                target allocation
+              </p>
+              <p className="mt-3 text-sm text-neutral-600">{bucket.body}</p>
+            </Card>
+          ))}
+        </div>
       </div>
     </Section>
   );
