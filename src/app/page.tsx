@@ -21,56 +21,54 @@ export default function HomePage() {
 
 function HeroSection() {
   return (
-    <Section variant="brand" as="header" className="py-16 md:py-24">
-      <div className="relative min-h-[420px] overflow-hidden rounded-2xl bg-gradient-to-br from-primary-700 via-primary-500 to-secondary-400 shadow-2xl md:min-h-[520px]">
-        {/* Drop the hero clip in /public/hero.mp4 (or update the src). The
-            gradient above shows through while the source resolves or if
-            playback is unavailable. */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-        <div aria-hidden className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 flex items-center">
-          <div className="max-w-xl px-6 text-white md:px-12">
-            <p className="mb-4 font-heading text-xs uppercase tracking-widest">
-              Umoja Africa
-            </p>
-            <h1 className="font-heading text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
-              Empowering Africa Through <em>Education</em>
-            </h1>
-            <p className="mt-4 text-white/80 md:text-lg">
-              A continent-wide effort to give every young African the
-              foundation, scholarships, and mentorship they deserve — built
-              alongside the communities we serve.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-2">
-              <Link
-                href="/donate"
-                className={buttonStyles({ variant: "secondary", size: "lg" })}
-              >
-                Donate
-              </Link>
-              <Link
-                href="/get-involved"
-                className={buttonStyles({
-                  variant: "outline-inverted",
-                  size: "lg",
-                })}
-              >
-                Get Involved
-              </Link>
-            </div>
+    <section className="relative w-full min-h-[80vh] overflow-hidden bg-gradient-to-br from-primary-700 via-primary-500 to-secondary-400 md:min-h-[90vh]">
+      {/* Drop the hero clip in /public/hero.mp4 (or update the src). The
+          section gradient shows through while the source resolves or if
+          playback is unavailable — no fallback poster needed. */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden
+        className="absolute inset-0 h-full w-full object-cover"
+      >
+        <source src="/hero.mp4" type="video/mp4" />
+      </video>
+      <div aria-hidden className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 z-10 flex items-center pt-24 md:pt-32">
+        <div className="max-w-2xl px-6 text-white md:pl-16">
+          <p className="mb-4 font-heading text-xs uppercase tracking-widest">
+            Umoja Africa
+          </p>
+          <h1 className="font-heading text-4xl font-semibold leading-tight tracking-tight md:text-6xl lg:text-7xl">
+            Empowering Africa Through <em>Education</em>
+          </h1>
+          <p className="mt-4 text-white/80 md:text-lg">
+            A continent-wide effort to give every young African the
+            foundation, scholarships, and mentorship they deserve — built
+            alongside the communities we serve.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-2 md:mt-8">
+            <Link
+              href="/donate"
+              className={buttonStyles({ variant: "secondary", size: "lg" })}
+            >
+              Donate
+            </Link>
+            <Link
+              href="/get-involved"
+              className={buttonStyles({
+                variant: "outline-inverted",
+                size: "lg",
+              })}
+            >
+              Get Involved
+            </Link>
           </div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }
 
