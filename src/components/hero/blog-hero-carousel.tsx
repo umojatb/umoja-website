@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { buttonStyles } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import type { Post } from "@/lib/blog";
 import { cn } from "@/lib/utils";
 
@@ -112,13 +113,16 @@ export function BlogHeroCarousel({
         className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-primary-900/95 via-primary-900/60 to-transparent md:from-primary-900/90"
       />
 
-      {/* Top zone — text, vertically centered, padded above the controls bar */}
+      {/* Top zone — text, vertically centered, padded above the controls bar.
+         h1 takes positive `tracking-[0.02em]` to override the negative
+         tracking the global `h1` rule applies — uppercase forms collide
+         under tight tracking. */}
       <div className="absolute inset-x-0 top-0 bottom-24 z-20 flex items-center px-6 md:bottom-28 md:px-16">
-        <div key={active.slug} className="max-w-xl md:max-w-2xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-secondary-400">
+        <div className="max-w-xl md:max-w-2xl">
+          <Eyebrow size="xs" tone="inverted">
             {active.category}
-          </p>
-          <h1 className="mt-3 line-clamp-3 font-heading text-3xl font-extrabold uppercase leading-tight text-white md:text-5xl">
+          </Eyebrow>
+          <h1 className="mt-3 line-clamp-3 font-heading text-3xl font-extrabold uppercase leading-tight tracking-[0.02em] text-white md:text-5xl">
             {active.title}
           </h1>
           <p className="mt-4 line-clamp-2 text-white/80 md:text-lg">

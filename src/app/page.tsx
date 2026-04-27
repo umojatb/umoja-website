@@ -3,9 +3,11 @@ import Link from "next/link";
 import { buttonStyles } from "@/components/ui/button";
 import { BlogHeroCarousel } from "@/components/hero/blog-hero-carousel";
 import { CTASection } from "@/components/layout/cta-section";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
 import { ImageTextSection } from "@/components/sections/image-text-section";
 import { Section } from "@/components/ui/section";
+import { TextLink } from "@/components/ui/text-link";
 import {
   formatPostDate,
   getFeaturedPosts,
@@ -105,7 +107,7 @@ function OpportunityGapSection() {
 
 function KeyStatementSection() {
   return (
-    <Section variant="brand" className="py-20 md:py-28 rounded-t-3xl">
+    <Section variant="brand" className="py-20 md:py-28 lg:py-28 rounded-t-3xl">
       <div className="max-w-3xl">
         <Heading level={2} tone="inverted" display>
           Talent doesn’t choose its address. We don’t ask it to.
@@ -158,12 +160,7 @@ function LatestBlogSection() {
         <Heading level={2} eyebrow="From the blog">
           More stories
         </Heading>
-        <Link
-          href="/blog"
-          className="font-heading text-sm font-semibold text-primary-700 transition-colors hover:text-primary-900"
-        >
-          Read all posts →
-        </Link>
+        <TextLink href="/blog">Read all posts</TextLink>
       </div>
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
         {posts.map((post) => (
@@ -190,9 +187,9 @@ function BlogPreviewCard({ post }: { post: Post }) {
             className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
         </div>
-        <p className="mt-4 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-secondary-700">
+        <Eyebrow size="xs" className="mt-4">
           {post.category}
-        </p>
+        </Eyebrow>
         <h3 className="mt-2 font-heading text-lg font-semibold text-primary-900 group-hover:text-primary-700">
           {post.title}
         </h3>
@@ -275,12 +272,7 @@ function LatestReportSection() {
                 Download PDF
               </Link>
             )}
-            <Link
-              href="/annual-reports"
-              className="font-heading text-sm font-semibold text-primary-700 transition-colors hover:text-primary-900"
-            >
-              All reports →
-            </Link>
+            <TextLink href="/annual-reports">All reports</TextLink>
           </div>
         </div>
         <div className="relative aspect-[3/4] w-full max-w-[16rem] overflow-hidden rounded-xl bg-neutral-200">
