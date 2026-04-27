@@ -66,7 +66,7 @@ const POSTS: readonly Post[] = [
     readMinutes: 6,
     author: BAKA,
     cover: {
-      src: "/blog/keep-scholarship-past-year-three.jpg",
+      src: "/images/blog/michael-ali-cFU2iDh6NHI-unsplash.jpg",
       alt: "Two students walking together along a school path at dusk",
     },
     featured: true,
@@ -86,9 +86,10 @@ const POSTS: readonly Post[] = [
     readMinutes: 5,
     author: TESSY,
     cover: {
-      src: "/blog/inside-selection-process.jpg",
+      src: "/images/blog/michael-ali-_TPjI57-uMk-unsplash.jpg",
       alt: "A community gathering in a school courtyard",
     },
+    featured: true,
   },
   {
     slug: "scholar-to-selector-aline",
@@ -105,9 +106,10 @@ const POSTS: readonly Post[] = [
     readMinutes: 4,
     author: BAKA,
     cover: {
-      src: "/blog/scholar-to-selector-aline.jpg",
+      src: "/images/blog/michael-ali-2_rFy9TFRRc-unsplash.jpg",
       alt: "A young woman speaking at a community panel",
     },
+    featured: true,
   },
   {
     slug: "2025-site-visits-lessons",
@@ -125,7 +127,7 @@ const POSTS: readonly Post[] = [
     readMinutes: 7,
     author: TESSY,
     cover: {
-      src: "/blog/2025-site-visits-lessons.jpg",
+      src: "/images/blog/michael-ali-dMmZ4jSsjJM-unsplash.jpg",
       alt: "An open notebook on a wooden desk in a classroom",
     },
   },
@@ -145,7 +147,7 @@ const POSTS: readonly Post[] = [
     readMinutes: 8,
     author: BAKA,
     cover: {
-      src: "/blog/impact-framework-how-we-count.jpg",
+      src: "/images/placeholders/desola-lanre-ologun-IgUR1iX0mqM-unsplash.jpg",
       alt: "A spread of audit documents and pens on a wooden table",
     },
   },
@@ -164,7 +166,7 @@ const POSTS: readonly Post[] = [
     readMinutes: 5,
     author: TESSY,
     cover: {
-      src: "/blog/partnership-outlasts-grant.jpg",
+      src: "/images/placeholders/hannah-busing-Zyx1bK9mqmA-unsplash.jpg",
       alt: "Two community partners reviewing documents at a wooden table",
     },
   },
@@ -194,6 +196,10 @@ export function getPostBySlug(slug: string): Post | undefined {
 
 export function getFeaturedPost(): Post | undefined {
   return POSTS.find((post) => post.featured);
+}
+
+export function getFeaturedPosts(): readonly Post[] {
+  return POSTS.filter((post) => post.featured);
 }
 
 export function getNonFeaturedPosts(): readonly Post[] {
