@@ -26,23 +26,28 @@ function getReducedMotionServerSnapshot(): boolean {
 type BlogHeroCarouselProps = {
   /** Slide source — pass `getFeaturedPosts()` from the page. */
   posts: readonly Post[];
-  /** Autoplay interval. Default 6s. */
+  /** Autoplay interval. Default 8s — long enough to read title + excerpt. */
   intervalMs?: number;
 };
 
 /**
- * Editorial hero carousel. Cross-fades blog cover images and updates the
- * overlaid title / excerpt / CTA per active slide. Mounts inside the framed
- * hero card on the homepage — the card supplies the rounded clip + min-height;
- * this component fills it via `absolute inset-0`.
+ * Editorial hero carousel. Two-zone layout:
  *
- * Autoplay pauses when the user clicks the pause button or when the OS
- * reports `prefers-reduced-motion: reduce` — in which case the pause button
- * is disabled and shows the play glyph.
+ *   ┌──────────────────────────────────────┐
+ *   │ TEXT (eyebrow + title + excerpt)     │  ← top zone, vertically centered,
+ *   │                                      │     line-clamped (3/2) for layout
+ *   │                                      │     stability across slides
+ *   ├──────────────────────────────────────┤
+ *   │ CTAs (Donate + Read)   • • •  ⏸     │  ← controls bar, absolute bottom,
+ *   └──────────────────────────────────────┘     fixed position regardless of
+ *                                                text length
+ *
+ * Autoplay pauses on the manual button or when the OS reports
+ * `prefers-reduced-motion: reduce` (subscription via useSyncExternalStore).
  */
 export function BlogHeroCarousel({
   posts,
-  intervalMs = 6000,
+  intervalMs = 8000,
 }: BlogHeroCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -105,97 +110,99 @@ export function BlogHeroCarousel({
         className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"
       />
 
-      <div className="absolute inset-0 z-10 flex items-center">
-        <div
-          key={active.slug}
-          className="max-w-xl px-6 md:max-w-2xl md:px-16 lg:max-w-3xl"
-        >
+      {/* Top zone — text, vertically centered, padded above the controls bar */}
+      <div className="absolute inset-x-0 top-0 bottom-24 z-10 flex items-center px-6 md:bottom-28 md:px-16">
+        <div key={active.slug} className="max-w-xl md:max-w-2xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-secondary-400">
             {active.category}
           </p>
-          <h1 className="mt-3 font-heading text-4xl font-extrabold uppercase leading-tight text-white md:text-6xl">
+          <h1 className="mt-3 line-clamp-3 font-heading text-3xl font-extrabold uppercase leading-tight text-white md:text-5xl">
             {active.title}
           </h1>
-          <p className="mt-4 max-w-2xl text-white/80 md:text-lg">
+          <p className="mt-4 line-clamp-2 text-white/80 md:text-lg">
             {active.excerpt}
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-10">
-            <Link
-              href="/donate"
-              className={buttonStyles({ variant: "secondary", size: "lg" })}
-            >
-              Donate
-            </Link>
-            <Link
-              href={`/blog/${active.slug}`}
-              className={buttonStyles({
-                variant: "outline-inverted",
-                size: "lg",
-              })}
-            >
-              Read article
-            </Link>
-          </div>
         </div>
       </div>
 
-      {posts.length > 1 && (
-        <div className="absolute bottom-4 right-4 z-20 flex items-center gap-3 md:bottom-6 md:right-6">
-          <div
-            role="group"
-            aria-label="Slide navigation"
-            className="flex gap-1.5"
+      {/* Bottom zone — controls bar, fixed position regardless of text */}
+      <div className="absolute inset-x-0 bottom-6 z-20 flex flex-col gap-3 px-6 sm:flex-row sm:items-center sm:justify-between md:bottom-8 md:px-16">
+        <div className="flex flex-wrap items-center gap-3">
+          <Link
+            href="/donate"
+            className={buttonStyles({ variant: "secondary", size: "lg" })}
           >
-            {posts.map((post, i) => (
-              <button
-                key={post.slug}
-                type="button"
-                onClick={() => goTo(i)}
-                aria-label={`Go to slide ${i + 1}: ${post.title}`}
-                aria-current={i === activeIndex ? "true" : undefined}
-                className={cn(
-                  "h-2 w-2 rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
-                  i === activeIndex
-                    ? "bg-secondary-500"
-                    : "bg-white/40 hover:bg-white/60",
-                )}
-              />
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={() => setIsPaused((p) => !p)}
-            aria-label={
-              isPaused ? "Resume carousel autoplay" : "Pause carousel autoplay"
-            }
-            aria-pressed={isPaused}
-            disabled={autoplayDisabled}
-            className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/40 bg-black/55 text-white transition-colors hover:bg-black/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-50"
+            Donate
+          </Link>
+          <Link
+            href={`/blog/${active.slug}`}
+            className={buttonStyles({
+              variant: "outline-inverted",
+              size: "lg",
+            })}
           >
-            {isPaused || autoplayDisabled ? (
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="h-3 w-3"
-              >
-                <path d="M8 5.5v13a1 1 0 0 0 1.55.83l10-6.5a1 1 0 0 0 0-1.66l-10-6.5A1 1 0 0 0 8 5.5z" />
-              </svg>
-            ) : (
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="h-3 w-3"
-              >
-                <rect x="6" y="5" width="4" height="14" rx="1" />
-                <rect x="14" y="5" width="4" height="14" rx="1" />
-              </svg>
-            )}
-          </button>
+            Read article
+          </Link>
         </div>
-      )}
+
+        {posts.length > 1 && (
+          <div className="flex items-center gap-3">
+            <div
+              role="group"
+              aria-label="Slide navigation"
+              className="flex gap-1.5"
+            >
+              {posts.map((post, i) => (
+                <button
+                  key={post.slug}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  aria-label={`Go to slide ${i + 1}: ${post.title}`}
+                  aria-current={i === activeIndex ? "true" : undefined}
+                  className={cn(
+                    "h-2 w-2 rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
+                    i === activeIndex ? "bg-white" : "bg-white/40 hover:bg-white/60",
+                  )}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setIsPaused((p) => !p)}
+              aria-label={
+                isPaused
+                  ? "Resume carousel autoplay"
+                  : "Pause carousel autoplay"
+              }
+              aria-pressed={isPaused}
+              disabled={autoplayDisabled}
+              className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-colors hover:bg-white/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {isPaused || autoplayDisabled ? (
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="h-3 w-3"
+                >
+                  <path d="M8 5.5v13a1 1 0 0 0 1.55.83l10-6.5a1 1 0 0 0 0-1.66l-10-6.5A1 1 0 0 0 8 5.5z" />
+                </svg>
+              ) : (
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="h-3 w-3"
+                >
+                  <rect x="6" y="5" width="4" height="14" rx="1" />
+                  <rect x="14" y="5" width="4" height="14" rx="1" />
+                </svg>
+              )}
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
