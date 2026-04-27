@@ -6,6 +6,7 @@ import { CTASection } from "@/components/layout/cta-section";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
 import { ImageTextSection } from "@/components/sections/image-text-section";
+import { ProgramsOverviewSection } from "@/components/sections/programs-overview";
 import { Section } from "@/components/ui/section";
 import { TextLink } from "@/components/ui/text-link";
 import {
@@ -21,7 +22,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <IntroSection />
+      <ProgramsOverviewSection />
       <VisualBreakSection />
       <OpportunityGapSection />
       <KeyStatementSection />
@@ -44,21 +45,6 @@ function HeroSection() {
         <BlogHeroCarousel posts={featuredPosts} />
       </div>
     </section>
-  );
-}
-
-function IntroSection() {
-  return (
-    <Section className="py-12">
-      <div className="mx-auto max-w-prose">
-        <p className="text-base leading-relaxed text-neutral-700 md:text-lg">
-          Umoja Africa runs three programs — scholarships, mentorship, and
-          community engagement — across multiple African countries. The
-          structure that follows is the proof: how we choose, who we partner
-          with, and how the money moves.
-        </p>
-      </div>
-    </Section>
   );
 }
 
