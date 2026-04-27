@@ -4,6 +4,7 @@ import { buttonStyles } from "@/components/ui/button";
 import { BlogHeroCarousel } from "@/components/hero/blog-hero-carousel";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { ImageTextSection } from "@/components/sections/image-text-section";
 import { Section } from "@/components/ui/section";
 import {
   formatPostDate,
@@ -19,6 +20,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <IntroSection />
+      <VisualBreakSection />
       <OpportunityGapSection />
       <KeyStatementSection />
       <ApproachStorySection />
@@ -52,6 +54,22 @@ function IntroSection() {
           structure that follows is the proof: how we choose, who we partner
           with, and how the money moves.
         </p>
+      </div>
+    </Section>
+  );
+}
+
+function VisualBreakSection() {
+  return (
+    <Section className="py-8 md:py-12">
+      <div className="relative aspect-[16/8] w-full overflow-hidden rounded-2xl bg-neutral-200">
+        <Image
+          src="/images/hero/yannis-h-uaPaEM7MiQQ-unsplash.jpg"
+          alt="Students gathered outside a community school"
+          fill
+          sizes="(min-width: 1280px) 1280px, 92vw"
+          className="object-cover"
+        />
       </div>
     </Section>
   );
@@ -98,43 +116,35 @@ function KeyStatementSection() {
 
 function ApproachStorySection() {
   return (
-    <Section className="py-16 md:py-20">
-      <div className="max-w-2xl md:ml-auto">
-        <Heading
-          level={2}
-          eyebrow="Our approach"
-          description="We don’t parachute in. We build long-term partnerships that put scholarships and mentorship in the hands of the people closest to the work."
-        >
-          Sustained access. Sustained presence.
-        </Heading>
-        <div className="mt-6">
-          <Link
-            href="/programs"
-            className={buttonStyles({ variant: "outline", size: "md" })}
-          >
-            See how it works
-          </Link>
-        </div>
-      </div>
-    </Section>
+    <ImageTextSection
+      eyebrow="Our approach"
+      title="Sustained access. Sustained presence."
+      description="We don’t parachute in. We build long-term partnerships that put scholarships and mentorship in the hands of the people closest to the work."
+      image={{
+        src: "/images/placeholders/alvin-david-0AKPfr-xlCU-unsplash.jpg",
+        alt: "Community partners walking through a school courtyard",
+      }}
+      cta={{ label: "See how it works", href: "/programs" }}
+    />
   );
 }
 
 function LongViewSection() {
   return (
-    <Section className="py-16 md:py-20">
-      <div className="max-w-2xl border-l-2 border-secondary-500 pl-6 md:pl-10">
-        <Heading level={2} eyebrow="The long view">
+    <ImageTextSection
+      eyebrow="The long view"
+      title={
+        <>
           Each gift reaches a <em>person</em>, not a number.
-        </Heading>
-        <p className="mt-3 max-w-prose text-base leading-relaxed text-neutral-700 md:text-lg">
-          We’re built deliberately small. Every donor sees the cohort their
-          gift funds, every volunteer is paired with a scholar by name, and
-          every partnership is reviewed each year by the same small team.
-          When that changes, it’ll be because we decided it should.
-        </p>
-      </div>
-    </Section>
+        </>
+      }
+      description="We’re built deliberately small. Every donor sees the cohort their gift funds, every volunteer is paired with a scholar by name, and every partnership is reviewed each year by the same small team. When that changes, it’ll be because we decided it should."
+      image={{
+        src: "/images/placeholders/bennett-tobias-tqwOJAvUIh4-unsplash.jpg",
+        alt: "A scholar studying at a community library",
+      }}
+      reverse
+    />
   );
 }
 
