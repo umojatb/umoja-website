@@ -4,6 +4,7 @@ import Link from "next/link";
 import { buttonStyles } from "@/components/ui/button";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 import {
   formatPostDate,
@@ -33,16 +34,16 @@ export default function BlogPage() {
 
 function BlogHero() {
   return (
-    <Section as="header" className="py-14 md:py-20">
-      <Heading
-        level={1}
-        align="center"
-        eyebrow="Blog"
-        description="Field notes, impact stories, and transparency posts — written by the people doing the work, on a steady cadence."
-      >
-        Insights &amp; stories
-      </Heading>
-    </Section>
+    <PageHero
+      variant="image"
+      eyebrow="Blog"
+      title="Insights & stories"
+      description="Field notes, impact stories, and transparency posts — written by the people doing the work, on a steady cadence."
+      image={{
+        src: "/images/placeholders/different-people-doing-volunteer-work-with-food.jpg",
+        alt: "Community volunteers sorting supplies for a partner school",
+      }}
+    />
   );
 }
 

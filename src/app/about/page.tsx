@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
 export const metadata: Metadata = {
@@ -71,16 +72,16 @@ export default function AboutPage() {
 
 function AboutHero() {
   return (
-    <Section as="header" className="py-14 md:py-20">
-      <Heading
-        level={1}
-        align="center"
-        eyebrow="About"
-        description="We invest in young Africans through full scholarships and lasting mentorship — built in partnership with the communities that raised them."
-      >
-        About Umoja Africa
-      </Heading>
-    </Section>
+    <PageHero
+      variant="image"
+      eyebrow="About"
+      title="About Umoja Africa"
+      description="We invest in young Africans through full scholarships and lasting mentorship — built in partnership with the communities that raised them."
+      image={{
+        src: "/images/hero/tim-marshall-cAtzHUz7Z8g-unsplash.jpg",
+        alt: "Students walking together along a community school path",
+      }}
+    />
   );
 }
 

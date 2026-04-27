@@ -4,6 +4,7 @@ import { buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
 export const metadata: Metadata = {
@@ -104,16 +105,12 @@ export default function GetInvolvedPage() {
 
 function GetInvolvedHero() {
   return (
-    <Section as="header" className="py-14 md:py-20">
-      <Heading
-        level={1}
-        align="center"
-        eyebrow="Get involved"
-        description="Three ways to help: fund a scholarship, volunteer your time, or partner as an institution. Pick the one that fits — or talk to us if it’s not on the list."
-      >
-        How will you help?
-      </Heading>
-    </Section>
+    <PageHero
+      variant="color"
+      eyebrow="Get involved"
+      title="How will you help?"
+      description="Three ways to help: fund a scholarship, volunteer your time, or partner as an institution. Pick the one that fits — or talk to us if it’s not on the list."
+    />
   );
 }
 

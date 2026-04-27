@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 import { CONTACT_EMAIL } from "@/lib/contact";
 import { ContactForm } from "./contact-form";
@@ -41,16 +42,12 @@ export default function ContactPage() {
 
 function ContactHero() {
   return (
-    <Section as="header" className="py-14 md:py-20">
-      <Heading
-        level={1}
-        align="center"
-        eyebrow="Contact"
-        description="Whether it’s a question, a partnership idea, or a donation that doesn’t fit the standard form — we’d love to hear it."
-      >
-        Get in touch
-      </Heading>
-    </Section>
+    <PageHero
+      variant="color"
+      eyebrow="Contact"
+      title="Get in touch"
+      description="Whether it’s a question, a partnership idea, or a donation that doesn’t fit the standard form — we’d love to hear it."
+    />
   );
 }
 
