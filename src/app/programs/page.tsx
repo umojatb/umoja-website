@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { ImageTextSection } from "@/components/sections/image-text-section";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
@@ -162,25 +163,16 @@ function HowItWorksSection() {
 
 function ContinuitySection() {
   return (
-    <Section>
-      <div className="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-12">
-        <div>
-          <Heading level={2} eyebrow="Why this works">
-            Continuity is the program.
-          </Heading>
-          <p className="mt-3 text-base leading-relaxed text-neutral-700 md:text-lg">
-            Most scholarships end the day a student receives them. Ours start
-            there. The relationship — termly check-ins, mentor pairings,
-            alumni who come back to select the next cohort — is what turns
-            one funded year into a generation of funded learners.
-          </p>
-        </div>
-        <div
-          aria-hidden
-          className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-secondary-300 via-secondary-400 to-primary-500 shadow-2xl"
-        />
-      </div>
-    </Section>
+    <ImageTextSection
+      eyebrow="Why this works"
+      title="Continuity is the program."
+      description="Most scholarships end the day a student receives them. Ours start there. The relationship — termly check-ins, mentor pairings, alumni who come back to select the next cohort — is what turns one funded year into a generation of funded learners."
+      image={{
+        src: "/images/placeholders/emmanuel-ikwuegbu-Z-KCM4gK8C8-unsplash.jpg",
+        alt: "Alumni and current scholars at a community partnership review",
+      }}
+      reverse
+    />
   );
 }
 
