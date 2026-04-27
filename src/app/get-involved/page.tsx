@@ -4,6 +4,7 @@ import { buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { ImageTextSection } from "@/components/sections/image-text-section";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
@@ -199,24 +200,16 @@ function VolunteerDetailsSection() {
 
 function ThreePathsAnchorSection() {
   return (
-    <Section variant="brand" className="-mt-4 md:-mt-8">
-      <div className="grid items-center gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
-        <div
-          aria-hidden
-          className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-secondary-300 via-secondary-400 to-secondary-500 shadow-2xl"
-        />
-        <div>
-          <Heading level={2} tone="inverted" eyebrow="From the work" display>
-            All three paths build the same program.
-          </Heading>
-          <p className="mt-3 text-base leading-relaxed text-neutral-200 md:text-lg">
-            Money funds the scholarship. Time builds the relationship.
-            Partnership scales both. Each contributor changes the program in
-            a different way — and the program needs all of them.
-          </p>
-        </div>
-      </div>
-    </Section>
+    <ImageTextSection
+      variant="brand"
+      eyebrow="From the work"
+      title="All three paths build the same program."
+      description="Money funds the scholarship. Time builds the relationship. Partnership scales both. Each contributor changes the program in a different way — and the program needs all of them."
+      image={{
+        src: "/images/placeholders/emmanuel-ikwuegbu-VC6MGt9ZoBA-unsplash.jpg",
+        alt: "A scholar and mentor reviewing coursework together",
+      }}
+    />
   );
 }
 
