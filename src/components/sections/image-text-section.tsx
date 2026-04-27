@@ -25,7 +25,7 @@ type ImageTextSectionProps = {
   };
   /** Section surface (default / soft / muted / brand / dark / inset). */
   variant?: SectionVariant;
-  /** DOM id on the underlying section — used as an anchor target by the nav. */
+  /** DOM id on the underlying section, used as an anchor target by the nav. */
   id?: string;
 };
 

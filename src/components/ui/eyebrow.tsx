@@ -16,7 +16,7 @@ type EyebrowProps = {
 
 /**
  * Small uppercase tracked label that pairs with a heading or a card image.
- * Single source of truth for the eyebrow treatment — section headings,
+ * Single source of truth for the eyebrow treatment, section headings,
  * blog card categories, and hero slide categories all compose this.
  *
  * Footer column headings (`<h2>EXPLORE</h2>`, `<h2>LEGAL</h2>`) look

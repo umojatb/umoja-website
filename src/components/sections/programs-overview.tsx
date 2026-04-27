@@ -18,7 +18,7 @@ const programs: readonly Program[] = [
     number: "02",
     title: "Mentorship",
     description:
-      "Every volunteer is paired with a scholar by name for the duration of the program — reviewed each year by the same small team.",
+      "Every volunteer is paired with a scholar by name for the duration of the program, reviewed each year by the same small team.",
   },
   {
     number: "03",
@@ -29,12 +29,12 @@ const programs: readonly Program[] = [
 ];
 
 /**
- * "What do you actually do?" — the beat right after the hero.
+ * "What do you actually do?", the beat right after the hero.
  *
  * Pays off the brand promise of structural transparency by *being*
  * structured: an asymmetric editorial split with a numbered, hairline-
  * separated list of the three programs on the right. The numbered list
- * is the section's payoff — show, don't tell.
+ * is the section's payoff, show, don't tell.
  *
  * Stacks on mobile (statement above, programs below).
  */
@@ -50,7 +50,7 @@ export function ProgramsOverviewSection() {
             One long-term commitment.
           </h2>
           <p className="mt-6 max-w-md text-base leading-relaxed text-neutral-700 md:text-lg">
-            The structure that follows is the proof — how we choose, who we
+            The structure that follows is the proof, how we choose, who we
             partner with, and how the money moves.
           </p>
         </div>

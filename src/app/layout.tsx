@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Umoja Africa",
   },
   description:
-    "Umoja Africa — empowering communities across the continent through education, opportunity, and shared progress.",
+    "Umoja Africa, empowering communities across the continent through education, opportunity, and shared progress.",
   metadataBase: new URL("https://umoja-africa.org"),
 };
 

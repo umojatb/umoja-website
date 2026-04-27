@@ -24,11 +24,11 @@ const VALUES: readonly Value[] = [
   },
   {
     title: "Long-haul",
-    body: "We commit through graduation. Education isn’t a one-time gift — it’s a relationship that compounds.",
+    body: "We commit through graduation. Education isn’t a one-time gift, it’s a relationship that compounds.",
   },
   {
     title: "Honest reporting",
-    body: "What we do, what we don’t, and how the money moves — in public, on a steady cadence.",
+    body: "What we do, what we don’t, and how the money moves, in public, on a steady cadence.",
   },
   {
     title: "Talent over paperwork",
@@ -54,7 +54,7 @@ const FOUNDERS: readonly Founder[] = [
     name: "Tessy",
     role: "Co-founder",
     initials: "T",
-    bio: "Built Umoja’s mentorship program — the relationship that pairs every scholar with practitioners and alumni through graduation.",
+    bio: "Built Umoja’s mentorship program, the relationship that pairs every scholar with practitioners and alumni through graduation.",
   },
 ] as const;
 
@@ -77,7 +77,7 @@ function AboutHero() {
       variant="image"
       eyebrow="About"
       title="About Umoja Africa"
-      description="We invest in young Africans through full scholarships and lasting mentorship — built in partnership with the communities that raised them."
+      description="We invest in young Africans through full scholarships and lasting mentorship, built in partnership with the communities that raised them."
       image={{
         src: "/images/hero/tim-marshall-cAtzHUz7Z8g-unsplash.jpg",
         alt: "Students walking together along a community school path",
@@ -106,9 +106,9 @@ function OurStorySection() {
           <p>
             Umoja Africa began in eastern Congo, where co-founders Baka and
             Tessy grew up watching brilliant classmates fall out of school
-            — not because they couldn’t keep up, but because the system
+, not because they couldn’t keep up, but because the system
             around them couldn’t keep them. School fees, transport, books,
-            a single bad season for a family — any one of those could end
+            a single bad season for a family, any one of those could end
             an education that would have changed a community.
           </p>
           <p>
@@ -121,7 +121,7 @@ function OurStorySection() {
           <p>
             Today Umoja Africa runs on the same principle. We invest in
             young Africans the way Baka and Tessy invested in that first
-            student — with full funding, real mentorship, and a
+            student, with full funding, real mentorship, and a
             relationship that doesn’t end at graduation. The geography
             expands, but the standard doesn’t.
           </p>
@@ -147,8 +147,7 @@ function VisionMissionSection() {
             Vision
           </p>
           <p className="mt-2 font-heading text-xl font-medium text-primary-900 md:text-2xl">
-            An Africa where talent — not income, not geography, not gender —
-            decides who gets to learn.
+            An Africa where talent, not income, not geography, not gender,             decides who gets to learn.
           </p>
         </Card>
         <Card>
@@ -196,7 +195,7 @@ function LeadershipSection() {
       <Heading
         level={2}
         eyebrow="Leadership"
-        description="Umoja Africa was founded — and is still led day-to-day — by the people who started it."
+        description="Umoja Africa was founded, and is still led day-to-day, by the people who started it."
       >
         The founders
       </Heading>

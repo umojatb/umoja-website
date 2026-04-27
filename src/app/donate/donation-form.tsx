@@ -151,7 +151,7 @@ export function DonationForm() {
       </button>
 
       <p className="text-center text-xs text-neutral-500">
-        UI preview — secure payments launch soon. To give today,{" "}
+        UI preview, secure payments launch soon. To give today,{" "}
         <Link
           href="/contact"
           className="font-medium text-primary-700 underline underline-offset-2 hover:text-primary-600"

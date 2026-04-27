@@ -9,7 +9,7 @@ import { Section } from "@/components/ui/section";
 export const metadata: Metadata = {
   title: "Programs",
   description:
-    "Three connected programs — scholarships, mentorship, and community engagement — and the five-step relationship that runs through them.",
+    "Three connected programs, scholarships, mentorship, and community engagement, and the five-step relationship that runs through them.",
 };
 
 type Program = { readonly title: string; readonly body: string };
@@ -17,7 +17,7 @@ type Program = { readonly title: string; readonly body: string };
 const PROGRAMS: readonly Program[] = [
   {
     title: "Scholarships",
-    body: "Multi-year, fully funded. We cover fees, books, transport, and the unexpected — so families don’t have to choose between this term and the next.",
+    body: "Multi-year, fully funded. We cover fees, books, transport, and the unexpected, so families don’t have to choose between this term and the next.",
   },
   {
     title: "Mentorship",
@@ -34,7 +34,7 @@ type Step = { readonly title: string; readonly body: string };
 const STEPS: readonly Step[] = [
   {
     title: "Student selection",
-    body: "Local teachers and elders nominate learners who are ready. We look at potential — not just past grades or pedigree.",
+    body: "Local teachers and elders nominate learners who are ready. We look at potential, not just past grades or pedigree.",
   },
   {
     title: "Financial support",
@@ -42,7 +42,7 @@ const STEPS: readonly Step[] = [
   },
   {
     title: "Mentorship",
-    body: "Each scholar is paired with a mentor — a practitioner or alumnus — who stays engaged with them through graduation.",
+    body: "Each scholar is paired with a mentor, a practitioner or alumnus, who stays engaged with them through graduation.",
   },
   {
     title: "Progress monitoring",
@@ -67,7 +67,7 @@ const CRITERIA: readonly Criterion[] = [
   },
   {
     title: "Commitment",
-    body: "Scholars and families commit to the relationship — termly check-ins, school attendance, and the small reciprocities that keep a program honest.",
+    body: "Scholars and families commit to the relationship, termly check-ins, school attendance, and the small reciprocities that keep a program honest.",
   },
   {
     title: "Ethical process",
@@ -94,7 +94,7 @@ function ProgramsHero() {
       variant="image"
       eyebrow="Programs"
       title="Our programs"
-      description="Three connected programs, one purpose: get high-potential African scholars through the full arc of their education — together with the communities that raised them."
+      description="Three connected programs, one purpose: get high-potential African scholars through the full arc of their education, together with the communities that raised them."
       image={{
         src: "/images/hero/joel-muniz-A4Ax1ApccfA-unsplash.jpg",
         alt: "A scholar at work in a community classroom",
@@ -167,7 +167,7 @@ function ContinuitySection() {
       id="continuity"
       eyebrow="Why this works"
       title="Continuity is the program."
-      description="Most scholarships end the day a student receives them. Ours start there. The relationship — termly check-ins, mentor pairings, alumni who come back to select the next cohort — is what turns one funded year into a generation of funded learners."
+      description="Most scholarships end the day a student receives them. Ours start there. The relationship, termly check-ins, mentor pairings, alumni who come back to select the next cohort, is what turns one funded year into a generation of funded learners."
       image={{
         src: "/images/placeholders/emmanuel-ikwuegbu-Z-KCM4gK8C8-unsplash.jpg",
         alt: "Alumni and current scholars at a community partnership review",
@@ -184,7 +184,7 @@ function SelectionSection() {
         level={2}
         eyebrow="Student selection"
         tone="inverted"
-        description="Four guarantees that shape every scholarship decision. Selection happens with — not at — the communities involved."
+        description="Four guarantees that shape every scholarship decision. Selection happens with, not at, the communities involved."
       >
         How we choose scholars
       </Heading>

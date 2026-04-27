@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: "Annual Reports",
   description:
-    "Independent audits, impact reports, and methodology papers — Umoja Africa’s published record, free to read and share.",
+    "Independent audits, impact reports, and methodology papers, Umoja Africa’s published record, free to read and share.",
 };
 
 export default function AnnualReportsPage() {
@@ -33,7 +33,7 @@ function ReportsHero() {
       variant="color"
       eyebrow="Annual reports"
       title="Reports & publications"
-      description="Independent audits, impact reports, and methodology papers — free to read, free to share. The reports listed below are publishing soon; this page becomes the live archive once they’re online."
+      description="Independent audits, impact reports, and methodology papers, free to read, free to share. The reports listed below are publishing soon; this page becomes the live archive once they’re online."
     />
   );
 }
@@ -85,7 +85,7 @@ function ReportCard({ report }: { report: Report }) {
           href={report.fileUrl}
           aria-label={
             isPlaceholder
-              ? `${report.title} — coming soon`
+              ? `${report.title}, coming soon`
               : `Download ${report.title} PDF`
           }
           aria-disabled={isPlaceholder || undefined}
@@ -103,7 +103,7 @@ function ReportsCTA() {
   return (
     <CTASection
       heading="Donate with full transparency"
-      description="Every dollar enters the system documented in these reports — tracked, audited, and reported on a published cadence."
+      description="Every dollar enters the system documented in these reports, tracked, audited, and reported on a published cadence."
       primary={{ label: "Donate", href: "/donate" }}
       secondary={{ label: "Read the impact page", href: "/impact" }}
     />
