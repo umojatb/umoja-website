@@ -110,3 +110,10 @@ export function getAllReports(): readonly Report[] {
 export function getReportBySlug(slug: string): Report | undefined {
   return REPORTS.find((report) => report.slug === slug);
 }
+
+export function getLatestReport(): Report | undefined {
+  if (REPORTS.length === 0) return undefined;
+  return [...REPORTS].sort((a, b) =>
+    b.publishedAt.localeCompare(a.publishedAt),
+  )[0];
+}

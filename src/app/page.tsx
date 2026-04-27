@@ -1,10 +1,18 @@
+import Image from "next/image";
 import Link from "next/link";
 import { buttonStyles } from "@/components/ui/button";
 import { BlogHeroCarousel } from "@/components/hero/blog-hero-carousel";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
-import { getFeaturedPosts } from "@/lib/blog";
+import {
+  formatPostDate,
+  getFeaturedPosts,
+  getNonFeaturedPosts,
+  type Post,
+} from "@/lib/blog";
+import { getFeaturedProgram } from "@/lib/programs";
+import { formatReportDate, getLatestReport } from "@/lib/reports";
 
 export default function HomePage() {
   return (
@@ -15,6 +23,9 @@ export default function HomePage() {
       <KeyStatementSection />
       <ApproachStorySection />
       <LongViewSection />
+      <LatestBlogSection />
+      <FeaturedProgramSection />
+      <LatestReportSection />
       <CallToActionSection />
     </>
   );
@@ -122,6 +133,142 @@ function LongViewSection() {
           every partnership is reviewed each year by the same small team.
           When that changes, it’ll be because we decided it should.
         </p>
+      </div>
+    </Section>
+  );
+}
+
+function LatestBlogSection() {
+  const posts = getNonFeaturedPosts().slice(0, 3);
+  if (posts.length === 0) return null;
+  return (
+    <Section variant="soft">
+      <div className="flex flex-wrap items-end justify-between gap-6">
+        <Heading level={2} eyebrow="From the blog">
+          More stories
+        </Heading>
+        <Link
+          href="/blog"
+          className="font-heading text-sm font-semibold text-primary-700 transition-colors hover:text-primary-900"
+        >
+          Read all posts →
+        </Link>
+      </div>
+      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        {posts.map((post) => (
+          <BlogPreviewCard key={post.slug} post={post} />
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function BlogPreviewCard({ post }: { post: Post }) {
+  return (
+    <Link href={`/blog/${post.slug}`} className="group block">
+      <article className="flex h-full flex-col">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-neutral-200">
+          <Image
+            src={post.cover.src}
+            alt={post.cover.alt}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+        <p className="mt-4 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-secondary-700">
+          {post.category}
+        </p>
+        <h3 className="mt-2 font-heading text-lg font-semibold text-primary-900 group-hover:text-primary-700">
+          {post.title}
+        </h3>
+        <p className="mt-3 flex-1 text-xs text-neutral-500">
+          {formatPostDate(post.publishedAt)} · {post.readMinutes} min read
+        </p>
+      </article>
+    </Link>
+  );
+}
+
+function FeaturedProgramSection() {
+  const program = getFeaturedProgram();
+  if (!program) return null;
+  return (
+    <Section>
+      <div className="grid gap-6 lg:grid-cols-2 lg:items-center lg:gap-12">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-200">
+          <Image
+            src={program.cover.src}
+            alt={program.cover.alt}
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
+        </div>
+        <div>
+          <Heading level={2} eyebrow="Featured program">
+            {program.name}
+          </Heading>
+          <p className="mt-4 max-w-prose text-base leading-relaxed text-neutral-600 md:text-lg">
+            {program.shortDescription}
+          </p>
+          <div className="mt-6">
+            <Link
+              href="/programs"
+              className={buttonStyles({ variant: "primary", size: "md" })}
+            >
+              Explore programs
+            </Link>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+function LatestReportSection() {
+  const report = getLatestReport();
+  if (!report) return null;
+  const isPlaceholder = report.fileUrl === "#";
+  return (
+    <Section variant="muted">
+      <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12">
+        <div>
+          <Heading level={2} eyebrow="Latest report">
+            {report.title}
+          </Heading>
+          <p className="mt-4 max-w-prose text-base leading-relaxed text-neutral-600 md:text-lg">
+            {report.description}
+          </p>
+          <p className="mt-3 text-sm text-neutral-500">
+            {report.category} · {report.year} · {report.pages} pages ·
+            Published {formatReportDate(report.publishedAt)}
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            <Link
+              href={report.fileUrl}
+              aria-disabled={isPlaceholder || undefined}
+              className={buttonStyles({ variant: "primary", size: "md" })}
+            >
+              {isPlaceholder ? "Coming soon" : "Download PDF"}
+            </Link>
+            <Link
+              href="/annual-reports"
+              className="font-heading text-sm font-semibold text-primary-700 transition-colors hover:text-primary-900"
+            >
+              All reports →
+            </Link>
+          </div>
+        </div>
+        <div className="relative aspect-[3/4] w-full max-w-[16rem] overflow-hidden rounded-xl bg-neutral-200">
+          <Image
+            src={report.cover.src}
+            alt={report.cover.alt}
+            fill
+            sizes="(min-width: 1024px) 16rem, 60vw"
+            className="object-cover"
+          />
+        </div>
       </div>
     </Section>
   );
