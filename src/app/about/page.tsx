@@ -89,6 +89,7 @@ function AboutHero() {
 function OurStorySection() {
   return (
     <ImageTextSection
+      id="our-story"
       variant="soft"
       eyebrow="Our story"
       title={
@@ -132,7 +133,11 @@ function OurStorySection() {
 
 function VisionMissionSection() {
   return (
-    <Section variant="brand" className="-mt-4 md:-mt-8">
+    <Section
+      id="vision-mission"
+      variant="brand"
+      className="-mt-4 md:-mt-8"
+    >
       <Heading level={2} eyebrow="What we stand for" tone="inverted" display>
         Vision &amp; mission
       </Heading>
@@ -163,7 +168,7 @@ function VisionMissionSection() {
 
 function CoreValuesSection() {
   return (
-    <Section variant="muted">
+    <Section id="core-values" variant="muted">
       <Heading
         level={2}
         eyebrow="Core values"
@@ -187,7 +192,7 @@ function CoreValuesSection() {
 
 function LeadershipSection() {
   return (
-    <Section className="py-8 md:py-10">
+    <Section id="leadership" className="py-8 md:py-10">
       <Heading
         level={2}
         eyebrow="Leadership"
