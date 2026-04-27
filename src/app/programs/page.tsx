@@ -105,7 +105,7 @@ function ProgramsHero() {
 
 function CoreProgramsSection() {
   return (
-    <Section variant="muted">
+    <Section id="core-programs" variant="muted">
       <Heading
         level={2}
         eyebrow="What we run"
@@ -129,7 +129,7 @@ function CoreProgramsSection() {
 
 function HowItWorksSection() {
   return (
-    <Section className="py-12 md:py-16">
+    <Section id="how-it-works" className="py-12 md:py-16">
       <Heading
         level={2}
         eyebrow="How it works"
@@ -164,6 +164,7 @@ function HowItWorksSection() {
 function ContinuitySection() {
   return (
     <ImageTextSection
+      id="continuity"
       eyebrow="Why this works"
       title="Continuity is the program."
       description="Most scholarships end the day a student receives them. Ours start there. The relationship — termly check-ins, mentor pairings, alumni who come back to select the next cohort — is what turns one funded year into a generation of funded learners."
@@ -178,7 +179,7 @@ function ContinuitySection() {
 
 function SelectionSection() {
   return (
-    <Section variant="brand" className="py-16 md:py-20">
+    <Section id="selection" variant="brand" className="py-16 md:py-20">
       <Heading
         level={2}
         eyebrow="Student selection"

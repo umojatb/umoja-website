@@ -25,6 +25,8 @@ type ImageTextSectionProps = {
   };
   /** Section surface (default / soft / muted / brand / dark / inset). */
   variant?: SectionVariant;
+  /** DOM id on the underlying section — used as an anchor target by the nav. */
+  id?: string;
 };
 
 /**
@@ -44,10 +46,11 @@ export function ImageTextSection({
   reverse = false,
   cta,
   variant,
+  id,
 }: ImageTextSectionProps) {
   const isDarkSurface = variant === "brand" || variant === "dark";
   return (
-    <Section variant={variant}>
+    <Section variant={variant} id={id}>
       <div className="grid gap-6 lg:grid-cols-2 lg:items-center lg:gap-12">
         <div
           className={cn(

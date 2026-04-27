@@ -117,7 +117,7 @@ function GetInvolvedHero() {
 
 function PathSelectionSection() {
   return (
-    <Section variant="muted">
+    <Section id="paths" variant="muted">
       <Heading
         level={2}
         align="center"
@@ -173,7 +173,7 @@ function WhyItMattersSection() {
 
 function VolunteerDetailsSection() {
   return (
-    <Section variant="muted">
+    <Section id="volunteer" variant="muted">
       <Heading
         level={2}
         eyebrow="Volunteer in detail"
@@ -215,7 +215,7 @@ function ThreePathsAnchorSection() {
 
 function PartnershipDetailsSection() {
   return (
-    <Section>
+    <Section id="partner">
       <Heading
         level={2}
         eyebrow="Partnership in detail"
