@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { cn } from "@/lib/utils";
 
 export type HeadingLevel = 1 | 2 | 3;
@@ -52,14 +53,7 @@ export function Heading({
   return (
     <div className={cn(isCentered ? "text-center" : "text-left", className)}>
       {eyebrow && (
-        <p
-          className={cn(
-            "font-heading text-sm font-semibold uppercase tracking-[0.2em]",
-            isInverted ? "text-secondary-400" : "text-secondary-700",
-          )}
-        >
-          {eyebrow}
-        </p>
+        <Eyebrow tone={isInverted ? "inverted" : "default"}>{eyebrow}</Eyebrow>
       )}
       <Tag
         className={cn(

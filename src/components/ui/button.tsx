@@ -9,9 +9,15 @@ export type ButtonVariant =
   | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
 
+/* Transition spans color + transform so the press scale animates with the
+   color change. Active scale gives instant feedback that the surface heard
+   the tap; reduced-motion users keep the color transition but lose the
+   transform. */
 const baseClasses =
   "inline-flex items-center justify-center gap-1 rounded-full font-medium " +
-  "transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 " +
+  "transition-[transform,color,background-color,border-color] duration-150 ease-out-strong " +
+  "active:scale-[0.97] motion-reduce:active:scale-100 " +
+  "focus-visible:outline-2 focus-visible:outline-offset-2 " +
   "disabled:cursor-not-allowed disabled:opacity-60";
 
 const variantClasses: Record<ButtonVariant, string> = {

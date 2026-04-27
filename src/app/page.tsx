@@ -3,9 +3,12 @@ import Link from "next/link";
 import { buttonStyles } from "@/components/ui/button";
 import { BlogHeroCarousel } from "@/components/hero/blog-hero-carousel";
 import { CTASection } from "@/components/layout/cta-section";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
 import { ImageTextSection } from "@/components/sections/image-text-section";
+import { ProgramsOverviewSection } from "@/components/sections/programs-overview";
 import { Section } from "@/components/ui/section";
+import { TextLink } from "@/components/ui/text-link";
 import {
   formatPostDate,
   getFeaturedPosts,
@@ -19,7 +22,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <IntroSection />
+      <ProgramsOverviewSection />
       <VisualBreakSection />
       <OpportunityGapSection />
       <KeyStatementSection />
@@ -35,27 +38,13 @@ export default function HomePage() {
 
 function HeroSection() {
   const featuredPosts = getFeaturedPosts();
+  if (featuredPosts.length === 0) return null;
   return (
     <section className="w-full bg-primary-700 py-6 md:py-8 lg:py-10">
       <div className="relative mx-auto w-[92%] min-h-[60vh] max-w-7xl overflow-hidden rounded-[2rem] md:min-h-[64vh] lg:min-h-[68vh]">
         <BlogHeroCarousel posts={featuredPosts} />
       </div>
     </section>
-  );
-}
-
-function IntroSection() {
-  return (
-    <Section className="py-12">
-      <div className="mx-auto max-w-prose">
-        <p className="text-base leading-relaxed text-neutral-700 md:text-lg">
-          Umoja Africa runs three programs — scholarships, mentorship, and
-          community engagement — across multiple African countries. The
-          structure that follows is the proof: how we choose, who we partner
-          with, and how the money moves.
-        </p>
-      </div>
-    </Section>
   );
 }
 
@@ -104,7 +93,7 @@ function OpportunityGapSection() {
 
 function KeyStatementSection() {
   return (
-    <Section variant="brand" className="py-20 md:py-28 rounded-t-3xl">
+    <Section variant="brand" className="py-20 md:py-28 lg:py-28 rounded-t-3xl">
       <div className="max-w-3xl">
         <Heading level={2} tone="inverted" display>
           Talent doesn’t choose its address. We don’t ask it to.
@@ -157,12 +146,7 @@ function LatestBlogSection() {
         <Heading level={2} eyebrow="From the blog">
           More stories
         </Heading>
-        <Link
-          href="/blog"
-          className="font-heading text-sm font-semibold text-primary-700 transition-colors hover:text-primary-900"
-        >
-          Read all posts →
-        </Link>
+        <TextLink href="/blog">Read all posts</TextLink>
       </div>
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
         {posts.map((post) => (
@@ -175,7 +159,10 @@ function LatestBlogSection() {
 
 function BlogPreviewCard({ post }: { post: Post }) {
   return (
-    <Link href={`/blog/${post.slug}`} className="group block">
+    <Link
+      href={`/blog/${post.slug}`}
+      className="group block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-700"
+    >
       <article className="flex h-full flex-col">
         <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-neutral-200">
           <Image
@@ -183,16 +170,16 @@ function BlogPreviewCard({ post }: { post: Post }) {
             alt={post.cover.alt}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
         </div>
-        <p className="mt-4 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-secondary-700">
+        <Eyebrow size="xs" className="mt-4">
           {post.category}
-        </p>
+        </Eyebrow>
         <h3 className="mt-2 font-heading text-lg font-semibold text-primary-900 group-hover:text-primary-700">
           {post.title}
         </h3>
-        <p className="mt-3 flex-1 text-xs text-neutral-500">
+        <p className="mt-3 flex-1 text-xs text-neutral-600">
           {formatPostDate(post.publishedAt)} · {post.readMinutes} min read
         </p>
       </article>
@@ -250,24 +237,28 @@ function LatestReportSection() {
           <p className="mt-4 max-w-prose text-base leading-relaxed text-neutral-600 md:text-lg">
             {report.description}
           </p>
-          <p className="mt-3 text-sm text-neutral-500">
+          <p className="mt-3 text-sm text-neutral-600">
             {report.category} · {report.year} · {report.pages} pages ·
             Published {formatReportDate(report.publishedAt)}
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-4">
-            <Link
-              href={report.fileUrl}
-              aria-disabled={isPlaceholder || undefined}
-              className={buttonStyles({ variant: "primary", size: "md" })}
-            >
-              {isPlaceholder ? "Coming soon" : "Download PDF"}
-            </Link>
-            <Link
-              href="/annual-reports"
-              className="font-heading text-sm font-semibold text-primary-700 transition-colors hover:text-primary-900"
-            >
-              All reports →
-            </Link>
+            {isPlaceholder ? (
+              <button
+                type="button"
+                disabled
+                className={buttonStyles({ variant: "primary", size: "md" })}
+              >
+                Coming soon
+              </button>
+            ) : (
+              <Link
+                href={report.fileUrl}
+                className={buttonStyles({ variant: "primary", size: "md" })}
+              >
+                Download PDF
+              </Link>
+            )}
+            <TextLink href="/annual-reports">All reports</TextLink>
           </div>
         </div>
         <div className="relative aspect-[3/4] w-full max-w-[16rem] overflow-hidden rounded-xl bg-neutral-200">

@@ -64,6 +64,12 @@
      Every spacing/sizing utility (`p-*`, `m-*`, `gap-*`, `w-*`, etc.) becomes
      a multiple of 8px: `p-1` = 8px, `p-2` = 16px, `p-4` = 32px, ... */
   --spacing: 0.5rem;
+
+  /* Easing — interactive feedback uses a stronger ease-out than the browser
+     default cubic-bezier(0.4, 0, 0.2, 1). Tailwind v4 maps `--ease-*` tokens
+     onto the `ease-*` transition-timing utilities, so this becomes
+     `ease-out-strong` at the call site. */
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 :root {

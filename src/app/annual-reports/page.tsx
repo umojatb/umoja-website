@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CTASection } from "@/components/layout/cta-section";
-import { Heading } from "@/components/ui/heading";
+import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 import {
   formatReportDate,
@@ -29,16 +29,12 @@ export default function AnnualReportsPage() {
 
 function ReportsHero() {
   return (
-    <Section as="header" className="py-14 md:py-20">
-      <Heading
-        level={1}
-        align="center"
-        eyebrow="Annual reports"
-        description="Independent audits, impact reports, and methodology papers — free to read, free to share. The reports listed below are publishing soon; this page becomes the live archive once they’re online."
-      >
-        Reports &amp; publications
-      </Heading>
-    </Section>
+    <PageHero
+      variant="color"
+      eyebrow="Annual reports"
+      title="Reports & publications"
+      description="Independent audits, impact reports, and methodology papers — free to read, free to share. The reports listed below are publishing soon; this page becomes the live archive once they’re online."
+    />
   );
 }
 

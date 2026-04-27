@@ -23,7 +23,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer">
-            <h2 className="font-heading text-sm font-semibold uppercase tracking-wider text-white">
+            <h2 className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-white">
               Explore
             </h2>
             <ul className="mt-2 space-y-1 text-sm">
@@ -41,7 +41,7 @@ export function Footer() {
           </nav>
 
           <nav aria-label="Legal">
-            <h2 className="font-heading text-sm font-semibold uppercase tracking-wider text-white">
+            <h2 className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-white">
               Legal
             </h2>
             <ul className="mt-2 space-y-1 text-sm">
