@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { ImageTextSection } from "@/components/sections/image-text-section";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
@@ -87,26 +88,34 @@ function AboutHero() {
 
 function OurStorySection() {
   return (
-    <Section variant="soft">
-      <div className="grid gap-6 lg:grid-cols-5 lg:gap-12">
-        <Heading level={2} eyebrow="Our story" className="lg:col-span-2">
+    <ImageTextSection
+      variant="soft"
+      eyebrow="Our story"
+      title={
+        <>
           From a single classroom in <em>Congo</em>
-        </Heading>
-        <div className="space-y-3 text-base leading-relaxed text-neutral-700 md:text-lg lg:col-span-3">
+        </>
+      }
+      image={{
+        src: "/images/hero/volunteer-helping-with-donation-box.jpg",
+        alt: "A community supplying books and resources to a partner school",
+      }}
+      description={
+        <>
           <p>
-            Umoja Africa began in eastern Congo, where co-founders Baka
-            and Tessy grew up watching brilliant classmates fall out of
-            school — not because they couldn’t keep up, but because the
-            system around them couldn’t keep them. School fees, transport,
-            books, a single bad season for a family — any one of those
-            could end an education that would have changed a community.
+            Umoja Africa began in eastern Congo, where co-founders Baka and
+            Tessy grew up watching brilliant classmates fall out of school
+            — not because they couldn’t keep up, but because the system
+            around them couldn’t keep them. School fees, transport, books,
+            a single bad season for a family — any one of those could end
+            an education that would have changed a community.
           </p>
           <p>
-            They started with one student. One scholarship, one set of
-            fees, one young person their teachers and neighbours had
-            identified as ready. They learned what worked, what didn’t,
-            and what the people closest to the work had been telling them
-            all along: scholarships matter, but presence matters more.
+            They started with one student. One scholarship, one set of fees,
+            one young person their teachers and neighbours had identified as
+            ready. They learned what worked, what didn’t, and what the
+            people closest to the work had been telling them all along:
+            scholarships matter, but presence matters more.
           </p>
           <p>
             Today Umoja Africa runs on the same principle. We invest in
@@ -115,9 +124,9 @@ function OurStorySection() {
             relationship that doesn’t end at graduation. The geography
             expands, but the standard doesn’t.
           </p>
-        </div>
-      </div>
-    </Section>
+        </>
+      }
+    />
   );
 }
 

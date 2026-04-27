@@ -66,9 +66,13 @@ export function ImageTextSection({
           <Heading level={2} eyebrow={eyebrow}>
             {title}
           </Heading>
-          <p className="mt-4 max-w-prose text-base leading-relaxed text-neutral-600 md:text-lg">
-            {description}
-          </p>
+          <div className="mt-4 max-w-prose space-y-3 text-base leading-relaxed text-neutral-600 md:text-lg">
+            {typeof description === "string" ? (
+              <p>{description}</p>
+            ) : (
+              description
+            )}
+          </div>
           {cta && (
             <div className="mt-6">
               <Link

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { ImageTextSection } from "@/components/sections/image-text-section";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
@@ -200,29 +201,30 @@ function FundsAllocationSection() {
 
 function TransparencySection() {
   return (
-    <Section variant="inset">
-      <div className="ml-auto mr-0 max-w-4xl px-3 sm:px-4 md:mr-12 lg:mr-20">
-        <div className="grid gap-6 lg:grid-cols-5 lg:gap-12">
-          <Heading level={2} eyebrow="Transparency" className="lg:col-span-2">
-            What we publish, and how often
-          </Heading>
-          <div className="space-y-3 text-base leading-relaxed text-neutral-700 md:text-lg lg:col-span-3">
-            <p>
-              Umoja Africa publishes a full impact report each year —
-              covering scholar outcomes, an independent financial audit, the
-              partner directory, and what changed in our strategy. Quarterly
-              updates fill in the months between.
-            </p>
-            <p>
-              We commit to honest accounting: when something underperforms,
-              we say so; when we change strategy, we explain why; when a
-              donor asks to see the books, we open them. Our reports remain
-              freely available — linked from this page once published.
-            </p>
-          </div>
-        </div>
-      </div>
-    </Section>
+    <ImageTextSection
+      eyebrow="Transparency"
+      title="What we publish, and how often"
+      image={{
+        src: "/images/placeholders/felicia-montenegro-EEbLJlfCnSI-unsplash.jpg",
+        alt: "An open report on a desk with annotations",
+      }}
+      description={
+        <>
+          <p>
+            Umoja Africa publishes a full impact report each year — covering
+            scholar outcomes, an independent financial audit, the partner
+            directory, and what changed in our strategy. Quarterly updates
+            fill in the months between.
+          </p>
+          <p>
+            We commit to honest accounting: when something underperforms,
+            we say so; when we change strategy, we explain why; when a donor
+            asks to see the books, we open them. Our reports remain freely
+            available — linked from this page once published.
+          </p>
+        </>
+      }
+    />
   );
 }
 
