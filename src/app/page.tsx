@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { buttonStyles } from "@/components/ui/button";
+import { BlogHeroCarousel } from "@/components/hero/blog-hero-carousel";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
-import { HeroVideo } from "@/components/hero-video";
 import { Section } from "@/components/ui/section";
+import { getFeaturedPosts } from "@/lib/blog";
 
 export default function HomePage() {
   return (
@@ -20,47 +21,11 @@ export default function HomePage() {
 }
 
 function HeroSection() {
+  const featuredPosts = getFeaturedPosts();
   return (
     <section className="w-full bg-primary-700 py-6 md:py-8 lg:py-10">
       <div className="relative mx-auto w-[92%] min-h-[60vh] max-w-7xl overflow-hidden rounded-[2rem] md:min-h-[64vh] lg:min-h-[68vh]">
-        <HeroVideo
-          src="/images/hero/hero.mp4"
-          poster="/images/hero/poster.jpg"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"
-        />
-        <div className="absolute inset-0 z-10 flex items-center">
-          <div className="max-w-xl px-6 md:max-w-2xl md:px-16 lg:max-w-3xl">
-            <h1 className="font-heading text-4xl font-extrabold uppercase leading-tight text-white md:text-6xl">
-              Empowering Africa Through Education
-            </h1>
-            <p className="mt-6 text-white/80 md:text-lg">
-              A continent-wide effort to give every young African the
-              foundation, scholarships, and mentorship they deserve — built
-              alongside the communities we serve.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-10">
-              <Link
-                href="/donate"
-                className={buttonStyles({ variant: "secondary", size: "lg" })}
-              >
-                Donate
-              </Link>
-              <Link
-                href="/get-involved"
-                className={buttonStyles({
-                  variant: "outline-inverted",
-                  size: "lg",
-                })}
-              >
-                Get Involved
-              </Link>
-            </div>
-          </div>
-        </div>
+        <BlogHeroCarousel posts={featuredPosts} />
       </div>
     </section>
   );
