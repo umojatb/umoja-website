@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
 export const metadata: Metadata = {
@@ -87,16 +88,16 @@ export default function ImpactPage() {
 
 function ImpactHero() {
   return (
-    <Section as="header" className="py-14 md:py-20">
-      <Heading
-        level={1}
-        align="center"
-        eyebrow="Impact"
-        description="What we count, where every dollar goes, and the reporting commitments that hold us to it. We are early-stage on purpose — small enough to publish detail, big enough to matter."
-      >
-        Our impact
-      </Heading>
-    </Section>
+    <PageHero
+      variant="image"
+      eyebrow="Impact"
+      title="Our impact"
+      description="What we count, where every dollar goes, and the reporting commitments that hold us to it. We are early-stage on purpose — small enough to publish detail, big enough to matter."
+      image={{
+        src: "/images/placeholders/christy-joseph-jacob-Mh-R3YrrHT8-unsplash.jpg",
+        alt: "A scholar reading at a community library",
+      }}
+    />
   );
 }
 
