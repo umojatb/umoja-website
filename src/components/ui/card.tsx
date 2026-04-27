@@ -8,7 +8,7 @@ type CardProps = {
 } & Omit<HTMLAttributes<HTMLElement>, "className" | "children">;
 
 /**
- * Generic surface for content groupings — blog cards, program tiles,
+ * Generic surface for content groupings, blog cards, program tiles,
  * impact stats. Provides a consistent border, radius, padding, and elevation;
  * override with `className` when a specific instance needs more or less.
  */

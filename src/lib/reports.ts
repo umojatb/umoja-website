@@ -1,5 +1,5 @@
 /**
- * Reports content source — mock data for /annual-reports.
+ * Reports content source, mock data for /annual-reports.
  *
  * The `fileUrl` is intentionally `#` for now; once the actual PDFs are in
  * place under /public/reports, swap each `fileUrl` to the file path. The
@@ -32,7 +32,7 @@ const REPORTS: readonly Report[] = [
     slug: "2025-annual-impact-report",
     title: "2025 Annual Impact Report",
     description:
-      "Cohort outcomes, financial allocation, and partnership health across six countries — the full year audit and the questions we’re carrying into 2026.",
+      "Cohort outcomes, financial allocation, and partnership health across six countries, the full year audit and the questions we’re carrying into 2026.",
     year: 2025,
     category: "Annual Report",
     pages: 56,

@@ -2,12 +2,12 @@
  * Centralized navigation config.
  *
  * Source of truth for the global Navbar and Footer. Adding a route to the
- * site means editing this file — never hardcode links inside components.
+ * site means editing this file, never hardcode links inside components.
  *
  * `mainNav` is the flat route list. Items with a `panel` get a click-to-open
  * mega menu in the top bar. Items flagged `topBarHidden` are kept here for
  * footer rendering but skipped in the desktop nav (used to keep the top bar
- * to four anchor sections — Impact and Contact still link from inside the
+ * to four anchor sections, Impact and Contact still link from inside the
  * About / Get Involved panels).
  */
 
@@ -64,7 +64,7 @@ export const mainNav: readonly NavItem[] = [
       featured: {
         title: "From a single classroom in Congo",
         excerpt:
-          "How Baka and Tessy turned one scholarship into a multi-country program — without losing the relationship that made the first one work.",
+          "How Baka and Tessy turned one scholarship into a multi-country program, without losing the relationship that made the first one work.",
         href: "/about#our-story",
         image: {
           src: "/images/hero/tim-marshall-cAtzHUz7Z8g-unsplash.jpg",
@@ -78,7 +78,7 @@ export const mainNav: readonly NavItem[] = [
     href: "/programs",
     panel: {
       description:
-        "Three connected programs — scholarships, mentorship, and community engagement — and the relationship that runs through them.",
+        "Three connected programs, scholarships, mentorship, and community engagement, and the relationship that runs through them.",
       ctaLabel: "Learn more about our programs",
       ctaHref: "/programs",
       primaryLinks: [
@@ -94,7 +94,7 @@ export const mainNav: readonly NavItem[] = [
       featured: {
         title: "Featured program: Scholarships",
         excerpt:
-          "Multi-year scholarships that cover fees, transport, books, and the unexpected — committed through to graduation.",
+          "Multi-year scholarships that cover fees, transport, books, and the unexpected, committed through to graduation.",
         href: "/programs",
         image: {
           src: "/images/sections/emmanuel-ikwuegbu-VC6MGt9ZoBA-unsplash.jpg",
@@ -108,7 +108,7 @@ export const mainNav: readonly NavItem[] = [
     href: "/get-involved",
     panel: {
       description:
-        "Three ways to help: fund a scholarship, volunteer your time, or partner as an institution. Pick the one that fits — or talk to us if it’s not on the list.",
+        "Three ways to help: fund a scholarship, volunteer your time, or partner as an institution. Pick the one that fits, or talk to us if it’s not on the list.",
       ctaLabel: "See all paths",
       ctaHref: "/get-involved",
       primaryLinks: [
@@ -140,7 +140,7 @@ export const mainNav: readonly NavItem[] = [
     href: "/blog",
     panel: {
       description:
-        "Field notes, impact stories, and transparency posts — written by the people doing the work, on a steady cadence.",
+        "Field notes, impact stories, and transparency posts, written by the people doing the work, on a steady cadence.",
       ctaLabel: "Read all posts",
       ctaHref: "/blog",
       primaryLinks: [

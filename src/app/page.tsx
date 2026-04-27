@@ -70,7 +70,7 @@ function OpportunityGapSection() {
       <Heading
         level={2}
         eyebrow="The opportunity gap"
-        description="Across Africa, millions of young people are ready to learn — and the systems around them are still catching up. We close that distance, one community partnership at a time."
+        description="Across Africa, millions of young people are ready to learn, and the systems around them are still catching up. We close that distance, one community partnership at a time."
       >
         Talent is everywhere. Opportunity is not.
       </Heading>
@@ -84,7 +84,7 @@ function OpportunityGapSection() {
           quality learning resources. One in three adults still cannot read or
           write fluently in their primary language; today we partner with{" "}
           <span className="font-medium text-primary-700">200+</span>{" "}
-          community-led schools across six countries — and counting.
+          community-led schools across six countries, and counting.
         </p>
       </div>
     </Section>

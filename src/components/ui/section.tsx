@@ -24,8 +24,8 @@ type SectionProps = {
  *
  * `soft` / `muted` / `inset` form a neutral elevation ladder:
  *   page (white) → soft (neutral-50) → muted (neutral-100)
- * `brand` is the navy emphasis surface — used for mid-page anchors.
- * `dark` is the neutral-black surface — used by the closing CTA.
+ * `brand` is the navy emphasis surface, used for mid-page anchors.
+ * `dark` is the neutral-black surface, used by the closing CTA.
  * `inset` is `soft` without the auto-Container; the consumer renders
  * its own inner panel to create container layering. */
 const variantClasses: Record<SectionVariant, string> = {
@@ -44,7 +44,7 @@ const variantClasses: Record<SectionVariant, string> = {
  * `<Section>`. Default padding is `py-10 md:py-14` (80 / 112 px on the 8px
  * scale). Wraps content in a `<Container>` by default; pass `bare` to opt
  * out for full-bleed sections. The `inset` variant also opts out
- * automatically — the consumer takes responsibility for inner layout
+ * automatically, the consumer takes responsibility for inner layout
  * (container layering pattern).
  */
 export function Section({

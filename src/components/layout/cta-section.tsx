@@ -12,9 +12,9 @@ export type CTAAction = {
 type CTASectionProps = {
   heading: ReactNode;
   description?: ReactNode;
-  /** Primary action — gold (`secondary` button variant). */
+  /** Primary action, gold (`secondary` button variant). */
   primary: CTAAction;
-  /** Optional secondary action — outline-on-dark variant. */
+  /** Optional secondary action, outline-on-dark variant. */
   secondary?: CTAAction;
   className?: string;
 };

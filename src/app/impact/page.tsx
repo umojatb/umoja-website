@@ -32,7 +32,7 @@ const METRICS: readonly Metric[] = [
   {
     label: "Years active",
     statement: "Founded in Congo",
-    body: "What began as a single scholarship between friends in eastern Congo is now a multi-country program — still run by the people who started it.",
+    body: "What began as a single scholarship between friends in eastern Congo is now a multi-country program, still run by the people who started it.",
   },
 ];
 
@@ -41,11 +41,11 @@ type Story = { readonly title: string; readonly body: string };
 const STORIES: readonly Story[] = [
   {
     title: "Identified, funded, accompanied",
-    body: "A scholar nominated by her teachers in rural eastern Congo. Umoja covers the fees, books, and transport that would otherwise have ended her education. Through every term, an alumna mentor from her field of study stays in steady contact — exam prep, career advice, the small reciprocities that keep a scholarship from feeling transactional.",
+    body: "A scholar nominated by her teachers in rural eastern Congo. Umoja covers the fees, books, and transport that would otherwise have ended her education. Through every term, an alumna mentor from her field of study stays in steady contact, exam prep, career advice, the small reciprocities that keep a scholarship from feeling transactional.",
   },
   {
     title: "From scholar to selector",
-    body: "Years after graduation, Umoja alumni return to the program — interviewing nominees, mentoring the next cohort, sitting on the panels that select them. The model is generational: the people closest to the work are the people who lived through it.",
+    body: "Years after graduation, Umoja alumni return to the program, interviewing nominees, mentoring the next cohort, sitting on the panels that select them. The model is generational: the people closest to the work are the people who lived through it.",
   },
 ];
 
@@ -93,7 +93,7 @@ function ImpactHero() {
       variant="image"
       eyebrow="Impact"
       title="Our impact"
-      description="What we count, where every dollar goes, and the reporting commitments that hold us to it. We are early-stage on purpose — small enough to publish detail, big enough to matter."
+      description="What we count, where every dollar goes, and the reporting commitments that hold us to it. We are early-stage on purpose, small enough to publish detail, big enough to matter."
       image={{
         src: "/images/placeholders/christy-joseph-jacob-Mh-R3YrrHT8-unsplash.jpg",
         alt: "A scholar reading at a community library",
@@ -137,7 +137,7 @@ function StoriesSection() {
       <Heading
         level={2}
         eyebrow="Stories from the cohort"
-        description="Composite portraits drawn from typical scholar journeys at Umoja. Verifiable individual stories — with each scholar’s consent — appear in our annual impact reports."
+        description="Composite portraits drawn from typical scholar journeys at Umoja. Verifiable individual stories, with each scholar’s consent, appear in our annual impact reports."
       >
         What a scholarship looks like
       </Heading>
@@ -161,7 +161,7 @@ function PledgeStatementSection() {
   return (
     <Section variant="brand" className="py-20 md:py-28 rounded-t-3xl">
       <Heading level={2} align="center" tone="inverted" display>
-        We don’t promise — we <em>publish</em>.
+        We don’t promise, we <em>publish</em>.
       </Heading>
     </Section>
   );
@@ -174,7 +174,7 @@ function FundsAllocationSection() {
         <Heading
           level={2}
           eyebrow="Where the money goes"
-          description="Our commitment for every dollar received. Audited actuals — with the full breakdown by program, geography, and cohort — publish each year in our annual impact report."
+          description="Our commitment for every dollar received. Audited actuals, with the full breakdown by program, geography, and cohort, publish each year in our annual impact report."
         >
           How funds are used
         </Heading>
@@ -211,7 +211,7 @@ function TransparencySection() {
       description={
         <>
           <p>
-            Umoja Africa publishes a full impact report each year — covering
+            Umoja Africa publishes a full impact report each year, covering
             scholar outcomes, an independent financial audit, the partner
             directory, and what changed in our strategy. Quarterly updates
             fill in the months between.
@@ -220,7 +220,7 @@ function TransparencySection() {
             We commit to honest accounting: when something underperforms,
             we say so; when we change strategy, we explain why; when a donor
             asks to see the books, we open them. Our reports remain freely
-            available — linked from this page once published.
+            available, linked from this page once published.
           </p>
         </>
       }
@@ -232,7 +232,7 @@ function ImpactCTASection() {
   return (
     <CTASection
       heading="Donate with full transparency"
-      description="Every dollar enters the system you just read about — tracked, audited, and reported on a published cadence."
+      description="Every dollar enters the system you just read about, tracked, audited, and reported on a published cadence."
       primary={{ label: "Donate", href: "/donate" }}
       secondary={{ label: "Read our reports", href: "/annual-reports" }}
     />

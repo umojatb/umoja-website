@@ -1,5 +1,5 @@
 /**
- * Public contact email — single source of truth.
+ * Public contact email, single source of truth.
  *
  * Used both by the contact form's submit handler (which composes a
  * `mailto:` link) and by the email card on the contact page. Update

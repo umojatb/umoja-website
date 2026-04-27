@@ -11,7 +11,7 @@ import { Section } from "@/components/ui/section";
 export const metadata: Metadata = {
   title: "Get Involved",
   description:
-    "Three ways to help — donate, volunteer, or partner. Pick the one that fits you, or talk to us first.",
+    "Three ways to help, donate, volunteer, or partner. Pick the one that fits you, or talk to us first.",
 };
 
 type Path = {
@@ -64,7 +64,7 @@ const VOLUNTEER_OPTIONS: readonly VolunteerOption[] = [
   {
     title: "Tutoring",
     commitment: "≈ 2 hours / week",
-    body: "Weekly subject support over video — math, sciences, language, college prep. We match by subject and time zone to a scholar who needs it.",
+    body: "Weekly subject support over video, math, sciences, language, college prep. We match by subject and time zone to a scholar who needs it.",
   },
   {
     title: "Workshops",
@@ -82,7 +82,7 @@ const PARTNER_OPTIONS: readonly PartnerOption[] = [
   },
   {
     title: "Resource contributions",
-    body: "Lab access, software licenses, internship slots, in-kind goods. We map needs to the cohort and the partner — nothing wasted.",
+    body: "Lab access, software licenses, internship slots, in-kind goods. We map needs to the cohort and the partner, nothing wasted.",
   },
   {
     title: "Long-term collaboration",
@@ -110,7 +110,7 @@ function GetInvolvedHero() {
       variant="color"
       eyebrow="Get involved"
       title="How will you help?"
-      description="Three ways to help: fund a scholarship, volunteer your time, or partner as an institution. Pick the one that fits — or talk to us if it’s not on the list."
+      description="Three ways to help: fund a scholarship, volunteer your time, or partner as an institution. Pick the one that fits, or talk to us if it’s not on the list."
     />
   );
 }
@@ -162,7 +162,7 @@ function WhyItMattersSection() {
         <Heading
           level={2}
           eyebrow="Why it matters"
-          description="Money funds the scholarship; time builds the relationship; partnership scales both. Each contributor changes the program in a different way — and the program needs all three to work."
+          description="Money funds the scholarship; time builds the relationship; partnership scales both. Each contributor changes the program in a different way, and the program needs all three to work."
         >
           Each path moves the program
         </Heading>
@@ -204,7 +204,7 @@ function ThreePathsAnchorSection() {
       variant="brand"
       eyebrow="From the work"
       title="All three paths build the same program."
-      description="Money funds the scholarship. Time builds the relationship. Partnership scales both. Each contributor changes the program in a different way — and the program needs all of them."
+      description="Money funds the scholarship. Time builds the relationship. Partnership scales both. Each contributor changes the program in a different way, and the program needs all of them."
       image={{
         src: "/images/placeholders/emmanuel-ikwuegbu-VC6MGt9ZoBA-unsplash.jpg",
         alt: "A scholar and mentor reviewing coursework together",
@@ -241,7 +241,7 @@ function ClosingCTASection() {
   return (
     <CTASection
       heading="Have a different idea?"
-      description="If your contribution doesn’t fit the paths above, write to us. Most partnerships start with a first email — and donations always work."
+      description="If your contribution doesn’t fit the paths above, write to us. Most partnerships start with a first email, and donations always work."
       primary={{ label: "Talk to us", href: "/contact" }}
       secondary={{ label: "Donate", href: "/donate" }}
     />

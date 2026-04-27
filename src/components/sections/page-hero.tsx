@@ -9,12 +9,12 @@ export type PageHeroAlign = "left" | "center";
 /**
  * Reusable hero block for sub-pages. Two variants:
  *
- * - `image` — full-width cover image in a rounded card (matches the
+ * - `image`, full-width cover image in a rounded card (matches the
  *   homepage hero framing) with a left-anchored brand-navy gradient.
  *   Eyebrow + title + description sit on the left in white. Use for
  *   storytelling pages (About, Programs, Impact, Blog).
  *
- * - `color` — solid `bg-primary-700` brand canvas, no imagery. Eyebrow
+ * - `color`, solid `bg-primary-700` brand canvas, no imagery. Eyebrow
  *   + title + description on the canvas, centered by default. Use for
  *   utility / archive pages where photos compete with the content
  *   (Annual Reports, Get Involved, Contact).

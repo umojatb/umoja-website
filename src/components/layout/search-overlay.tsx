@@ -46,7 +46,7 @@ type SearchOverlayProps = {
 
 /**
  * Modal overlay that lists every published page on the site, with a
- * client-side filter input. Replaces a real search backend — when one
+ * client-side filter input. Replaces a real search backend, when one
  * exists, swap the page list for fetched results.
  */
 export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
