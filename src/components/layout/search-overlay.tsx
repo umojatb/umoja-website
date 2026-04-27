@@ -91,8 +91,9 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
       aria-modal="true"
       aria-labelledby={titleId}
       aria-hidden={!isOpen}
+      inert={!isOpen || undefined}
       className={cn(
-        "fixed inset-0 z-[60] bg-background/95 backdrop-blur transition-opacity duration-200 motion-reduce:transition-none",
+        "fixed inset-0 z-[60] bg-background/95 backdrop-blur transition-opacity duration-200 ease-out-strong motion-reduce:transition-none",
         isOpen ? "opacity-100" : "pointer-events-none opacity-0",
       )}
       onClick={handleClose}
@@ -112,7 +113,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
             type="button"
             onClick={handleClose}
             aria-label="Close search"
-            className="inline-flex h-6 w-6 items-center justify-center rounded-full text-primary-700 transition-colors hover:bg-primary-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700"
+            className="inline-flex h-6 w-6 items-center justify-center rounded-full text-primary-700 transition-[transform,background-color,color] duration-150 ease-out-strong hover:bg-primary-50 active:scale-[0.92] motion-reduce:active:scale-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700"
           >
             <svg
               aria-hidden="true"

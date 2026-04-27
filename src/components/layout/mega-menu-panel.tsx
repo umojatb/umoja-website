@@ -84,9 +84,10 @@ export function MegaMenuPanel({
       role="region"
       aria-label={`${item.label} menu`}
       aria-hidden={!isOpen}
+      inert={!isOpen || undefined}
       className={cn(
         "absolute inset-x-0 top-full max-h-[45vh] overflow-hidden border-b border-neutral-200 bg-background shadow-lg",
-        "transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none",
+        "transition-[opacity,transform] duration-200 ease-out-strong motion-reduce:transition-none",
         isOpen
           ? "translate-y-0 opacity-100"
           : "pointer-events-none -translate-y-2 opacity-0",

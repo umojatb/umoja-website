@@ -59,15 +59,27 @@ export function Navbar() {
   }, [openPanel, isMobileOpen]);
 
   useEffect(() => {
-    if (!openPanel) return;
+    if (!openPanel && !isMobileOpen) return;
     const onMouseDown = (e: MouseEvent) => {
       if (!headerRef.current?.contains(e.target as Node)) {
         setOpenPanel(null);
+        setIsMobileOpen(false);
       }
     };
     document.addEventListener("mousedown", onMouseDown);
     return () => document.removeEventListener("mousedown", onMouseDown);
-  }, [openPanel]);
+  }, [openPanel, isMobileOpen]);
+
+  /* Lock body scroll when a modal-style overlay is open (mobile drawer or
+     search). Mega panels don't lock, they sit inline like a hover menu. */
+  useEffect(() => {
+    if (!isMobileOpen && !isSearchOpen) return;
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, [isMobileOpen, isSearchOpen]);
 
   const togglePanel = (label: string) => {
     setOpenPanel((current) => (current === label ? null : label));
@@ -105,11 +117,17 @@ export function Navbar() {
                     aria-expanded={openPanel === item.label}
                     aria-haspopup="true"
                     aria-controls={panelDomId(item.label)}
+                    aria-current={
+                      isItemActive(pathname, item.href) ? "page" : undefined
+                    }
                     className={cn(
-                      "inline-flex items-center gap-1 text-sm font-medium transition-colors",
+                      "relative inline-flex items-center gap-1 text-sm font-medium",
+                      "transition-[transform,color] duration-150 ease-out-strong",
+                      "active:scale-[0.97] motion-reduce:active:scale-100",
+                      "after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-[6px] after:h-[2px] after:rounded-full after:bg-secondary-500 after:opacity-0 after:transition-opacity after:duration-200 after:ease-out-strong",
                       openPanel === item.label ||
                         isItemActive(pathname, item.href)
-                        ? "text-primary-700"
+                        ? "text-primary-700 after:opacity-100"
                         : "text-neutral-600 hover:text-primary-700",
                     )}
                   >
@@ -123,9 +141,11 @@ export function Navbar() {
                       isItemActive(pathname, item.href) ? "page" : undefined
                     }
                     className={cn(
-                      "text-sm font-medium transition-colors",
+                      "relative text-sm font-medium",
+                      "transition-colors duration-150 ease-out-strong",
+                      "after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-[6px] after:h-[2px] after:rounded-full after:bg-secondary-500 after:opacity-0 after:transition-opacity after:duration-200 after:ease-out-strong",
                       isItemActive(pathname, item.href)
-                        ? "text-primary-700"
+                        ? "text-primary-700 after:opacity-100"
                         : "text-neutral-600 hover:text-primary-700",
                     )}
                   >
@@ -141,7 +161,7 @@ export function Navbar() {
               type="button"
               onClick={() => setIsSearchOpen(true)}
               aria-label="Search the site"
-              className="hidden h-6 w-6 items-center justify-center rounded-full text-primary-700 transition-colors hover:bg-primary-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 md:inline-flex"
+              className="hidden h-6 w-6 items-center justify-center rounded-full text-primary-700 transition-[transform,background-color,color] duration-150 ease-out-strong hover:bg-primary-50 active:scale-[0.92] motion-reduce:active:scale-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 md:inline-flex"
             >
               <SearchIcon />
             </button>
@@ -161,7 +181,7 @@ export function Navbar() {
               aria-expanded={isMobileOpen}
               aria-controls="mobile-nav"
               aria-label={isMobileOpen ? "Close menu" : "Open menu"}
-              className="inline-flex h-6 w-6 items-center justify-center rounded-full text-primary-700 transition-colors hover:bg-primary-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 md:hidden"
+              className="inline-flex h-6 w-6 items-center justify-center rounded-full text-primary-700 transition-[transform,background-color,color] duration-150 ease-out-strong hover:bg-primary-50 active:scale-[0.92] motion-reduce:active:scale-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 md:hidden"
             >
               {isMobileOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
@@ -181,8 +201,9 @@ export function Navbar() {
         <div
           id="mobile-nav"
           aria-hidden={!isMobileOpen}
+          inert={!isMobileOpen || undefined}
           className={cn(
-            "absolute inset-x-0 top-full max-h-[calc(100vh-3rem)] overflow-y-auto border-t border-neutral-200 bg-background/95 backdrop-blur transition-[transform,opacity] duration-200 ease-out motion-reduce:transition-none md:hidden",
+            "absolute inset-x-0 top-full max-h-[calc(100vh-3rem)] overflow-y-auto border-t border-neutral-200 bg-background/95 backdrop-blur transition-[transform,opacity] duration-200 ease-out-strong motion-reduce:transition-none md:hidden",
             isMobileOpen
               ? "translate-y-0 opacity-100"
               : "pointer-events-none -translate-y-1 opacity-0",
@@ -192,7 +213,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
-              className="flex w-full items-center gap-2 rounded-md border border-neutral-200 px-3 py-2 text-sm text-neutral-600 transition-colors hover:bg-neutral-100"
+              className="flex w-full items-center gap-2 rounded-md border border-neutral-200 px-3 py-2 text-sm text-neutral-600 transition-[transform,background-color,color] duration-150 ease-out-strong hover:bg-neutral-100 active:scale-[0.99] motion-reduce:active:scale-100"
             >
               <SearchIcon />
               <span>Search the site</span>
