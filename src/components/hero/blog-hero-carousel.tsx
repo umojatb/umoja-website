@@ -90,7 +90,7 @@ export function BlogHeroCarousel({
           key={post.slug}
           aria-hidden={i !== activeIndex}
           className={cn(
-            "absolute inset-0 z-0 transition-opacity duration-700",
+            "absolute inset-0 z-0 transition-opacity duration-700 motion-reduce:transition-none",
             i === activeIndex ? "opacity-100" : "opacity-0",
           )}
         >
@@ -179,7 +179,7 @@ export function BlogHeroCarousel({
               }
               aria-pressed={isPaused}
               disabled={autoplayDisabled}
-              className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-colors hover:bg-white/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-colors hover:bg-white/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isPaused || autoplayDisabled ? (
                 <svg
