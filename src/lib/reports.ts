@@ -39,7 +39,7 @@ const REPORTS: readonly Report[] = [
     publishedAt: "2026-04-01",
     fileUrl: "#",
     cover: {
-      src: "/reports/2025-annual-impact-report.jpg",
+      src: "/images/reports/emmanuel-ikwuegbu-VC6MGt9ZoBA-unsplash.jpg",
       alt: "Cover of the 2025 Annual Impact Report",
     },
   },
@@ -54,7 +54,7 @@ const REPORTS: readonly Report[] = [
     publishedAt: "2026-03-15",
     fileUrl: "#",
     cover: {
-      src: "/reports/financial-audit-2025.jpg",
+      src: "/images/reports/felicia-montenegro-EEbLJlfCnSI-unsplash.jpg",
       alt: "Cover of the FY 2025 Financial Audit",
     },
   },
@@ -69,7 +69,7 @@ const REPORTS: readonly Report[] = [
     publishedAt: "2026-02-20",
     fileUrl: "#",
     cover: {
-      src: "/reports/cohort-2023-outcomes.jpg",
+      src: "/images/reports/francisco-venancio-ay5JXZnl5Pk-unsplash.jpg",
       alt: "Cover of the 2023 Cohort Three-Year Outcomes report",
     },
   },
@@ -84,7 +84,7 @@ const REPORTS: readonly Report[] = [
     publishedAt: "2026-01-30",
     fileUrl: "#",
     cover: {
-      src: "/reports/impact-methodology.jpg",
+      src: "/images/reports/guillermo-suarez-2HM3rnzMcM0-unsplash.jpg",
       alt: "Cover of the Methodology paper",
     },
   },
