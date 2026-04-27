@@ -24,7 +24,8 @@ function HeroSection() {
     <section className="w-full bg-primary-700 py-6 md:py-8 lg:py-10">
       <div className="relative mx-auto w-[92%] min-h-[60vh] max-w-7xl overflow-hidden rounded-[2rem] md:min-h-[64vh] lg:min-h-[68vh]">
         <HeroVideo
-          src="/hero.mp4"
+          src="/images/hero/hero.mp4"
+          poster="/images/hero/poster.jpg"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div
