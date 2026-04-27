@@ -90,7 +90,7 @@ export function BlogHeroCarousel({
           key={post.slug}
           aria-hidden={i !== activeIndex}
           className={cn(
-            "absolute inset-0 transition-opacity duration-700",
+            "absolute inset-0 z-0 transition-opacity duration-700",
             i === activeIndex ? "opacity-100" : "opacity-0",
           )}
         >
@@ -105,13 +105,15 @@ export function BlogHeroCarousel({
         </div>
       ))}
 
+      {/* Brand-navy gradient overlay — strong reading zone left, image breathes right.
+         Mobile bumps to /95 opacity since text sits closer to centre. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"
+        className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-primary-900/95 via-primary-900/60 to-transparent md:from-primary-900/90"
       />
 
       {/* Top zone — text, vertically centered, padded above the controls bar */}
-      <div className="absolute inset-x-0 top-0 bottom-24 z-10 flex items-center px-6 md:bottom-28 md:px-16">
+      <div className="absolute inset-x-0 top-0 bottom-24 z-20 flex items-center px-6 md:bottom-28 md:px-16">
         <div key={active.slug} className="max-w-xl md:max-w-2xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-secondary-400">
             {active.category}
@@ -126,7 +128,7 @@ export function BlogHeroCarousel({
       </div>
 
       {/* Bottom zone — controls bar, fixed position regardless of text */}
-      <div className="absolute inset-x-0 bottom-6 z-20 flex flex-col gap-3 px-6 sm:flex-row sm:items-center sm:justify-between md:bottom-8 md:px-16">
+      <div className="absolute inset-x-0 bottom-6 z-30 flex flex-col gap-3 px-6 sm:flex-row sm:items-center sm:justify-between md:bottom-8 md:px-16">
         <div className="flex flex-wrap items-center gap-3">
           <Link
             href="/donate"
