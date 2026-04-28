@@ -102,7 +102,7 @@ export function Navbar() {
         >
           <Link
             href="/"
-            className="font-heading text-xl font-bold tracking-tight text-primary-700 transition-colors hover:text-primary-600"
+            className="font-heading text-xl font-bold tracking-tight text-primary-700 transition-colors duration-150 ease-out-strong hover:text-primary-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-700"
           >
             Umoja Africa
           </Link>
@@ -124,10 +124,10 @@ export function Navbar() {
                       "relative inline-flex items-center gap-1 text-sm font-medium",
                       "transition-[transform,color] duration-150 ease-out-strong",
                       "active:scale-[0.97] motion-reduce:active:scale-100",
-                      "after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-[6px] after:h-[2px] after:rounded-full after:bg-secondary-500 after:opacity-0 after:transition-opacity after:duration-200 after:ease-out-strong",
+                      "after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-[6px] after:h-[2px] after:origin-left after:rounded-full after:bg-secondary-500 after:scale-x-0 after:transition-transform after:duration-500 after:ease-out-strong after:motion-reduce:transition-none",
                       openPanel === item.label ||
                         isItemActive(pathname, item.href)
-                        ? "text-primary-700 after:opacity-100"
+                        ? "text-primary-700 after:scale-x-100"
                         : "text-neutral-600 hover:text-primary-700",
                     )}
                   >
@@ -143,9 +143,9 @@ export function Navbar() {
                     className={cn(
                       "relative text-sm font-medium",
                       "transition-colors duration-150 ease-out-strong",
-                      "after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-[6px] after:h-[2px] after:rounded-full after:bg-secondary-500 after:opacity-0 after:transition-opacity after:duration-200 after:ease-out-strong",
+                      "after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-[6px] after:h-[2px] after:origin-left after:rounded-full after:bg-secondary-500 after:scale-x-0 after:transition-transform after:duration-500 after:ease-out-strong after:motion-reduce:transition-none",
                       isItemActive(pathname, item.href)
-                        ? "text-primary-700 after:opacity-100"
+                        ? "text-primary-700 after:scale-x-100"
                         : "text-neutral-600 hover:text-primary-700",
                     )}
                   >
@@ -265,7 +265,7 @@ function MobileNavEntry({
           onClick={onLinkClick}
           aria-current={active ? "page" : undefined}
           className={cn(
-            "block rounded-md px-2 py-2 text-base font-medium transition-colors",
+            "block rounded-md px-2 py-2 text-base font-medium transition-[transform,background-color,color] duration-150 ease-out-strong active:scale-[0.99] motion-reduce:active:scale-100",
             active
               ? "bg-primary-50 text-primary-700"
               : "text-neutral-700 hover:bg-neutral-100 hover:text-primary-700",
@@ -289,7 +289,7 @@ function MobileNavEntry({
         aria-expanded={expanded}
         aria-controls={sectionId}
         className={cn(
-          "flex w-full items-center justify-between rounded-md px-2 py-2 text-base font-medium transition-colors",
+          "flex w-full items-center justify-between rounded-md px-2 py-2 text-base font-medium transition-[transform,background-color,color] duration-150 ease-out-strong active:scale-[0.99] motion-reduce:active:scale-100",
           active
             ? "bg-primary-50 text-primary-700"
             : "text-neutral-700 hover:bg-neutral-100 hover:text-primary-700",
@@ -310,7 +310,7 @@ function MobileNavEntry({
               <Link
                 href={link.href}
                 onClick={onLinkClick}
-                className="block rounded-md px-2 py-1.5 text-sm text-neutral-700 hover:bg-neutral-100 hover:text-primary-700"
+                className="block rounded-md px-2 py-1.5 text-sm text-neutral-700 transition-[transform,background-color,color] duration-150 ease-out-strong hover:bg-neutral-100 hover:text-primary-700 active:scale-[0.99] motion-reduce:active:scale-100"
               >
                 {link.label}
               </Link>
@@ -320,7 +320,7 @@ function MobileNavEntry({
         <Link
           href={panel.ctaHref}
           onClick={onLinkClick}
-          className="inline-flex items-center gap-1 px-2 text-xs font-semibold text-primary-700 underline underline-offset-4 hover:text-primary-900"
+          className="inline-flex items-center gap-1 px-2 text-xs font-semibold text-primary-700 underline underline-offset-4 transition-colors duration-150 ease-out-strong hover:text-primary-900"
         >
           {panel.ctaLabel}
           <span aria-hidden>→</span>
@@ -341,7 +341,7 @@ function ChevronIcon({ open }: { open: boolean }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={cn(
-        "h-2 w-2 transition-transform duration-200 motion-reduce:transition-none",
+        "h-2.5 w-2.5 transition-transform duration-200 ease-out-strong motion-reduce:transition-none",
         open && "rotate-180",
       )}
     >
