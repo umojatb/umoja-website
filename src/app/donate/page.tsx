@@ -28,7 +28,7 @@ const TRUST_LINKS: readonly TrustLink[] = [
   },
   {
     title: "Annual audited reports",
-    body: "Independent annual audit, scholar outcomes, and the partner directory — published yearly.",
+    body: "Independent annual audit, scholar outcomes, and the partner directory, published yearly.",
     cta: "Read our reports",
     href: "/annual-reports",
   },
@@ -52,7 +52,7 @@ const IMPACT_TIERS: readonly ImpactTier[] = [
   },
   {
     amount: "$50",
-    body: "Approximately one month of school fees and transport for a scholar — the most common monthly gift.",
+    body: "Approximately one month of school fees and transport for a scholar, the most common monthly gift.",
   },
   {
     amount: "$100",
@@ -79,7 +79,7 @@ function DonateHero() {
         level={1}
         align="center"
         eyebrow="Donate"
-        description="One scholar at a time, one term at a time. Every dollar funds the program you read about — and every donor gets a yearly impact report."
+        description="One scholar at a time, one term at a time. Every dollar funds the program you read about, and every donor gets a yearly impact report."
       >
         Support a scholar’s future
       </Heading>
@@ -105,7 +105,7 @@ function TrustSignalsSection() {
       <Heading
         level={2}
         eyebrow="Why this is safe to fund"
-        description="Three places to check the work before you give — and one person to talk to if anything is unclear."
+        description="Three places to check the work before you give, and one person to talk to if anything is unclear."
       >
         Trust signals
       </Heading>
@@ -138,7 +138,7 @@ function ImpactMappingSection() {
       <Heading
         level={2}
         eyebrow="What your donation does"
-        description="Approximate, honest framing. Exact costs vary by country, school, and term — full breakdowns publish in our annual report."
+        description="Approximate, honest framing. Exact costs vary by country, school, and term, full breakdowns publish in our annual report."
       >
         Where each gift lands
       </Heading>

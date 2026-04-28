@@ -4,13 +4,14 @@ import { buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { ImageTextSection } from "@/components/sections/image-text-section";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
 export const metadata: Metadata = {
   title: "Get Involved",
   description:
-    "Three ways to help — donate, volunteer, or partner. Pick the one that fits you, or talk to us first.",
+    "Three ways to help, donate, volunteer, or partner. Pick the one that fits you, or talk to us first.",
 };
 
 type Path = {
@@ -26,25 +27,25 @@ const PATHS: readonly Path[] = [
     id: "donate",
     title: "Donate",
     audience:
-      "individuals who want to directly fund a scholar’s education.",
-    body: "One-time or recurring gifts go straight into the scholarship pool. Every donor receives a yearly impact report and can request a partial breakdown by cohort.",
+      "individuals who want to directly fund a scholar's education.",
+    body: "Financial sponsorships fund scholarships, learning materials, and the mentorship program. Every donor receives a yearly impact report on the scholars they helped support.",
     cta: { label: "Donate now", href: "/donate" },
   },
   {
     id: "volunteer",
     title: "Volunteer",
     audience:
-      "practitioners and alumni who can give time, expertise, or steady mentorship.",
-    body: "Mentor a scholar through their academic year, run a workshop in your field, or tutor weekly via video. Time commitments range from one workshop to a full school year.",
-    cta: { label: "Become a volunteer", href: "/volunteer" },
+      "educators, practitioners, and mental-health advocates who can offer time, expertise, or steady mentorship.",
+    body: "Mentor a scholar one-on-one, lead a workshop on leadership or career readiness, or tutor weekly in your subject. Time commitments range from a single session to a full academic year.",
+    cta: { label: "Become a volunteer", href: "/get-involved#volunteer" },
   },
   {
     id: "partner",
     title: "Partner",
     audience:
-      "schools, employers, and institutions ready for a long-term collaboration.",
-    body: "Sponsor a cohort, host alumni for internships, or join a multi-year MOU with our partner schools. Partnerships are designed jointly and reviewed annually.",
-    cta: { label: "Become a partner", href: "/partner" },
+      "local schools, community leaders, small businesses, and corporate partners ready for a long-term collaboration.",
+    body: "Provide technology, books, or learning materials, offer internships, or back teacher training and extracurricular programs. Partnerships are designed jointly and reviewed annually.",
+    cta: { label: "Become a partner", href: "/get-involved#partner" },
   },
 ];
 
@@ -58,17 +59,17 @@ const VOLUNTEER_OPTIONS: readonly VolunteerOption[] = [
   {
     title: "Mentorship",
     commitment: "≈ 1 hour / month",
-    body: "Pair with a scholar in your field for an academic year. Monthly check-ins, exam-prep guidance, and the steady contact that keeps a scholarship from feeling transactional.",
+    body: "Guide a scholar with personal and professional advice over an academic year. Regular check-ins, motivation, and the steady contact that keeps a scholarship from feeling transactional.",
   },
   {
     title: "Tutoring",
     commitment: "≈ 2 hours / week",
-    body: "Weekly subject support over video — math, sciences, language, college prep. We match by subject and time zone to a scholar who needs it.",
+    body: "Help scholars excel academically through subject-specific coaching, math, sciences, language, college prep. We match by subject and time zone to a scholar who needs it.",
   },
   {
     title: "Workshops",
     commitment: "1–3 hours, one-off",
-    body: "Run a single session for a cohort: career talks, technical skills, university applications. Tell us what you’d teach and we’ll find the right audience.",
+    body: "Lead a session on leadership, life skills, or career readiness. Tell us what you'd teach and we'll find the right scholars to bring you into.",
   },
 ];
 
@@ -76,16 +77,16 @@ type PartnerOption = { readonly title: string; readonly body: string };
 
 const PARTNER_OPTIONS: readonly PartnerOption[] = [
   {
-    title: "Corporate sponsorship",
-    body: "Fund a cohort of scholars under your company’s name. We handle reporting and audit; your team meets the cohort each year.",
+    title: "Corporate Partnerships",
+    body: "Provide technology, books, or learning materials, offer internships or apprenticeship opportunities, or support initiatives like teacher training and extracurricular programs.",
   },
   {
-    title: "Resource contributions",
-    body: "Lab access, software licenses, internship slots, in-kind goods. We map needs to the cohort and the partner — nothing wasted.",
+    title: "Schools and community leaders",
+    body: "Umoja already collaborates with local schools and community leaders to identify deserving students. Joining as a school or community partner means jointly designing how the program runs in your district.",
   },
   {
-    title: "Long-term collaboration",
-    body: "A multi-year MOU with your school, university, or institution. Joint program design, shared metrics, annual review.",
+    title: "Small businesses",
+    body: "Existing small-business partners back individual scholars or fund specific learning resources. We handle the reporting; your team sees the impact directly.",
   },
 ];
 
@@ -109,14 +110,14 @@ function GetInvolvedHero() {
       variant="color"
       eyebrow="Get involved"
       title="How will you help?"
-      description="Three ways to help: fund a scholarship, volunteer your time, or partner as an institution. Pick the one that fits — or talk to us if it’s not on the list."
+      description="Umoja is a movement, and movements need partners. Fund a scholarship, volunteer your time, or partner as a school, business, or institution. Pick the one that fits, or talk to us if it isn't on the list."
     />
   );
 }
 
 function PathSelectionSection() {
   return (
-    <Section variant="muted">
+    <Section id="paths" variant="muted">
       <Heading
         level={2}
         align="center"
@@ -161,7 +162,7 @@ function WhyItMattersSection() {
         <Heading
           level={2}
           eyebrow="Why it matters"
-          description="Money funds the scholarship; time builds the relationship; partnership scales both. Each contributor changes the program in a different way — and the program needs all three to work."
+          description="Money funds the scholarship; time builds the relationship; partnership scales both. Each contributor changes the program in a different way, and the program needs all three to work."
         >
           Each path moves the program
         </Heading>
@@ -172,7 +173,7 @@ function WhyItMattersSection() {
 
 function VolunteerDetailsSection() {
   return (
-    <Section variant="muted">
+    <Section id="volunteer" variant="muted">
       <Heading
         level={2}
         eyebrow="Volunteer in detail"
@@ -199,34 +200,26 @@ function VolunteerDetailsSection() {
 
 function ThreePathsAnchorSection() {
   return (
-    <Section variant="brand" className="-mt-4 md:-mt-8">
-      <div className="grid items-center gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
-        <div
-          aria-hidden
-          className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-secondary-300 via-secondary-400 to-secondary-500 shadow-2xl"
-        />
-        <div>
-          <Heading level={2} tone="inverted" eyebrow="From the work" display>
-            All three paths build the same program.
-          </Heading>
-          <p className="mt-3 text-base leading-relaxed text-neutral-200 md:text-lg">
-            Money funds the scholarship. Time builds the relationship.
-            Partnership scales both. Each contributor changes the program in
-            a different way — and the program needs all of them.
-          </p>
-        </div>
-      </div>
-    </Section>
+    <ImageTextSection
+      variant="brand"
+      eyebrow="Together, we break barriers"
+      title="All three paths build the same program."
+      description="Together, we break down the barriers that prevent talented students from accessing the education they deserve, and create a community where every child has the opportunity to thrive, dream, and achieve."
+      image={{
+        src: "/images/placeholders/emmanuel-ikwuegbu-VC6MGt9ZoBA-unsplash.jpg",
+        alt: "A scholar and mentor reviewing coursework together",
+      }}
+    />
   );
 }
 
 function PartnershipDetailsSection() {
   return (
-    <Section>
+    <Section id="partner">
       <Heading
         level={2}
         eyebrow="Partnership in detail"
-        description="Institutional partnerships move the most people the fastest. Three formats we run today."
+        description="Umoja currently collaborates with local schools, community leaders, and small businesses to identify deserving students and support their education. Three concrete formats partners step into."
       >
         How institutions plug in
       </Heading>
@@ -248,7 +241,7 @@ function ClosingCTASection() {
   return (
     <CTASection
       heading="Have a different idea?"
-      description="If your contribution doesn’t fit the paths above, write to us. Most partnerships start with a first email — and donations always work."
+      description="If your contribution doesn’t fit the paths above, write to us. Most partnerships start with a first email, and donations always work."
       primary={{ label: "Talk to us", href: "/contact" }}
       secondary={{ label: "Donate", href: "/donate" }}
     />

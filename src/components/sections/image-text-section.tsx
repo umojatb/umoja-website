@@ -25,6 +25,8 @@ type ImageTextSectionProps = {
   };
   /** Section surface (default / soft / muted / brand / dark / inset). */
   variant?: SectionVariant;
+  /** DOM id on the underlying section, used as an anchor target by the nav. */
+  id?: string;
 };
 
 /**
@@ -44,9 +46,11 @@ export function ImageTextSection({
   reverse = false,
   cta,
   variant,
+  id,
 }: ImageTextSectionProps) {
+  const isDarkSurface = variant === "brand" || variant === "dark";
   return (
-    <Section variant={variant}>
+    <Section variant={variant} id={id}>
       <div className="grid gap-6 lg:grid-cols-2 lg:items-center lg:gap-12">
         <div
           className={cn(
@@ -63,12 +67,25 @@ export function ImageTextSection({
           />
         </div>
         <div>
-          <Heading level={2} eyebrow={eyebrow}>
+          <Heading
+            level={2}
+            eyebrow={eyebrow}
+            tone={isDarkSurface ? "inverted" : "default"}
+          >
             {title}
           </Heading>
-          <p className="mt-4 max-w-prose text-base leading-relaxed text-neutral-600 md:text-lg">
-            {description}
-          </p>
+          <div
+            className={cn(
+              "mt-4 max-w-prose space-y-3 text-base leading-relaxed md:text-lg",
+              isDarkSurface ? "text-neutral-200" : "text-neutral-600",
+            )}
+          >
+            {typeof description === "string" ? (
+              <p>{description}</p>
+            ) : (
+              description
+            )}
+          </div>
           {cta && (
             <div className="mt-6">
               <Link

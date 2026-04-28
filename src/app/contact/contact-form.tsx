@@ -36,9 +36,9 @@ export function ContactForm() {
 
     const reasonLabel = REASONS.find((r) => r.value === reason)?.label;
     const subject = reasonLabel
-      ? `Umoja site — ${reasonLabel}`
-      : "Umoja site — message";
-    const body = `${message.trim()}\n\n— ${name.trim()}\n${email.trim()}`;
+      ? `Umoja site, ${reasonLabel}`
+      : "Umoja site, message";
+    const body = `${message.trim()}\n\n, ${name.trim()}\n${email.trim()}`;
     const href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;

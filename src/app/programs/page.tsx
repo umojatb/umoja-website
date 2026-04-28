@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { ImageTextSection } from "@/components/sections/image-text-section";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
 export const metadata: Metadata = {
   title: "Programs",
   description:
-    "Three connected programs — scholarships, mentorship, and community engagement — and the five-step relationship that runs through them.",
+    "Holistic support for academically gifted students in Africa: full scholarships, dedicated mentorship, and community partnerships, with a transparent seven-step selection process.",
 };
 
 type Program = { readonly title: string; readonly body: string };
@@ -16,15 +17,15 @@ type Program = { readonly title: string; readonly body: string };
 const PROGRAMS: readonly Program[] = [
   {
     title: "Scholarships",
-    body: "Multi-year, fully funded. We cover fees, books, transport, and the unexpected — so families don’t have to choose between this term and the next.",
+    body: "We cover school fees, learning materials, clothing, and pocket money, the holistic package that keeps a student in school and lets them focus on learning.",
   },
   {
     title: "Mentorship",
-    body: "Each scholar paired with practitioners and alumni. Career advice, exam prep, and a steady relationship that doesn’t end at graduation.",
+    body: "Every Umoja scholar is paired with a dedicated mentor who checks in regularly, offering guidance, motivation, and personalized advice through their academic journey.",
   },
   {
     title: "Community engagement",
-    body: "Selection, partnerships, and reporting all happen with the schools and elders closest to the work. We don’t run programs at communities; we run them with.",
+    body: "Selection, support, and reporting happen alongside school headmasters, teachers, and community leaders, the people closest to each scholar.",
   },
 ];
 
@@ -33,23 +34,23 @@ type Step = { readonly title: string; readonly body: string };
 const STEPS: readonly Step[] = [
   {
     title: "Student selection",
-    body: "Local teachers and elders nominate learners who are ready. We look at potential — not just past grades or pedigree.",
+    body: "Recommendations from school headmasters, teachers, or community leaders identify academically gifted students with strong character.",
   },
   {
     title: "Financial support",
-    body: "A multi-year scholarship covers everything a scholar needs to stay in school: fees, transport, books, and basic living.",
+    body: "A holistic scholarship covers everything an Umoja scholar needs: school fees, learning materials, clothing, and pocket money.",
   },
   {
     title: "Mentorship",
-    body: "Each scholar is paired with a mentor — a practitioner or alumnus — who stays engaged with them through graduation.",
+    body: "Each scholar is paired with a dedicated mentor who checks in regularly with guidance, motivation, and personalized advice.",
   },
   {
     title: "Progress monitoring",
-    body: "Termly check-ins with the scholar, the school, and the family. Adjustments happen in writing, on a steady cadence, with the people involved.",
+    body: "Regular reports between the family, the school, and Umoja, with a clear contract that establishes the importance of open communication and visits.",
   },
   {
     title: "Long-term impact",
-    body: "Alumni stay in the network. They mentor the next cohort and sit on the panels that select them.",
+    body: "Beyond financial aid, scholars receive a sense of belonging and the assurance that someone believes in their potential, with us through every year of their education.",
   },
 ];
 
@@ -57,20 +58,32 @@ type Criterion = { readonly title: string; readonly body: string };
 
 const CRITERIA: readonly Criterion[] = [
   {
-    title: "Merit-based",
-    body: "Selection starts with potential, not pedigree. Local teachers identify learners who would thrive with support.",
+    title: "Merit-Based Selection",
+    body: "We prioritize academically gifted students with a proven track record of excellence. Recommendations from school headmasters, teachers, or community leaders are essential to identify students who excel academically and exhibit strong character.",
   },
   {
-    title: "Financial need",
-    body: "Scholarships go to students whose families could not fund them otherwise. Need is verified discreetly, never punitively.",
+    title: "Financial Need Assessment",
+    body: "Applicants must provide documentation to verify financial hardship, such as household income statements or community certifications. Home visits or interviews may be conducted to assess living conditions and financial challenges.",
   },
   {
-    title: "Commitment",
-    body: "Scholars and families commit to the relationship — termly check-ins, school attendance, and the small reciprocities that keep a program honest.",
+    title: "Demonstrated Commitment",
+    body: "Applicants submit a personal essay outlining their educational goals and commitment to Umoja's standards. Parents or guardians sign an agreement to actively support the student's academic journey and engage with Umoja.",
   },
   {
-    title: "Ethical process",
-    body: "No nepotism, no payments for access. Selection panels include community members and every decision is documented end-to-end.",
+    title: "Holistic Evaluation",
+    body: "We consider character attributes such as leadership potential, resilience, and willingness to contribute to their communities. Involvement in extracurricular activities or volunteer work is also taken into account.",
+  },
+  {
+    title: "Transparent and Ethical Criteria",
+    body: "Our selection criteria are clearly defined, emphasizing academic excellence, financial need, and alignment with Umoja's mission and values. We do not accept applications from family members or close associates of Umoja staff to ensure fairness and impartiality.",
+  },
+  {
+    title: "Independent Screening Process",
+    body: "An independent panel of educators, community leaders, and Umoja representatives reviews every application to maintain objectivity and integrity throughout the selection process.",
+  },
+  {
+    title: "Ongoing Monitoring and Support",
+    body: "Selected students are regularly reviewed for academic progress and commitment to the scholarship. Mentorship and guidance are provided to help every scholar achieve their full potential.",
   },
 ];
 
@@ -93,7 +106,7 @@ function ProgramsHero() {
       variant="image"
       eyebrow="Programs"
       title="Our programs"
-      description="Three connected programs, one purpose: get high-potential African scholars through the full arc of their education — together with the communities that raised them."
+      description="Three connected programs, one purpose: support academically gifted, underprivileged students in Africa through the full arc of their education, with the communities that raised them."
       image={{
         src: "/images/hero/joel-muniz-A4Ax1ApccfA-unsplash.jpg",
         alt: "A scholar at work in a community classroom",
@@ -104,11 +117,11 @@ function ProgramsHero() {
 
 function CoreProgramsSection() {
   return (
-    <Section variant="muted">
+    <Section id="core-programs" variant="muted">
       <Heading
         level={2}
         eyebrow="What we run"
-        description="One scholarship is rarely enough on its own. These three programs reinforce each other for every Umoja scholar."
+        description="A scholarship on its own rarely changes a life; the three together do. Every Umoja scholar receives all three from day one."
       >
         Core programs
       </Heading>
@@ -128,7 +141,7 @@ function CoreProgramsSection() {
 
 function HowItWorksSection() {
   return (
-    <Section className="py-12 md:py-16">
+    <Section id="how-it-works" className="py-12 md:py-16">
       <Heading
         level={2}
         eyebrow="How it works"
@@ -162,36 +175,28 @@ function HowItWorksSection() {
 
 function ContinuitySection() {
   return (
-    <Section>
-      <div className="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-12">
-        <div>
-          <Heading level={2} eyebrow="Why this works">
-            Continuity is the program.
-          </Heading>
-          <p className="mt-3 text-base leading-relaxed text-neutral-700 md:text-lg">
-            Most scholarships end the day a student receives them. Ours start
-            there. The relationship — termly check-ins, mentor pairings,
-            alumni who come back to select the next cohort — is what turns
-            one funded year into a generation of funded learners.
-          </p>
-        </div>
-        <div
-          aria-hidden
-          className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-secondary-300 via-secondary-400 to-primary-500 shadow-2xl"
-        />
-      </div>
-    </Section>
+    <ImageTextSection
+      id="continuity"
+      eyebrow="Why this works"
+      title="Continuity is the program."
+      description="Umoja's support is not limited to tuition. From the first scholarship in 2021 onwards, every scholar has received the same holistic package: educational expenses, materials, clothing, pocket money, and a dedicated mentor who stays in regular contact through every term."
+      image={{
+        src: "/images/placeholders/emmanuel-ikwuegbu-Z-KCM4gK8C8-unsplash.jpg",
+        alt: "A mentor and scholar reviewing schoolwork together",
+      }}
+      reverse
+    />
   );
 }
 
 function SelectionSection() {
   return (
-    <Section variant="brand" className="py-16 md:py-20">
+    <Section id="selection" variant="brand" className="py-16 md:py-20">
       <Heading
         level={2}
         eyebrow="Student selection"
         tone="inverted"
-        description="Four guarantees that shape every scholarship decision. Selection happens with — not at — the communities involved."
+        description="Seven strategies that shape every scholarship decision. We select the most deserving students through a clearly defined, fair, and transparent process."
       >
         How we choose scholars
       </Heading>
@@ -212,10 +217,10 @@ function SelectionSection() {
 function ProgramsCTASection() {
   return (
     <CTASection
-      heading="Help us reach the next cohort"
-      description="Fund the next cohort of scholarships, or partner with us as a school, employer, or institution."
+      heading="Help us reach the next student"
+      description="Today we fully support five scholars, and we want that number to grow. Fund a scholarship, mentor, or partner as a school, employer, or institution."
       primary={{ label: "Donate", href: "/donate" }}
-      secondary={{ label: "Partner", href: "/partner" }}
+      secondary={{ label: "Partner", href: "/get-involved#partner" }}
     />
   );
 }

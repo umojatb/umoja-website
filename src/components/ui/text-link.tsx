@@ -26,11 +26,11 @@ export function TextLink({
     <Link
       {...rest}
       className={cn(
-        "group/textlink inline-flex items-center gap-1 font-heading text-sm font-semibold text-primary-700 transition-colors hover:text-primary-900",
+        "group/textlink link-underline-parent inline-flex items-center gap-1 font-heading text-sm font-semibold text-primary-700 transition-colors hover:text-primary-900",
         className,
       )}
     >
-      <span>{children}</span>
+      <span className="link-underline">{children}</span>
       {!noArrow && (
         <span
           aria-hidden="true"

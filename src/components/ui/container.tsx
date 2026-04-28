@@ -12,7 +12,7 @@ type ContainerProps<T extends ElementType = "div"> = {
  *
  * Caps content at 1280px (`max-w-7xl`) and centers it with responsive side
  * padding that follows the 8px spacing scale: 24px → 32px → 48px.
- * Every page section should compose with `<Container>` — never set page
+ * Every page section should compose with `<Container>`, never set page
  * width or side padding ad-hoc.
  */
 export function Container<T extends ElementType = "div">({

@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { ImageTextSection } from "@/components/sections/image-text-section";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "How Umoja Africa began in eastern Congo, the people who built it, and the values that guide every scholarship and partnership today.",
+    "How Umoja began in the Democratic Republic of Congo in June 2021, the two friends who built it, and the values that guide every scholarship today.",
 };
 
 type Value = {
@@ -18,20 +19,36 @@ type Value = {
 
 const VALUES: readonly Value[] = [
   {
-    title: "Community-led",
-    body: "The people closest to the work decide what works. Selection, partnerships, and priorities start with them.",
+    title: "Community Service",
+    body: "We are deeply rooted in the communities we serve, committed to giving back and fostering a sense of responsibility and service in our beneficiaries.",
   },
   {
-    title: "Long-haul",
-    body: "We commit through graduation. Education isn’t a one-time gift — it’s a relationship that compounds.",
+    title: "Excellence",
+    body: "We inspire hard work, dedication, and the pursuit of greatness, encouraging our beneficiaries to seize every opportunity for growth and achievement.",
   },
   {
-    title: "Honest reporting",
-    body: "What we do, what we don’t, and how the money moves — in public, on a steady cadence.",
+    title: "Integrity",
+    body: "We uphold honesty, fairness, and transparency in all our actions, ensuring an ethical and just approach to student selection and program implementation.",
   },
   {
-    title: "Talent over paperwork",
-    body: "Local teachers and elders know who’s ready. We listen first, gatekeep last.",
+    title: "Empowerment",
+    body: "Through education and mentorship, we empower young people to realize their potential and become leaders who drive positive change in their communities.",
+  },
+  {
+    title: "Sustainability",
+    body: "Our focus is on creating lasting impact, fostering resilience, and equipping communities with the tools to achieve long-term development.",
+  },
+  {
+    title: "Collaboration",
+    body: "Partnerships with donors, educators, and volunteers amplify our reach and strengthen our ability to transform lives together.",
+  },
+  {
+    title: "Inclusivity",
+    body: "We embrace diversity and ensure equal opportunities for all, breaking barriers and providing access to education for underserved students.",
+  },
+  {
+    title: "Compassion",
+    body: "Our work is driven by empathy and a genuine desire to uplift lives, ensuring that every action reflects our commitment to making a meaningful difference.",
   },
 ] as const;
 
@@ -44,16 +61,16 @@ type Founder = {
 
 const FOUNDERS: readonly Founder[] = [
   {
-    name: "Baka",
+    name: "Junior Baka Wa Bana Sumaili",
     role: "Co-founder",
-    initials: "B",
-    bio: "Grew up in eastern Congo, where the work began. Leads the community partnerships that put the first scholarships in students’ hands.",
+    initials: "JB",
+    bio: "On a volunteer mission in the Democratic Republic of Congo, Baka noticed that aid was meeting survival needs but missing the one thing that breaks the cycle of poverty: education. He brought that insight back to Tessy, and Umoja began.",
   },
   {
-    name: "Tessy",
+    name: "Umutoni Tessy Mercy",
     role: "Co-founder",
-    initials: "T",
-    bio: "Built Umoja’s mentorship program — the relationship that pairs every scholar with practitioners and alumni through graduation.",
+    initials: "UT",
+    bio: "A former beneficiary of educational grants herself, Tessy understood firsthand how a single hand extended at the right moment can change a life. She co-founded Umoja with Baka in June 2021 to extend that same hand to other students.",
   },
 ] as const;
 
@@ -75,8 +92,8 @@ function AboutHero() {
     <PageHero
       variant="image"
       eyebrow="About"
-      title="About Umoja Africa"
-      description="We invest in young Africans through full scholarships and lasting mentorship — built in partnership with the communities that raised them."
+      title="About Umoja"
+      description="An education-focused nonprofit, founded in June 2021 by two friends with no resources of their own, only a shared belief that education is the most powerful tool for breaking the cycle of poverty."
       image={{
         src: "/images/hero/tim-marshall-cAtzHUz7Z8g-unsplash.jpg",
         alt: "Students walking together along a community school path",
@@ -87,43 +104,63 @@ function AboutHero() {
 
 function OurStorySection() {
   return (
-    <Section variant="soft">
-      <div className="grid gap-6 lg:grid-cols-5 lg:gap-12">
-        <Heading level={2} eyebrow="Our story" className="lg:col-span-2">
-          From a single classroom in <em>Congo</em>
-        </Heading>
-        <div className="space-y-3 text-base leading-relaxed text-neutral-700 md:text-lg lg:col-span-3">
+    <ImageTextSection
+      id="our-story"
+      variant="soft"
+      eyebrow="Our story"
+      title={
+        <>
+          Born in the heart of <em>Congo</em>
+        </>
+      }
+      image={{
+        src: "/images/hero/volunteer-helping-with-donation-box.jpg",
+        alt: "A community supplying books and resources to a partner school",
+      }}
+      description={
+        <>
           <p>
-            Umoja Africa began in eastern Congo, where co-founders Baka
-            and Tessy grew up watching brilliant classmates fall out of
-            school — not because they couldn’t keep up, but because the
-            system around them couldn’t keep them. School fees, transport,
-            books, a single bad season for a family — any one of those
-            could end an education that would have changed a community.
+            Umoja was born from the founders’ firsthand experiences with the
+            transformative power of education. During a volunteer mission in
+            the Democratic Republic of Congo, Junior Baka Wa Bana Sumaili saw
+            how access to education could uplift those in refugee camps and
+            break the cycle of poverty. Having herself been a beneficiary of
+            educational grants that broadened her horizons, Umutoni Tessy
+            Mercy carried a strong desire to give back and continue the
+            legacy of supporting others.
           </p>
           <p>
-            They started with one student. One scholarship, one set of
-            fees, one young person their teachers and neighbours had
-            identified as ready. They learned what worked, what didn’t,
-            and what the people closest to the work had been telling them
-            all along: scholarships matter, but presence matters more.
+            Together, with their modest savings, a shared vision, and an
+            unyielding commitment to making a difference, Baka and Tessy
+            founded Umoja in June 2021. In its very first year, Umoja
+            supported a 10-year-old girl whose parents were struggling to
+            afford her school fees. The support went beyond tuition: it
+            covered her materials, clothing, and pocket money, and paired
+            her with a dedicated mentor who checked in regularly, offering
+            guidance, motivation, and personalized advice.
           </p>
           <p>
-            Today Umoja Africa runs on the same principle. We invest in
-            young Africans the way Baka and Tessy invested in that first
-            student — with full funding, real mentorship, and a
-            relationship that doesn’t end at graduation. The geography
-            expands, but the standard doesn’t.
+            The success of the first year fuelled Umoja’s passion. In the
+            years that followed, support expanded to four more students,
+            each receiving the same holistic package, financial aid,
+            mentorship, a sense of belonging, and the assurance that
+            someone believes in their dreams. Today, Umoja proudly supports
+            five students fully, thanks to the outpouring of support from
+            volunteers and donors all over the world.
           </p>
-        </div>
-      </div>
-    </Section>
+        </>
+      }
+    />
   );
 }
 
 function VisionMissionSection() {
   return (
-    <Section variant="brand" className="-mt-4 md:-mt-8">
+    <Section
+      id="vision-mission"
+      variant="brand"
+      className="-mt-4 md:-mt-8"
+    >
       <Heading level={2} eyebrow="What we stand for" tone="inverted" display>
         Vision &amp; mission
       </Heading>
@@ -133,8 +170,7 @@ function VisionMissionSection() {
             Vision
           </p>
           <p className="mt-2 font-heading text-xl font-medium text-primary-900 md:text-2xl">
-            An Africa where talent — not income, not geography, not gender —
-            decides who gets to learn.
+            Empowering Africa through Education.
           </p>
         </Card>
         <Card>
@@ -142,9 +178,9 @@ function VisionMissionSection() {
             Mission
           </p>
           <p className="mt-2 font-heading text-xl font-medium text-primary-900 md:text-2xl">
-            Fund and accompany high-potential African students through the
-            full arc of their education, in partnership with the communities
-            that raised them.
+            To champion educational equity by supporting underprivileged
+            African youth, ensuring that every student can pursue their
+            academic goals and reach their full potential.
           </p>
         </Card>
       </div>
@@ -154,11 +190,11 @@ function VisionMissionSection() {
 
 function CoreValuesSection() {
   return (
-    <Section variant="muted">
+    <Section id="core-values" variant="muted">
       <Heading
         level={2}
         eyebrow="Core values"
-        description="Four commitments that guide every scholarship, every partnership, and every report we publish."
+        description="Eight commitments that are the foundation of our mission to transform lives through education. They guide our efforts, decisions, and interactions, ensuring we remain a beacon of hope for underprivileged youth."
       >
         How we work
       </Heading>
@@ -178,11 +214,11 @@ function CoreValuesSection() {
 
 function LeadershipSection() {
   return (
-    <Section className="py-8 md:py-10">
+    <Section id="leadership" className="py-8 md:py-10">
       <Heading
         level={2}
         eyebrow="Leadership"
-        description="Umoja Africa was founded — and is still led day-to-day — by the people who started it."
+        description="Umoja was founded, and is still led day-to-day, by the two friends who started it in June 2021."
       >
         The founders
       </Heading>

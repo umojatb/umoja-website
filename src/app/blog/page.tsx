@@ -16,7 +16,7 @@ import {
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Field notes, impact stories, and transparency posts from Umoja Africa — written by the people closest to the work.",
+    "Field notes, impact stories, and transparency posts from Umoja Africa, written by the people closest to the work.",
 };
 
 export default function BlogPage() {
@@ -38,7 +38,7 @@ function BlogHero() {
       variant="image"
       eyebrow="Blog"
       title="Insights & stories"
-      description="Field notes, impact stories, and transparency posts — written by the people doing the work, on a steady cadence."
+      description="Field notes, impact stories, and transparency posts, written by the people doing the work, on a steady cadence."
       image={{
         src: "/images/placeholders/different-people-doing-volunteer-work-with-food.jpg",
         alt: "Community volunteers sorting supplies for a partner school",

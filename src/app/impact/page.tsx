@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { ImageTextSection } from "@/components/sections/image-text-section";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
 export const metadata: Metadata = {
   title: "Impact",
   description:
-    "What we measure, where every dollar goes, and the reporting commitments we keep year after year.",
+    "Five scholars fully supported, founded in June 2021 in the Democratic Republic of Congo. The numbers we publish, where every dollar goes, and the reporting commitments we keep.",
 };
 
 type Metric = {
@@ -20,18 +21,18 @@ type Metric = {
 const METRICS: readonly Metric[] = [
   {
     label: "Students supported",
-    statement: "Growing each cohort",
-    body: "Multi-year scholarships in active delivery. Cohort counts publish quarterly with each impact update.",
+    statement: "5",
+    body: "Five scholars currently supported in full, each with the holistic package: school fees, learning materials, clothing, pocket money, and a dedicated mentor.",
   },
   {
-    label: "Schools partnered",
-    statement: "Network expanding",
-    body: "Each partnership is a formal MOU with a community school. The partner directory publishes with each annual report.",
+    label: "Founded",
+    statement: "June 2021",
+    body: "Umoja began in June 2021 with a single 10-year-old scholar. Support has expanded one student at a time, never faster than the relationships can carry.",
   },
   {
-    label: "Years active",
-    statement: "Founded in Congo",
-    body: "What began as a single scholarship between friends in eastern Congo is now a multi-country program — still run by the people who started it.",
+    label: "Origin",
+    statement: "DRC",
+    body: "Born from a volunteer mission in the Democratic Republic of Congo, where co-founder Baka first saw that survival aid was meeting needs but missing the one thing that breaks the cycle of poverty: education.",
   },
 ];
 
@@ -39,12 +40,12 @@ type Story = { readonly title: string; readonly body: string };
 
 const STORIES: readonly Story[] = [
   {
-    title: "Identified, funded, accompanied",
-    body: "A scholar nominated by her teachers in rural eastern Congo. Umoja covers the fees, books, and transport that would otherwise have ended her education. Through every term, an alumna mentor from her field of study stays in steady contact — exam prep, career advice, the small reciprocities that keep a scholarship from feeling transactional.",
+    title: "The first scholarship",
+    body: "In its very first year, Umoja supported a 10-year-old girl whose parents were struggling to afford her school fees. Beyond tuition, the support covered her materials, clothing, and pocket money, and paired her with a dedicated mentor who checked in regularly with guidance, motivation, and personalized advice. That holistic package is the same one every Umoja scholar receives today.",
   },
   {
-    title: "From scholar to selector",
-    body: "Years after graduation, Umoja alumni return to the program — interviewing nominees, mentoring the next cohort, sitting on the panels that select them. The model is generational: the people closest to the work are the people who lived through it.",
+    title: "From one scholar to five",
+    body: "The success of the first year fuelled Umoja's passion. Support expanded to four more students, each receiving the same holistic package. Today, Umoja proudly supports five students fully, thanks to the outpouring of support from volunteers and donors all over the world.",
   },
 ];
 
@@ -92,7 +93,7 @@ function ImpactHero() {
       variant="image"
       eyebrow="Impact"
       title="Our impact"
-      description="What we count, where every dollar goes, and the reporting commitments that hold us to it. We are early-stage on purpose — small enough to publish detail, big enough to matter."
+      description="We are deliberately small and deliberately honest. Five scholars in active support, four years since founding, a single origin in the DRC, and the holistic package that sits behind every scholarship."
       image={{
         src: "/images/placeholders/christy-joseph-jacob-Mh-R3YrrHT8-unsplash.jpg",
         alt: "A scholar reading at a community library",
@@ -108,7 +109,7 @@ function KeyMetricsSection() {
         <Heading
           level={2}
           eyebrow="Key metrics"
-          description="Real numbers replace these placeholders with each quarterly update. We won’t inflate them; if a quarter is slow, we’ll say so."
+          description="Real numbers, updated as the program grows. We won't inflate them; today's number is five, and that's the one we share."
         >
           What we measure
         </Heading>
@@ -136,7 +137,7 @@ function StoriesSection() {
       <Heading
         level={2}
         eyebrow="Stories from the cohort"
-        description="Composite portraits drawn from typical scholar journeys at Umoja. Verifiable individual stories — with each scholar’s consent — appear in our annual impact reports."
+        description="The journey from a single scholarship in June 2021 to five scholars today. We publish full, named scholar stories with each scholar's consent in our annual impact reports."
       >
         What a scholarship looks like
       </Heading>
@@ -160,7 +161,7 @@ function PledgeStatementSection() {
   return (
     <Section variant="brand" className="py-20 md:py-28 rounded-t-3xl">
       <Heading level={2} align="center" tone="inverted" display>
-        We don’t promise — we <em>publish</em>.
+        We don’t promise, we <em>publish</em>.
       </Heading>
     </Section>
   );
@@ -173,7 +174,7 @@ function FundsAllocationSection() {
         <Heading
           level={2}
           eyebrow="Where the money goes"
-          description="Our commitment for every dollar received. Audited actuals — with the full breakdown by program, geography, and cohort — publish each year in our annual impact report."
+          description="Our commitment for every dollar received. Audited actuals, with the full breakdown by program, geography, and cohort, publish each year in our annual impact report."
         >
           How funds are used
         </Heading>
@@ -200,29 +201,30 @@ function FundsAllocationSection() {
 
 function TransparencySection() {
   return (
-    <Section variant="inset">
-      <div className="ml-auto mr-0 max-w-4xl px-3 sm:px-4 md:mr-12 lg:mr-20">
-        <div className="grid gap-6 lg:grid-cols-5 lg:gap-12">
-          <Heading level={2} eyebrow="Transparency" className="lg:col-span-2">
-            What we publish, and how often
-          </Heading>
-          <div className="space-y-3 text-base leading-relaxed text-neutral-700 md:text-lg lg:col-span-3">
-            <p>
-              Umoja Africa publishes a full impact report each year —
-              covering scholar outcomes, an independent financial audit, the
-              partner directory, and what changed in our strategy. Quarterly
-              updates fill in the months between.
-            </p>
-            <p>
-              We commit to honest accounting: when something underperforms,
-              we say so; when we change strategy, we explain why; when a
-              donor asks to see the books, we open them. Our reports remain
-              freely available — linked from this page once published.
-            </p>
-          </div>
-        </div>
-      </div>
-    </Section>
+    <ImageTextSection
+      eyebrow="Transparency"
+      title="What we publish, and how often"
+      image={{
+        src: "/images/placeholders/felicia-montenegro-EEbLJlfCnSI-unsplash.jpg",
+        alt: "An open report on a desk with annotations",
+      }}
+      description={
+        <>
+          <p>
+            Umoja publishes a full impact report each year, covering scholar
+            outcomes, an independent financial audit, the schools and
+            community leaders we work with, and what changed in our
+            strategy. Updates fill in the months between.
+          </p>
+          <p>
+            We commit to honest accounting: when something underperforms,
+            we say so; when we change strategy, we explain why; when a donor
+            asks to see the books, we open them. Our reports remain freely
+            available, linked from this page once published.
+          </p>
+        </>
+      }
+    />
   );
 }
 
@@ -230,7 +232,7 @@ function ImpactCTASection() {
   return (
     <CTASection
       heading="Donate with full transparency"
-      description="Every dollar enters the system you just read about — tracked, audited, and reported on a published cadence."
+      description="Every dollar enters the system you just read about, tracked, audited, and reported on a published cadence."
       primary={{ label: "Donate", href: "/donate" }}
       secondary={{ label: "Read our reports", href: "/annual-reports" }}
     />

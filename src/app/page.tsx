@@ -6,7 +6,6 @@ import { CTASection } from "@/components/layout/cta-section";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
 import { ImageTextSection } from "@/components/sections/image-text-section";
-import { ProgramsOverviewSection } from "@/components/sections/programs-overview";
 import { Section } from "@/components/ui/section";
 import { TextLink } from "@/components/ui/text-link";
 import {
@@ -22,8 +21,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <ProgramsOverviewSection />
-      <VisualBreakSection />
+      <MissionSection />
       <OpportunityGapSection />
       <KeyStatementSection />
       <ApproachStorySection />
@@ -48,19 +46,114 @@ function HeroSection() {
   );
 }
 
-function VisualBreakSection() {
+function MissionSection() {
   return (
-    <Section className="py-8 md:py-12">
-      <div className="relative aspect-[16/8] w-full overflow-hidden rounded-2xl bg-neutral-200">
-        <Image
-          src="/images/hero/yannis-h-uaPaEM7MiQQ-unsplash.jpg"
-          alt="Students gathered outside a community school"
-          fill
-          sizes="(min-width: 1280px) 1280px, 92vw"
-          className="object-cover"
+    <Section className="py-10 md:py-14 lg:py-20">
+      <div className="text-center">
+        <div
+          aria-hidden="true"
+          className="mx-auto h-[3px] w-9 rounded-[2px] bg-secondary-500"
+        />
+
+        <p
+          className="mx-auto mt-6 max-w-[680px] font-sans font-normal leading-[1.25]"
+          style={{ fontSize: "clamp(28px, 4vw, 44px)" }}
+        >
+          Empowering Africa through{" "}
+          <em className="font-heading font-semibold text-primary-900">
+            education
+          </em>
+          , one{" "}
+          <em className="font-heading font-semibold text-primary-900">
+            student
+          </em>{" "}
+          at a time.
+        </p>
+
+        <div className="mt-[28px]">
+          <Link
+            href="/about"
+            className="inline-flex items-center rounded-full border border-primary-900 bg-transparent px-[28px] py-[10px] text-sm font-normal text-primary-900 transition-colors duration-[180ms] hover:bg-neutral-50 motion-reduce:transition-none"
+          >
+            Learn more about who we are
+          </Link>
+        </div>
+      </div>
+
+      <div className="mt-[44px] grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-2 lg:gap-3">
+        <MissionCard
+          titleLead="Our"
+          titleAccent="impact"
+          description="Five scholars currently supported in full, each with the holistic package: school fees, materials, clothing, pocket money, and mentorship."
+          linkLabel="Explore our impact"
+          href="/impact"
+          image={{
+            src: "/images/hero/yannis-h-uaPaEM7MiQQ-unsplash.jpg",
+            alt: "Students gathered outside a community school",
+          }}
+        />
+        <MissionCard
+          titleLead="Get"
+          titleAccent="involved"
+          description="Donate, mentor, tutor, or partner. Umoja is a movement, and movements need partners willing to invest in young futures."
+          linkLabel="See how to join"
+          href="/get-involved"
+          image={{
+            src: "/images/hero/volunteer-helping-with-donation-box.jpg",
+            alt: "Volunteers packing community donation boxes",
+          }}
         />
       </div>
     </Section>
+  );
+}
+
+type MissionCardProps = {
+  readonly titleLead: string;
+  readonly titleAccent: string;
+  readonly description: string;
+  readonly linkLabel: string;
+  readonly href: string;
+  readonly image: { readonly src: string; readonly alt: string };
+};
+
+function MissionCard({
+  titleLead,
+  titleAccent,
+  description,
+  linkLabel,
+  href,
+  image,
+}: MissionCardProps) {
+  return (
+    <article className="grid grid-cols-1 overflow-hidden rounded-xl border-[0.5px] border-neutral-200 bg-background transition-colors duration-200 hover:border-secondary-500 motion-reduce:transition-none sm:grid-cols-[34%_1fr] lg:grid-cols-[38%_1fr]">
+      <div className="relative h-[200px] bg-neutral-200 sm:h-full sm:min-h-[160px]">
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          sizes="(min-width: 1024px) 19vw, (min-width: 640px) 17vw, 100vw"
+          className="object-cover"
+        />
+      </div>
+      <div className="px-[18px] py-[20px]">
+        <h3 className="font-heading text-base font-normal text-primary-900 md:text-lg">
+          {titleLead}{" "}
+          <em className="font-heading font-semibold text-primary-900">
+            {titleAccent}
+          </em>
+        </h3>
+        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-neutral-600">
+          {description}
+        </p>
+        <Link
+          href={href}
+          className="link-underline-parent mt-3 inline-block text-sm font-medium text-primary-700 transition-colors hover:text-primary-900"
+        >
+          <span className="link-underline">{linkLabel}</span>
+        </Link>
+      </div>
+    </article>
   );
 }
 
@@ -70,21 +163,22 @@ function OpportunityGapSection() {
       <Heading
         level={2}
         eyebrow="The opportunity gap"
-        description="Across Africa, millions of young people are ready to learn — and the systems around them are still catching up. We close that distance, one community partnership at a time."
+        description="Across Africa, brilliant students fall out of school not because they can't keep up, but because their families can't cover the fees. Umoja exists to close that gap, one student at a time."
       >
         Talent is everywhere. Opportunity is not.
       </Heading>
 
       <div className="mt-12 grid gap-6 md:mt-16 md:grid-cols-[auto_1fr] md:items-end md:gap-12">
         <p className="font-heading text-7xl font-semibold leading-none tracking-tight text-primary-700 md:text-8xl lg:text-9xl">
-          100M+
+          5
         </p>
         <p className="max-w-prose text-base leading-relaxed text-neutral-700 md:text-lg">
-          school-age children across the continent without consistent access to
-          quality learning resources. One in three adults still cannot read or
-          write fluently in their primary language; today we partner with{" "}
-          <span className="font-medium text-primary-700">200+</span>{" "}
-          community-led schools across six countries — and counting.
+          scholars currently supported in full by Umoja, each with school
+          fees, learning materials, clothing, pocket money, and a dedicated
+          mentor. We started with{" "}
+          <span className="font-medium text-primary-700">one</span> in June
+          2021. Every new scholar has been added one at a time, never faster
+          than the relationships can carry.
         </p>
       </div>
     </Section>
@@ -107,8 +201,8 @@ function ApproachStorySection() {
   return (
     <ImageTextSection
       eyebrow="Our approach"
-      title="Sustained access. Sustained presence."
-      description="We don’t parachute in. We build long-term partnerships that put scholarships and mentorship in the hands of the people closest to the work."
+      title="Holistic support. Real mentorship."
+      description="Umoja's support is not limited to tuition. Every scholar receives the same package: school fees, learning materials, clothing, pocket money, and a dedicated mentor who checks in regularly with guidance, motivation, and personalized advice."
       image={{
         src: "/images/placeholders/alvin-david-0AKPfr-xlCU-unsplash.jpg",
         alt: "Community partners walking through a school courtyard",
@@ -127,7 +221,7 @@ function LongViewSection() {
           Each gift reaches a <em>person</em>, not a number.
         </>
       }
-      description="We’re built deliberately small. Every donor sees the cohort their gift funds, every volunteer is paired with a scholar by name, and every partnership is reviewed each year by the same small team. When that changes, it’ll be because we decided it should."
+      description="We are deliberately small. Every donor sees the scholars their gift funds, every volunteer is paired with a scholar by name, and every partnership is reviewed by the two founders themselves. The motto we work to: together, we break down the barriers that prevent talented students from accessing the education they deserve."
       image={{
         src: "/images/placeholders/bennett-tobias-tqwOJAvUIh4-unsplash.jpg",
         alt: "A scholar studying at a community library",

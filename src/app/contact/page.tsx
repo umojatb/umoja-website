@@ -10,7 +10,7 @@ import { ContactForm } from "./contact-form";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Write to the Umoja Africa team — questions, partnerships, donations, or anything else. Real people read every message.",
+    "Write to the Umoja team, questions, partnerships, donations, mentorship, or anything else. The two founders and the small core team read every message.",
 };
 
 type ContactOption = {
@@ -21,11 +21,11 @@ type ContactOption = {
 const CONTACT_OPTIONS: readonly ContactOption[] = [
   {
     title: "General inquiries",
-    body: "Questions about the program, our scholars, how to apply, or anything else you’re curious about. Use the form below — we’ll see it.",
+    body: "Questions about the program, the scholars we currently support, how to apply, or anything you're curious about. Use the form below, we'll see it.",
   },
   {
     title: "Partnerships",
-    body: "Schools, employers, and institutions ready for a long-term collaboration. Pick “Partnership” as the reason, or write to us directly.",
+    body: "Schools, community leaders, small businesses, and corporate partners ready for a long-term collaboration. Pick \"Partnership\" as the reason, or write to us directly.",
   },
 ];
 
@@ -46,7 +46,7 @@ function ContactHero() {
       variant="color"
       eyebrow="Contact"
       title="Get in touch"
-      description="Whether it’s a question, a partnership idea, or a donation that doesn’t fit the standard form — we’d love to hear it."
+      description="Whether it’s a question, a partnership idea, or a donation that doesn’t fit the standard form, we’d love to hear it."
     />
   );
 }
@@ -57,7 +57,7 @@ function ContactOptionsSection() {
       <Heading
         level={2}
         eyebrow="Reach out"
-        description="Three ways to start a conversation. All three land in the same inbox — pick the one that fits."
+        description="Three ways to start a conversation. All three land in the same inbox, pick the one that fits."
       >
         How to reach us
       </Heading>
@@ -96,7 +96,7 @@ function ContactFormSection() {
         <Heading
           level={2}
           eyebrow="Send a message"
-          description="We read every message that comes in. Replies aren’t always fast, but they’re real — written by the small team that runs the program."
+          description="We read every message that comes in. Replies aren’t always fast, but they’re real, written by the small team that runs the program."
         >
           Write to us
         </Heading>
@@ -112,7 +112,7 @@ function ClosingCTASection() {
   return (
     <CTASection
       heading="We’re here. Write to us."
-      description="Email or use the form above — both land in the same inbox, both get read, both get a real reply."
+      description="Email or use the form above, both land in the same inbox, both get read, both get a real reply."
       primary={{ label: "Email us", href: `mailto:${CONTACT_EMAIL}` }}
       secondary={{ label: "Read our impact", href: "/impact" }}
     />
