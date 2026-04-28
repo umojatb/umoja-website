@@ -36,17 +36,17 @@ export type Post = {
 };
 
 const BAKA: PostAuthor = {
-  name: "Baka",
+  name: "Junior Baka Wa Bana Sumaili",
   role: "Co-founder",
-  initials: "B",
-  bio: "Grew up in eastern Congo, where Umoja Africa began. Leads the community partnerships that put the first scholarships in students’ hands.",
+  initials: "JB",
+  bio: "On a volunteer mission in the Democratic Republic of Congo, Baka noticed that aid was meeting survival needs but missing the one thing that breaks the cycle of poverty: education. He brought that insight back to Tessy, and Umoja began.",
 };
 
 const TESSY: PostAuthor = {
-  name: "Tessy",
+  name: "Umutoni Tessy Mercy",
   role: "Co-founder",
-  initials: "T",
-  bio: "Built Umoja’s mentorship program, the relationship that pairs every scholar with practitioners and alumni through graduation.",
+  initials: "UT",
+  bio: "A former beneficiary of educational grants, Tessy understood firsthand how a single hand extended at the right moment can change a life. She co-founded Umoja with Baka in June 2021.",
 };
 
 const POSTS: readonly Post[] = [

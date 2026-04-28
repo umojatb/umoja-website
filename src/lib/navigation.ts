@@ -47,8 +47,8 @@ export const mainNav: readonly NavItem[] = [
     href: "/about",
     panel: {
       description:
-        "How Umoja Africa began in eastern Congo, the people who built it, and the values that guide every scholarship today.",
-      ctaLabel: "Learn more about Umoja Africa",
+        "How Umoja was founded in June 2021 by Junior Baka Wa Bana Sumaili and Umutoni Tessy Mercy, and the values that guide every scholarship today.",
+      ctaLabel: "Learn more about Umoja",
       ctaHref: "/about",
       primaryLinks: [
         { label: "Our story", href: "/about#our-story" },
@@ -62,9 +62,9 @@ export const mainNav: readonly NavItem[] = [
         { label: "Contact", href: "/contact" },
       ],
       featured: {
-        title: "From a single classroom in Congo",
+        title: "Born in the heart of Congo",
         excerpt:
-          "How Baka and Tessy turned one scholarship into a multi-country program, without losing the relationship that made the first one work.",
+          "How a volunteer mission in the DRC and a former educational-grant beneficiary became Umoja, founded in June 2021 with no resources and a shared belief in education.",
         href: "/about#our-story",
         image: {
           src: "/images/hero/tim-marshall-cAtzHUz7Z8g-unsplash.jpg",
@@ -78,7 +78,7 @@ export const mainNav: readonly NavItem[] = [
     href: "/programs",
     panel: {
       description:
-        "Three connected programs, scholarships, mentorship, and community engagement, and the relationship that runs through them.",
+        "Holistic scholarships, dedicated mentorship, and community partnerships, with a transparent seven-step selection process behind every scholar we support.",
       ctaLabel: "Learn more about our programs",
       ctaHref: "/programs",
       primaryLinks: [
@@ -94,11 +94,11 @@ export const mainNav: readonly NavItem[] = [
       featured: {
         title: "Featured program: Scholarships",
         excerpt:
-          "Multi-year scholarships that cover fees, transport, books, and the unexpected, committed through to graduation.",
+          "Holistic scholarships that cover school fees, learning materials, clothing, and pocket money, with a dedicated mentor for every scholar.",
         href: "/programs",
         image: {
-          src: "/images/sections/emmanuel-ikwuegbu-VC6MGt9ZoBA-unsplash.jpg",
-          alt: "A scholar reading at a community library",
+          src: "/images/hero/joel-muniz-A4Ax1ApccfA-unsplash.jpg",
+          alt: "Scholars at work in a community study session",
         },
       },
     },
@@ -108,7 +108,7 @@ export const mainNav: readonly NavItem[] = [
     href: "/get-involved",
     panel: {
       description:
-        "Three ways to help: fund a scholarship, volunteer your time, or partner as an institution. Pick the one that fits, or talk to us if it’s not on the list.",
+        "Umoja is a movement, and movements need partners. Donate, mentor, tutor, run a workshop, or partner as a school, business, or institution.",
       ctaLabel: "See all paths",
       ctaHref: "/get-involved",
       primaryLinks: [
@@ -120,17 +120,17 @@ export const mainNav: readonly NavItem[] = [
         { label: "Mentor a scholar", href: "/get-involved#volunteer" },
         { label: "Tutor weekly", href: "/get-involved#volunteer" },
         { label: "Run a workshop", href: "/get-involved#volunteer" },
-        { label: "Corporate sponsorship", href: "/get-involved#partner" },
+        { label: "Corporate partnership", href: "/get-involved#partner" },
         { label: "Talk to us", href: "/contact" },
       ],
       featured: {
         title: "Become a monthly donor",
         excerpt:
-          "Recurring gifts go straight into the scholarship pool. Every donor receives a yearly impact report.",
+          "Recurring gifts fund scholarships, learning materials, and the mentorship program. Every donor receives a yearly impact report.",
         href: "/donate",
         image: {
-          src: "/images/hero/joel-muniz-A4Ax1ApccfA-unsplash.jpg",
-          alt: "A scholar at work in a community classroom",
+          src: "/images/hero/volunteer-helping-with-donation-box.jpg",
+          alt: "Volunteers packing community donation boxes",
         },
       },
     },
@@ -140,7 +140,7 @@ export const mainNav: readonly NavItem[] = [
     href: "/blog",
     panel: {
       description:
-        "Field notes, impact stories, and transparency posts, written by the people doing the work, on a steady cadence.",
+        "Field notes, impact stories, and transparency posts, written by the founders and the small core team that runs Umoja day to day.",
       ctaLabel: "Read all posts",
       ctaHref: "/blog",
       primaryLinks: [

@@ -128,7 +128,7 @@ export function Navbar() {
                       openPanel === item.label ||
                         isItemActive(pathname, item.href)
                         ? "text-primary-700 after:scale-x-100"
-                        : "text-neutral-600 hover:text-primary-700",
+                        : "text-neutral-600 hover:text-primary-700 hover:after:scale-x-100",
                     )}
                   >
                     {item.label}
@@ -141,12 +141,12 @@ export function Navbar() {
                       isItemActive(pathname, item.href) ? "page" : undefined
                     }
                     className={cn(
-                      "relative text-sm font-medium",
+                      "relative inline-block text-sm font-medium",
                       "transition-colors duration-150 ease-out-strong",
                       "after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-[6px] after:h-[2px] after:origin-left after:rounded-full after:bg-secondary-500 after:scale-x-0 after:transition-transform after:duration-500 after:ease-out-strong after:motion-reduce:transition-none",
                       isItemActive(pathname, item.href)
                         ? "text-primary-700 after:scale-x-100"
-                        : "text-neutral-600 hover:text-primary-700",
+                        : "text-neutral-600 hover:text-primary-700 hover:after:scale-x-100",
                     )}
                   >
                     {item.label}

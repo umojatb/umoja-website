@@ -32,7 +32,7 @@ const REPORTS: readonly Report[] = [
     slug: "2025-annual-impact-report",
     title: "2025 Annual Impact Report",
     description:
-      "Cohort outcomes, financial allocation, and partnership health across six countries, the full year audit and the questions we’re carrying into 2026.",
+      "Scholar outcomes, financial allocation, and partnership health for the year, the full audit and the questions we're carrying into 2026.",
     year: 2025,
     category: "Annual Report",
     pages: 56,
@@ -47,7 +47,7 @@ const REPORTS: readonly Report[] = [
     slug: "financial-audit-2025",
     title: "Independent Financial Audit, FY 2025",
     description:
-      "Independent third-party audit of Umoja Africa’s revenue, allocation, and reserves for the fiscal year ending December 2025.",
+      "Independent third-party audit of Umoja's revenue, allocation, and reserves for the fiscal year ending December 2025.",
     year: 2025,
     category: "Financial Audit",
     pages: 22,

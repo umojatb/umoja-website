@@ -10,7 +10,7 @@ import { ContactForm } from "./contact-form";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Write to the Umoja Africa team, questions, partnerships, donations, or anything else. Real people read every message.",
+    "Write to the Umoja team, questions, partnerships, donations, mentorship, or anything else. The two founders and the small core team read every message.",
 };
 
 type ContactOption = {
@@ -21,11 +21,11 @@ type ContactOption = {
 const CONTACT_OPTIONS: readonly ContactOption[] = [
   {
     title: "General inquiries",
-    body: "Questions about the program, our scholars, how to apply, or anything else you’re curious about. Use the form below, we’ll see it.",
+    body: "Questions about the program, the scholars we currently support, how to apply, or anything you're curious about. Use the form below, we'll see it.",
   },
   {
     title: "Partnerships",
-    body: "Schools, employers, and institutions ready for a long-term collaboration. Pick “Partnership” as the reason, or write to us directly.",
+    body: "Schools, community leaders, small businesses, and corporate partners ready for a long-term collaboration. Pick \"Partnership\" as the reason, or write to us directly.",
   },
 ];
 

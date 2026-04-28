@@ -77,6 +77,36 @@
   --foreground: oklch(20.8% 0.04 255);
 }
 
+@layer utilities {
+  /* Loading-style underline. Animates from left to right via a
+     background-image gradient so the line "draws in" on hover. Used by
+     wrapping the underlined text in a <span class="link-underline"> and
+     keeping any sibling icon/arrow OUTSIDE that span. When the underline
+     should activate by hovering the parent element (e.g. an <a> that
+     contains a text span + an arrow span), put `link-underline-parent`
+     on the parent. Respects prefers-reduced-motion. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1.5px;
+    padding-bottom: 1px;
+    text-decoration: none;
+    transition: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .link-underline {
+      transition: background-size 0.35s ease;
+    }
+  }
+
+  .link-underline:hover,
+  .link-underline-parent:hover .link-underline {
+    background-size: 100% 1.5px;
+  }
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;

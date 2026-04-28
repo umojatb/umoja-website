@@ -3,9 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { TextLink } from "@/components/ui/text-link";
 import type { NavItem } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
+
+const FEATURED_FALLBACK_SRC = "/images/hero/volunteer-helping-with-donation-box.jpg";
 
 type MegaMenuPanelProps = {
   /** The nav item driving this panel, guaranteed to have `panel`. */
@@ -27,46 +28,36 @@ type MegaMenuPanelProps = {
  * `motion-reduce`.
  */
 /**
- * Featured card image with a branded fallback. If the configured src is
- * empty OR the image fails to load (404, decode error), we render a navy
- * placeholder with the menu section label in white uppercase tracking,  * intentional-looking, never a broken-image gray rectangle.
+ * Featured card image. If the configured src is empty OR fails to load
+ * (404, decode error), we swap to a thematic photograph from /public so
+ * the card always shows a real image, never a coloured rectangle.
  *
  * Image source itself is centralised in `src/lib/navigation.ts` per panel,
  * so swapping images is a single-file edit.
  */
 function FeaturedCardImage({
-  label,
   src,
   alt,
 }: {
-  label: string;
   src: string;
   alt: string;
 }) {
   const [hasError, setHasError] = useState(false);
-  const showFallback = !src || hasError;
+  const useFallback = !src || hasError;
+  const finalSrc = useFallback ? FEATURED_FALLBACK_SRC : src;
+  const finalAlt = useFallback ? "Umoja Africa community photograph" : alt;
   return (
-    <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-primary-700">
-      {showFallback ? (
-        <div
-          role="img"
-          aria-label={`${label} placeholder`}
-          className="absolute inset-0 grid place-items-center bg-primary-700"
-        >
-          <span className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-white">
-            {label}
-          </span>
-        </div>
-      ) : (
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes="(min-width: 1024px) 25vw, 100vw"
-          onError={() => setHasError(true)}
-          className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-        />
-      )}
+    <div className="relative aspect-[16/10] overflow-hidden rounded-md bg-neutral-200">
+      <Image
+        src={finalSrc}
+        alt={finalAlt}
+        fill
+        sizes="(min-width: 1024px) 25vw, 100vw"
+        onError={() => {
+          if (!hasError) setHasError(true);
+        }}
+        className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+      />
     </div>
   );
 }
@@ -93,43 +84,48 @@ export function MegaMenuPanel({
           : "pointer-events-none -translate-y-2 opacity-0",
       )}
     >
-      <div className="mx-auto flex h-full max-w-7xl flex-col px-3 py-6 sm:px-4 lg:px-6 lg:py-8">
-        <div className="grid min-h-0 flex-1 gap-8 lg:grid-cols-[1.1fr_1fr_1fr_1.4fr] lg:gap-10">
-          <div className="border-b border-neutral-200 pb-6 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-6">
-            <h2 className="font-heading text-xl font-semibold tracking-tight text-primary-900 md:text-2xl">
+      <div className="mx-auto flex h-full max-w-7xl flex-col px-3 py-3 sm:px-4 lg:px-6 lg:py-4">
+        <div className="grid min-h-0 flex-1 gap-6 lg:grid-cols-[1.1fr_1fr_1fr_1.4fr] lg:gap-8">
+          <div className="border-b border-neutral-200 pb-4 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-5">
+            <h2 className="font-heading text-lg font-semibold tracking-tight text-primary-900">
               {item.label}
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-neutral-600 md:text-base">
+            <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-neutral-600">
               {panel.description}
             </p>
-            <TextLink href={panel.ctaHref} onClick={onLinkClick} className="mt-4">
-              {panel.ctaLabel}
-            </TextLink>
+            <Link
+              href={panel.ctaHref}
+              onClick={onLinkClick}
+              className="link-underline-parent mt-3 inline-flex items-center gap-1 text-xs text-neutral-600 transition-colors hover:text-primary-700"
+            >
+              <span className="link-underline">{panel.ctaLabel}</span>
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
 
-          <ul className="space-y-4 overflow-y-auto border-b border-neutral-200 pb-6 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-6">
+          <ul className="overflow-y-auto border-b border-neutral-200 pb-4 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-5">
             {panel.primaryLinks.map((link) => (
               <li key={link.href + link.label}>
                 <Link
                   href={link.href}
                   onClick={onLinkClick}
-                  className="text-sm text-neutral-700 underline-offset-4 hover:text-primary-700 hover:underline"
+                  className="link-underline-parent block py-1 text-sm text-neutral-700 hover:text-primary-700"
                 >
-                  {link.label}
+                  <span className="link-underline">{link.label}</span>
                 </Link>
               </li>
             ))}
           </ul>
 
-          <ul className="space-y-4 overflow-y-auto border-b border-neutral-200 pb-6 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-6">
+          <ul className="overflow-y-auto border-b border-neutral-200 pb-4 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-5">
             {panel.secondaryLinks.map((link) => (
               <li key={link.href + link.label}>
                 <Link
                   href={link.href}
                   onClick={onLinkClick}
-                  className="text-sm text-neutral-700 underline-offset-4 hover:text-primary-700 hover:underline"
+                  className="link-underline-parent block py-1 text-sm text-neutral-700 hover:text-primary-700"
                 >
-                  {link.label}
+                  <span className="link-underline">{link.label}</span>
                 </Link>
               </li>
             ))}
@@ -138,17 +134,16 @@ export function MegaMenuPanel({
           <Link
             href={panel.featured.href}
             onClick={onLinkClick}
-            className="group block rounded-xl bg-neutral-50 p-4 transition-colors hover:bg-neutral-100"
+            className="group block rounded-md bg-neutral-50 p-3 transition-colors hover:bg-neutral-100"
           >
             <FeaturedCardImage
-              label={item.label}
               src={panel.featured.image.src}
               alt={panel.featured.image.alt}
             />
-            <h3 className="mt-3 font-heading text-base font-semibold text-primary-900 group-hover:text-primary-700 md:text-lg">
+            <h3 className="mt-2 line-clamp-2 font-heading text-sm font-medium text-primary-900 group-hover:text-primary-700 md:text-base">
               {panel.featured.title}
             </h3>
-            <p className="mt-2 text-xs leading-relaxed text-neutral-600 md:text-sm">
+            <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-neutral-600">
               {panel.featured.excerpt}
             </p>
           </Link>
