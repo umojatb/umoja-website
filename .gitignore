@@ -141,3 +141,14 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Design-sync build artifacts (generated — do not commit)
+.ds-sync/
+ds-bundle/
+types/
+index.d.ts
+src/ds-entry.tsx
+tsconfig.ds.json
+.ds-build-css/tailwind-generated.css
+.ds-build-css/combined.css
+.design-sync/.cache/

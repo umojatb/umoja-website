@@ -1,0 +1,10 @@
+{
+  "projectId": "a7436bfd-4e6e-48e4-ac6a-1446abea73e6",
+  "pkg": "umoja-website",
+  "globalName": "UmojaDS",
+  "shape": "package",
+  "srcDir": "src/components",
+  "tsconfig": "tsconfig.json",
+  "cssEntry": ".ds-build-css/combined.css",
+  "runtimeFontPrefixes": ["IBM Plex Sans", "Manrope"]
+}
