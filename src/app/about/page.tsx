@@ -3,8 +3,10 @@ import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
 import { ImageTextSection } from "@/components/sections/image-text-section";
+import { InnerPage } from "@/components/layout/inner-page";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
+import { TeamDirectory } from "@/components/team/team-directory";
 
 export const metadata: Metadata = {
   title: "About",
@@ -52,38 +54,18 @@ const VALUES: readonly Value[] = [
   },
 ] as const;
 
-type Founder = {
-  readonly name: string;
-  readonly role: string;
-  readonly initials: string;
-  readonly bio: string;
-};
-
-const FOUNDERS: readonly Founder[] = [
-  {
-    name: "Junior Baka Wa Bana Sumaili",
-    role: "Co-founder",
-    initials: "JB",
-    bio: "On a volunteer mission in the Democratic Republic of Congo, Baka noticed that aid was meeting survival needs but missing the one thing that breaks the cycle of poverty: education. He brought that insight back to Tessy, and Umoja began.",
-  },
-  {
-    name: "Umutoni Tessy Mercy",
-    role: "Co-founder",
-    initials: "UT",
-    bio: "A former beneficiary of educational grants herself, Tessy understood firsthand how a single hand extended at the right moment can change a life. She co-founded Umoja with Baka in June 2021 to extend that same hand to other students.",
-  },
-] as const;
 
 export default function AboutPage() {
   return (
-    <>
+    <InnerPage>
       <AboutHero />
       <OurStorySection />
+      <FirstScholarSection />
       <VisionMissionSection />
       <CoreValuesSection />
-      <LeadershipSection />
+      <TeamSection />
       <JoinUsCTASection />
-    </>
+    </InnerPage>
   );
 }
 
@@ -108,11 +90,7 @@ function OurStorySection() {
       id="our-story"
       variant="soft"
       eyebrow="Our story"
-      title={
-        <>
-          Born in the heart of <em>Congo</em>
-        </>
-      }
+      title="Born in the heart of Congo"
       image={{
         src: "/images/hero/volunteer-helping-with-donation-box.jpg",
         alt: "A community supplying books and resources to a partner school",
@@ -120,37 +98,50 @@ function OurStorySection() {
       description={
         <>
           <p>
-            Umoja was born from the founders’ firsthand experiences with the
+            Umoja was born from the founders&apos; firsthand experiences with the
             transformative power of education. During a volunteer mission in
             the Democratic Republic of Congo, Junior Baka Wa Bana Sumaili saw
             how access to education could uplift those in refugee camps and
-            break the cycle of poverty. Having herself been a beneficiary of
-            educational grants that broadened her horizons, Umutoni Tessy
-            Mercy carried a strong desire to give back and continue the
-            legacy of supporting others.
+            break the cycle of poverty.
           </p>
           <p>
+            Having herself been a beneficiary of educational grants that
+            broadened her horizons, Umutoni Tessy Mercy carried a strong
+            desire to give back and continue the legacy of supporting others.
             Together, with their modest savings, a shared vision, and an
-            unyielding commitment to making a difference, Baka and Tessy
-            founded Umoja in June 2021. In its very first year, Umoja
-            supported a 10-year-old girl whose parents were struggling to
-            afford her school fees. The support went beyond tuition: it
-            covered her materials, clothing, and pocket money, and paired
-            her with a dedicated mentor who checked in regularly, offering
-            guidance, motivation, and personalized advice.
+            unyielding commitment, they founded Umoja in June 2021.
           </p>
           <p>
-            The success of the first year fuelled Umoja’s passion. In the
-            years that followed, support expanded to four more students,
-            each receiving the same holistic package, financial aid,
-            mentorship, a sense of belonging, and the assurance that
-            someone believes in their dreams. Today, Umoja proudly supports
-            five students fully, thanks to the outpouring of support from
-            volunteers and donors all over the world.
+            Today, Umoja proudly supports five students fully, thanks to the
+            outpouring of support from volunteers and donors all over the world.
           </p>
         </>
       }
     />
+  );
+}
+
+function FirstScholarSection() {
+  return (
+    <Section id="first-scholar" className="py-14 md:py-20">
+      <div className="mx-auto max-w-4xl">
+        <p className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-accent-500">
+          Scholar 01
+        </p>
+        <blockquote className="mt-4 border-l-2 border-accent-500 pl-6">
+          <p className="text-2xl font-light leading-relaxed text-primary-900 md:text-3xl lg:text-4xl">
+            In its very first year, Umoja supported a 10-year-old girl whose
+            parents were struggling to afford her school fees. The support went
+            beyond tuition: books, clothing, pocket money, and a dedicated
+            mentor who checked in every term.
+          </p>
+        </blockquote>
+        <p className="mt-6 max-w-prose text-base leading-relaxed text-neutral-600 md:text-lg">
+          That holistic package is the same one every Umoja scholar receives
+          today. One student at a time, one scholarship at a time.
+        </p>
+      </div>
+    </Section>
   );
 }
 
@@ -166,18 +157,18 @@ function VisionMissionSection() {
       </Heading>
       <div className="mt-6 grid gap-3 md:grid-cols-2">
         <Card>
-          <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-secondary-500">
+          <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-accent-400">
             Vision
           </p>
-          <p className="mt-2 font-heading text-xl font-medium text-primary-900 md:text-2xl">
+          <p className="mt-2 text-xl font-medium text-primary-900 md:text-2xl">
             Empowering Africa through Education.
           </p>
         </Card>
         <Card>
-          <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-secondary-500">
+          <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-accent-400">
             Mission
           </p>
-          <p className="mt-2 font-heading text-xl font-medium text-primary-900 md:text-2xl">
+          <p className="mt-2 text-xl font-medium text-primary-900 md:text-2xl">
             To champion educational equity by supporting underprivileged
             African youth, ensuring that every student can pursue their
             academic goals and reach their full potential.
@@ -198,13 +189,15 @@ function CoreValuesSection() {
       >
         How we work
       </Heading>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {VALUES.map((value) => (
           <Card key={value.title}>
-            <h3 className="font-heading text-lg font-semibold text-primary-900">
+            <h3 className="text-lg font-semibold text-primary-900">
               {value.title}
             </h3>
-            <p className="mt-1 text-sm text-neutral-600">{value.body}</p>
+            <p className="mt-2 text-sm leading-relaxed text-neutral-600">
+              {value.body}
+            </p>
           </Card>
         ))}
       </div>
@@ -212,39 +205,18 @@ function CoreValuesSection() {
   );
 }
 
-function LeadershipSection() {
+function TeamSection() {
   return (
-    <Section id="leadership" className="py-8 md:py-10">
+    <Section id="team" className="py-10 md:py-14">
       <Heading
         level={2}
-        eyebrow="Leadership"
-        description="Umoja was founded, and is still led day-to-day, by the two friends who started it in June 2021."
+        eyebrow="Our Team"
+        description="Umoja was founded, and is still led day-to-day, by the two friends who started it in June 2021. Click Quick look on any card to read the full story."
       >
         The founders
       </Heading>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        {FOUNDERS.map((founder) => (
-          <Card key={founder.name}>
-            <div className="flex items-start gap-3">
-              <div
-                role="img"
-                aria-label={`Portrait of ${founder.name}`}
-                className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary-700 font-heading text-xl font-semibold text-white"
-              >
-                {founder.initials}
-              </div>
-              <div>
-                <h3 className="font-heading text-lg font-semibold text-primary-900">
-                  {founder.name}
-                </h3>
-                <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-secondary-600">
-                  {founder.role}
-                </p>
-                <p className="mt-2 text-sm text-neutral-600">{founder.bio}</p>
-              </div>
-            </div>
-          </Card>
-        ))}
+      <div className="mt-8">
+        <TeamDirectory />
       </div>
     </Section>
   );

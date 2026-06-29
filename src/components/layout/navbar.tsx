@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -98,13 +99,37 @@ export function Navbar() {
         <Container
           as="nav"
           aria-label="Primary"
-          className="flex h-9 items-center justify-between gap-4"
+          className="flex h-14 items-center justify-between gap-3 md:h-9 md:gap-4"
         >
+          {/*
+            `whitespace-nowrap` keeps the wordmark on one line even when
+            the right-side buttons grow on mobile. Without this, a
+            44px tap-target hamburger plus a Donate pill steal enough
+            horizontal room to push "Africa" onto a second line.
+          */}
+          {/*
+            Logo lockup: icon mark is always visible; "Umoja Africa" text
+            is hidden on the narrowest viewports where the hamburger +
+            Donate pill leave no room, then reappears at sm (480 px+).
+            whitespace-nowrap prevents the text wrapping to a second line
+            if the right-side buttons squeeze the available space.
+          */}
           <Link
             href="/"
-            className="font-heading text-xl font-bold tracking-tight text-primary-700 transition-colors duration-150 ease-out-strong hover:text-primary-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-700"
+            aria-label="Umoja Africa — home"
+            className="flex shrink-0 items-center gap-1 whitespace-nowrap transition-opacity duration-150 ease-out-strong hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-700"
           >
-            Umoja Africa
+            <Image
+              src="/images/logo/logo.png"
+              alt="Umoja Africa"
+              width={1024}
+              height={1024}
+              priority
+              className="h-5 w-auto shrink-0"
+            />
+            <span className="hidden font-heading text-lg font-bold tracking-tight text-primary-700 sm:inline md:text-xl">
+              Umoja Africa
+            </span>
           </Link>
 
           <ul className="hidden items-center gap-5 md:flex">
@@ -157,20 +182,32 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
+            {/*
+              Touch targets: the icon-only buttons are sized to >=44px on
+              mobile (Apple HIG / WCAG 2.5.5 minimum) so taps land
+              reliably. Desktop tightens back to ~24px since cursor
+              precision is fine. Inner `<svg>` keeps a small visual size
+              regardless of button box.
+            */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
               aria-label="Search the site"
-              className="hidden h-6 w-6 items-center justify-center rounded-full text-primary-700 transition-[transform,background-color,color] duration-150 ease-out-strong hover:bg-primary-50 active:scale-[0.92] motion-reduce:active:scale-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 md:inline-flex"
+              className="hidden h-11 w-11 items-center justify-center rounded-full text-primary-700 transition-[transform,background-color,color] duration-150 ease-out-strong hover:bg-primary-50 active:scale-[0.92] motion-reduce:active:scale-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 md:inline-flex md:h-6 md:w-6"
             >
               <SearchIcon />
             </button>
+            {/*
+              Donate sized to ~36px on mobile — comfortably tappable
+              without dominating the now-56px navbar. Desktop tightens
+              to 20px since cursor precision is fine.
+            */}
             <Link
               href={donateHref}
               className={buttonStyles({
                 variant: "secondary",
                 size: "md",
-                className: "h-6 md:h-5",
+                className: "h-9 px-4 text-sm md:h-5 md:px-3",
               })}
             >
               Donate
@@ -181,7 +218,7 @@ export function Navbar() {
               aria-expanded={isMobileOpen}
               aria-controls="mobile-nav"
               aria-label={isMobileOpen ? "Close menu" : "Open menu"}
-              className="inline-flex h-6 w-6 items-center justify-center rounded-full text-primary-700 transition-[transform,background-color,color] duration-150 ease-out-strong hover:bg-primary-50 active:scale-[0.92] motion-reduce:active:scale-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 md:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-primary-700 transition-[transform,background-color,color] duration-150 ease-out-strong hover:bg-primary-50 active:scale-[0.92] motion-reduce:active:scale-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 md:hidden"
             >
               {isMobileOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
@@ -360,7 +397,7 @@ function SearchIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-3 w-3"
+      className="h-4 w-4 md:h-3 md:w-3"
     >
       <circle cx="11" cy="11" r="7" />
       <path d="m20 20-3.5-3.5" />
@@ -377,7 +414,7 @@ function MenuIcon() {
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
-      className="h-3 w-3"
+      className="h-4 w-4 md:h-3 md:w-3"
     >
       <path d="M4 7h16M4 12h16M4 17h16" />
     </svg>
@@ -393,7 +430,7 @@ function CloseIcon() {
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
-      className="h-3 w-3"
+      className="h-4 w-4 md:h-3 md:w-3"
     >
       <path d="M6 6l12 12M6 18L18 6" />
     </svg>

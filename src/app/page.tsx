@@ -56,18 +56,14 @@ function MissionSection() {
         />
 
         <p
-          className="mx-auto mt-6 max-w-[680px] font-sans font-normal leading-[1.25]"
+          className="mx-auto mt-6 max-w-[680px] font-heading font-extrabold leading-[1.1] tracking-[-0.02em]"
           style={{ fontSize: "clamp(28px, 4vw, 44px)" }}
         >
           Empowering Africa through{" "}
-          <em className="font-heading font-semibold text-primary-900">
-            education
-          </em>
-          , one{" "}
-          <em className="font-heading font-semibold text-primary-900">
-            student
-          </em>{" "}
-          at a time.
+          <span className="font-extrabold text-primary-900">education</span>,
+          one{" "}
+          <span className="font-extrabold text-primary-900">student</span> at a
+          time.
         </p>
 
         <div className="mt-[28px]">
@@ -139,9 +135,9 @@ function MissionCard({
       <div className="px-[18px] py-[20px]">
         <h3 className="font-heading text-base font-normal text-primary-900 md:text-lg">
           {titleLead}{" "}
-          <em className="font-heading font-semibold text-primary-900">
+          <span className="font-heading font-semibold text-primary-900">
             {titleAccent}
-          </em>
+          </span>
         </h3>
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-neutral-600">
           {description}
@@ -216,11 +212,7 @@ function LongViewSection() {
   return (
     <ImageTextSection
       eyebrow="The long view"
-      title={
-        <>
-          Each gift reaches a <em>person</em>, not a number.
-        </>
-      }
+      title="Each gift reaches a person, not a number."
       description="We are deliberately small. Every donor sees the scholars their gift funds, every volunteer is paired with a scholar by name, and every partnership is reviewed by the two founders themselves. The motto we work to: together, we break down the barriers that prevent talented students from accessing the education they deserve."
       image={{
         src: "/images/placeholders/bennett-tobias-tqwOJAvUIh4-unsplash.jpg",

@@ -149,6 +149,5 @@ types/
 index.d.ts
 src/ds-entry.tsx
 tsconfig.ds.json
-.ds-build-css/tailwind-generated.css
-.ds-build-css/combined.css
+.ds-build-css/
 .design-sync/.cache/

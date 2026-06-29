@@ -3,13 +3,14 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { InnerPage } from "@/components/layout/inner-page";
 import { Section } from "@/components/ui/section";
 import { DonationForm } from "./donation-form";
 
 export const metadata: Metadata = {
   title: "Donate",
   description:
-    "Support a scholar’s education. Choose one-time or monthly, pick an amount, and read where every dollar goes.",
+    "Support a scholar's education. Choose one-time or monthly, pick an amount, and read where every dollar goes.",
 };
 
 type TrustLink = {
@@ -62,26 +63,26 @@ const IMPACT_TIERS: readonly ImpactTier[] = [
 
 export default function DonatePage() {
   return (
-    <>
+    <InnerPage>
       <DonateHero />
       <DonationFormSection />
       <TrustSignalsSection />
       <ImpactMappingSection />
       <OtherWaysToGiveCTA />
-    </>
+    </InnerPage>
   );
 }
 
 function DonateHero() {
   return (
-    <Section as="header" className="py-14 md:py-20">
+    <Section as="header" className="py-16 md:py-24">
       <Heading
         level={1}
         align="center"
         eyebrow="Donate"
         description="One scholar at a time, one term at a time. Every dollar funds the program you read about, and every donor gets a yearly impact report."
       >
-        Support a scholar’s future
+        Support a scholar&apos;s future
       </Heading>
     </Section>
   );
@@ -89,9 +90,9 @@ function DonateHero() {
 
 function DonationFormSection() {
   return (
-    <Section variant="muted" className="py-10 md:py-12">
+    <Section variant="muted" className="py-10 md:py-14">
       <div className="mx-auto max-w-prose">
-        <Card className="p-5 md:p-6">
+        <Card className="p-5 md:p-8">
           <DonationForm />
         </Card>
       </div>
@@ -109,19 +110,21 @@ function TrustSignalsSection() {
       >
         Trust signals
       </Heading>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {TRUST_LINKS.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className="block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700"
+            className="group block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700"
           >
-            <Card className="h-full hover:shadow-md">
-              <h3 className="font-heading text-lg font-semibold text-primary-900">
+            <Card className="h-full p-5 md:p-6 transition-shadow group-hover:shadow-md">
+              <h3 className="text-lg font-semibold text-primary-900">
                 {link.title}
               </h3>
-              <p className="mt-1 text-sm text-neutral-600">{link.body}</p>
-              <p className="mt-3 text-sm font-semibold text-secondary-600">
+              <p className="mt-2 text-sm leading-relaxed text-neutral-600">
+                {link.body}
+              </p>
+              <p className="mt-4 text-sm font-semibold text-accent-500 group-hover:text-accent-600 transition-colors">
                 {link.cta} →
               </p>
             </Card>
@@ -142,13 +145,15 @@ function ImpactMappingSection() {
       >
         Where each gift lands
       </Heading>
-      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-3">
         {IMPACT_TIERS.map((tier) => (
-          <Card key={tier.amount}>
-            <p className="font-heading text-3xl font-bold text-primary-700">
+          <Card key={tier.amount} className="p-5 md:p-6">
+            <p className="font-display text-4xl font-bold text-accent-500">
               {tier.amount}
             </p>
-            <p className="mt-2 text-sm text-neutral-600">{tier.body}</p>
+            <p className="mt-3 text-sm leading-relaxed text-neutral-600">
+              {tier.body}
+            </p>
           </Card>
         ))}
       </div>
@@ -160,7 +165,7 @@ function OtherWaysToGiveCTA() {
   return (
     <CTASection
       heading="Other ways to give"
-      description="Major gifts, corporate contributions, employer matching, and stock or wire transfers go through a different channel. Email us and we’ll walk you through it."
+      description="Major gifts, corporate contributions, employer matching, and stock or wire transfers go through a different channel. Email us and we'll walk you through it."
       primary={{ label: "Talk to a person", href: "/contact" }}
       secondary={{ label: "Read our reports", href: "/annual-reports" }}
     />

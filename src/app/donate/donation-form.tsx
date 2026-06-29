@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useId, useState, type ChangeEvent, type FormEvent } from "react";
 import { buttonStyles } from "@/components/ui/button";
+import { CONTACT_EMAIL } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
+import { validateAmount } from "@/lib/validation";
 
 type Frequency = "once" | "monthly";
 type AmountChoice = "25" | "50" | "100" | "custom";
@@ -20,25 +22,86 @@ const AMOUNT_CHOICES: readonly { value: AmountChoice; label: string }[] = [
   { value: "custom", label: "Custom" },
 ] as const;
 
+type SubmitState = "idle" | "submitting" | "redirecting" | "error";
+
 export function DonationForm() {
   const formId = useId();
   const [frequency, setFrequency] = useState<Frequency>("monthly");
   const [amount, setAmount] = useState<AmountChoice>("50");
   const [customAmount, setCustomAmount] = useState<string>("");
+  const [status, setStatus] = useState<SubmitState>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  // Captured Stripe checkout URL. Held in state so a visible fallback
+  // link can render if the browser drops `window.location.assign()`
+  // (rare but documented on iOS Safari after long async chains).
+  const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
 
-  const effectiveAmount =
+  const rawAmount =
     amount === "custom" ? Number(customAmount) || 0 : Number(amount);
-  const isValid = effectiveAmount > 0;
+  const amountValidation = validateAmount(rawAmount);
+  const isValid = amountValidation.ok;
+  const effectiveAmount = amountValidation.ok ? amountValidation.value : 0;
+  const isSubmitting = status === "submitting";
 
-  const buttonLabel = !isValid
-    ? "Choose an amount"
-    : `Donate $${effectiveAmount}${frequency === "monthly" ? " / month" : ""}`;
+  // Inline error for the custom amount field, only after the user has typed
+  // something. We don't show it if they haven't picked Custom yet, even if
+  // technically a fresh form has 0 in custom.
+  const customAmountError =
+    amount === "custom" && customAmount.length > 0 && !amountValidation.ok
+      ? amountValidation.message
+      : "";
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const buttonLabel =
+    status === "submitting"
+      ? "Starting checkout…"
+      : status === "redirecting"
+        ? "Redirecting to Stripe…"
+        : !isValid
+          ? "Choose an amount"
+          : `Donate $${effectiveAmount}${frequency === "monthly" ? " / month" : ""}`;
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // Payment integration is intentionally not wired up. The disclaimer
-    // below the submit button names the workaround for users who want to
-    // give today.
+    if (!isValid || isSubmitting) return;
+    setStatus("submitting");
+    setErrorMessage("");
+    setCheckoutUrl(null);
+    try {
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: effectiveAmount,
+          frequency,
+          cancelUrl: window.location.href,
+        }),
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        url?: string;
+        message?: string;
+      };
+      if (!res.ok || !data.ok || !data.url) {
+        throw new Error(data.message ?? "Could not start checkout.");
+      }
+      // Capture the URL in state BEFORE attempting navigation so the
+      // fallback link is already rendered if the redirect drops. iOS
+      // Safari occasionally treats the gesture context as "lost" after
+      // long async chains and silently no-ops the navigation, leaving
+      // the user on /donate with no feedback.
+      setCheckoutUrl(data.url);
+      setStatus("redirecting");
+      // `assign()` is semantically explicit (vs `href = url` which is
+      // a property setter that some browsers treat differently in
+      // certain contexts). If this dropped, the visible fallback link
+      // below catches the user.
+      window.location.assign(data.url);
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Could not start checkout.",
+      );
+    }
   }
 
   function handleCustomChange(event: ChangeEvent<HTMLInputElement>) {
@@ -118,7 +181,14 @@ export function DonationForm() {
             >
               Custom amount (USD)
             </label>
-            <div className="mt-1 flex items-center rounded-2xl border-2 border-primary-200 bg-background focus-within:border-primary-700">
+            <div
+              className={cn(
+                "mt-1 flex items-center rounded-2xl border-2 bg-background",
+                customAmountError
+                  ? "border-red-500 focus-within:border-red-600"
+                  : "border-primary-200 focus-within:border-primary-700",
+              )}
+            >
               <span className="pl-3 font-heading text-lg font-bold text-neutral-500">
                 $
               </span>
@@ -131,16 +201,66 @@ export function DonationForm() {
                 placeholder="0"
                 value={customAmount}
                 onChange={handleCustomChange}
+                aria-invalid={!!customAmountError}
+                aria-describedby={
+                  customAmountError ? `${formId}-custom-amount-error` : undefined
+                }
                 className="w-full rounded-r-2xl bg-transparent py-2 pl-1 pr-3 font-heading text-lg font-bold text-primary-900 outline-none placeholder:text-neutral-400"
               />
             </div>
+            {customAmountError && (
+              <p
+                id={`${formId}-custom-amount-error`}
+                className="mt-1 text-sm text-red-700"
+              >
+                {customAmountError}
+              </p>
+            )}
           </div>
         )}
       </fieldset>
 
+      {status === "error" && (
+        <p
+          role="alert"
+          className="rounded-xl border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800"
+        >
+          {errorMessage || "Something went wrong. Please try again."}
+        </p>
+      )}
+
+      {/*
+        Visible fallback when a Stripe checkout URL has been issued but
+        the automatic `window.location.assign()` redirect may have been
+        dropped (iOS Safari edge case). The plain `<a>` tag with an
+        explicit `href` is a normal navigation initiated by a user tap,
+        which mobile browsers always honor. `noopener noreferrer` keeps
+        Stripe in the same tab without leaking referrer.
+      */}
+      {checkoutUrl && status === "redirecting" && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="rounded-xl border border-primary-200 bg-primary-50 px-3 py-3 text-sm text-primary-900"
+        >
+          <p className="font-medium">Taking you to Stripe checkout&hellip;</p>
+          <p className="mt-1 text-xs">
+            If nothing happens after a moment,{" "}
+            <a
+              href={checkoutUrl}
+              rel="noopener noreferrer"
+              className="font-semibold underline underline-offset-2 hover:text-primary-700"
+            >
+              tap here to continue to checkout
+            </a>
+            .
+          </p>
+        </div>
+      )}
+
       <button
         type="submit"
-        disabled={!isValid}
+        disabled={!isValid || isSubmitting || status === "redirecting"}
         className={buttonStyles({
           variant: "primary",
           size: "lg",
@@ -151,12 +271,12 @@ export function DonationForm() {
       </button>
 
       <p className="text-center text-xs text-neutral-500">
-        UI preview, secure payments launch soon. To give today,{" "}
+        Secure payments processed by Stripe. Prefer wire transfer or stock?{" "}
         <Link
-          href="/contact"
+          href={`mailto:${CONTACT_EMAIL}`}
           className="font-medium text-primary-700 underline underline-offset-2 hover:text-primary-600"
         >
-          email us
+          Email us
         </Link>
         .
       </p>

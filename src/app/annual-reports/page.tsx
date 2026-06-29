@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CTASection } from "@/components/layout/cta-section";
+import { InnerPage } from "@/components/layout/inner-page";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 import {
@@ -13,17 +14,17 @@ import {
 export const metadata: Metadata = {
   title: "Annual Reports",
   description:
-    "Independent audits, impact reports, and methodology papers, Umoja Africa’s published record, free to read and share.",
+    "Independent audits, impact reports, and methodology papers, Umoja Africa's published record, free to read and share.",
 };
 
 export default function AnnualReportsPage() {
   const reports = getAllReports();
   return (
-    <>
+    <InnerPage>
       <ReportsHero />
       <ReportsGridSection reports={reports} />
       <ReportsCTA />
-    </>
+    </InnerPage>
   );
 }
 
@@ -33,7 +34,7 @@ function ReportsHero() {
       variant="color"
       eyebrow="Annual reports"
       title="Reports & publications"
-      description="Independent audits, impact reports, and methodology papers, free to read, free to share. The reports listed below are publishing soon; this page becomes the live archive once they’re online."
+      description="Independent audits, impact reports, and methodology papers, free to read, free to share. The reports listed below are publishing soon; this page becomes the live archive once they're online."
     />
   );
 }
@@ -58,27 +59,28 @@ function ReportCard({ report }: { report: Report }) {
         <Image
           src={report.cover.src}
           alt={report.cover.alt}
-          fill
+          width={600}
+          height={800}
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 90vw"
-          className="object-cover"
+          className="h-full w-full object-cover"
         />
         {isPlaceholder && (
-          <span className="absolute right-3 top-3 inline-flex items-center rounded-full bg-secondary-500 px-2.5 py-1 font-heading text-xs font-semibold uppercase tracking-wider text-primary-900">
+          <span className="absolute right-3 top-3 inline-flex items-center rounded-full bg-accent-500 px-2.5 py-1 font-heading text-xs font-semibold uppercase tracking-wider text-white">
             Coming soon
           </span>
         )}
       </div>
-      <p className="mt-5 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-secondary-700">
-        {report.category} · {report.year}
+      <p className="mt-5 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
+        {report.category} &middot; {report.year}
       </p>
-      <h3 className="mt-2 font-heading text-lg font-semibold text-primary-900">
+      <h3 className="mt-2 text-lg font-semibold text-primary-900">
         {report.title}
       </h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-neutral-600">
         {report.description}
       </p>
-      <p className="mt-4 text-xs text-neutral-500">
-        {report.pages} pages · Published {formatReportDate(report.publishedAt)}
+      <p className="mt-4 text-xs text-neutral-400">
+        {report.pages} pages &middot; Published {formatReportDate(report.publishedAt)}
       </p>
       <div className="mt-5">
         <Link
@@ -89,10 +91,10 @@ function ReportCard({ report }: { report: Report }) {
               : `Download ${report.title} PDF`
           }
           aria-disabled={isPlaceholder || undefined}
-          className="inline-flex items-center gap-1 font-heading text-sm font-semibold text-primary-700 hover:text-primary-900"
+          className="inline-flex items-center gap-1 text-sm font-semibold text-accent-500 hover:text-accent-600 transition-colors"
         >
           Download PDF
-          <span aria-hidden>→</span>
+          <span aria-hidden> →</span>
         </Link>
       </div>
     </article>

@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 type ImageTextSectionProps = {
   /** Small uppercase label rendered above the heading. */
   eyebrow?: string;
-  /** Heading text or JSX (e.g. with `<em>` emphasis). */
+  /** Heading text or JSX. */
   title: ReactNode;
   /** Body copy under the heading. */
   description: ReactNode;
