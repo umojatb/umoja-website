@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { legalNav, mainNav } from "@/lib/navigation";
@@ -10,11 +11,23 @@ export function Footer() {
       <Container className="py-8">
         <div className="grid gap-6 md:grid-cols-3">
           <div>
+            {/* White/mono logo variant on dark navy background */}
             <Link
               href="/"
-              className="font-heading text-xl font-bold tracking-tight text-white"
+              aria-label="Umoja Africa — home"
+              className="inline-flex items-center gap-1 transition-opacity duration-150 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
-              Umoja Africa
+              <Image
+                src="/images/logo/logo-white.png"
+                alt=""
+                aria-hidden="true"
+                width={1536}
+                height={1024}
+                className="h-6 w-auto shrink-0"
+              />
+              <span className="font-heading text-xl font-bold tracking-tight text-white">
+                Umoja Africa
+              </span>
             </Link>
             <p className="mt-2 max-w-xs text-sm text-neutral-400">
               Empowering communities across the continent through education,

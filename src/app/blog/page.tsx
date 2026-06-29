@@ -4,6 +4,7 @@ import Link from "next/link";
 import { buttonStyles } from "@/components/ui/button";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
+import { InnerPage } from "@/components/layout/inner-page";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 import {
@@ -23,12 +24,12 @@ export default function BlogPage() {
   const featured = getFeaturedPost();
   const posts = getNonFeaturedPosts();
   return (
-    <>
+    <InnerPage>
       <BlogHero />
       {featured && <FeaturedArticleSection post={featured} />}
       <ArticleGridSection posts={posts} />
       <BlogCTASection />
-    </>
+    </InnerPage>
   );
 }
 
@@ -50,10 +51,10 @@ function BlogHero() {
 function FeaturedArticleSection({ post }: { post: Post }) {
   return (
     <Section variant="soft">
-      <p className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-secondary-700">
+      <p className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-accent-500">
         Featured
       </p>
-      <div className="mt-4 grid gap-6 lg:grid-cols-2 lg:items-center lg:gap-12">
+      <div className="mt-5 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-14">
         <Link
           href={`/blog/${post.slug}`}
           className="group relative block aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-200"
@@ -69,25 +70,25 @@ function FeaturedArticleSection({ post }: { post: Post }) {
           />
         </Link>
         <div>
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-secondary-700">
+          <p className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
             {post.category}
           </p>
-          <h2 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-primary-900 md:text-4xl lg:text-5xl">
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-primary-900 md:text-4xl lg:text-5xl">
             <Link
               href={`/blog/${post.slug}`}
-              className="hover:text-primary-700"
+              className="hover:text-primary-700 transition-colors"
             >
               {post.title}
             </Link>
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-neutral-600 md:text-lg">
+          <p className="mt-5 text-base leading-relaxed text-neutral-600 md:text-lg">
             {post.excerpt}
           </p>
-          <p className="mt-4 text-sm text-neutral-500">
-            {post.author.name} · {formatPostDate(post.publishedAt)} ·{" "}
+          <p className="mt-4 text-sm text-neutral-400">
+            {post.author.name} &middot; {formatPostDate(post.publishedAt)} &middot;{" "}
             {post.readMinutes} min read
           </p>
-          <div className="mt-6">
+          <div className="mt-7">
             <Link
               href={`/blog/${post.slug}`}
               className={buttonStyles({ variant: "primary", size: "md" })}
@@ -107,7 +108,7 @@ function ArticleGridSection({ posts }: { posts: readonly Post[] }) {
       <Heading level={2} eyebrow="More posts">
         Latest from the team
       </Heading>
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <ArticleCard key={post.slug} post={post} />
         ))}
@@ -129,17 +130,17 @@ function ArticleCard({ post }: { post: Post }) {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
-        <p className="mt-4 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-secondary-700">
+        <p className="mt-4 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
           {post.category}
         </p>
-        <h3 className="mt-2 font-heading text-lg font-semibold text-primary-900 group-hover:text-primary-700">
+        <h3 className="mt-2 text-lg font-semibold text-primary-900 group-hover:text-primary-700 transition-colors">
           {post.title}
         </h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-neutral-600">
           {post.excerpt}
         </p>
-        <p className="mt-3 text-xs text-neutral-500">
-          {formatPostDate(post.publishedAt)} · {post.readMinutes} min read
+        <p className="mt-4 text-xs text-neutral-400">
+          {formatPostDate(post.publishedAt)} &middot; {post.readMinutes} min read
         </p>
       </article>
     </Link>

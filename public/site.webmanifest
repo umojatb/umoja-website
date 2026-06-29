@@ -1,0 +1,21 @@
+{
+  "name": "Umoja Africa",
+  "short_name": "Umoja",
+  "description": "Empowering communities across the continent through education, opportunity, and shared progress.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1b4079",
+  "background_color": "#faf8f3",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

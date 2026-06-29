@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/layout/cta-section";
 import { Heading } from "@/components/ui/heading";
 import { ImageTextSection } from "@/components/sections/image-text-section";
+import { InnerPage } from "@/components/layout/inner-page";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/ui/section";
 
@@ -20,6 +21,7 @@ type Path = {
   readonly audience: string;
   readonly body: string;
   readonly cta: { readonly label: string; readonly href: string };
+  readonly featured?: boolean;
 };
 
 const PATHS: readonly Path[] = [
@@ -30,6 +32,7 @@ const PATHS: readonly Path[] = [
       "individuals who want to directly fund a scholar's education.",
     body: "Financial sponsorships fund scholarships, learning materials, and the mentorship program. Every donor receives a yearly impact report on the scholars they helped support.",
     cta: { label: "Donate now", href: "/donate" },
+    featured: true,
   },
   {
     id: "volunteer",
@@ -37,7 +40,7 @@ const PATHS: readonly Path[] = [
     audience:
       "educators, practitioners, and mental-health advocates who can offer time, expertise, or steady mentorship.",
     body: "Mentor a scholar one-on-one, lead a workshop on leadership or career readiness, or tutor weekly in your subject. Time commitments range from a single session to a full academic year.",
-    cta: { label: "Become a volunteer", href: "/get-involved#volunteer" },
+    cta: { label: "Become a volunteer", href: "/apply/volunteer" },
   },
   {
     id: "partner",
@@ -45,7 +48,7 @@ const PATHS: readonly Path[] = [
     audience:
       "local schools, community leaders, small businesses, and corporate partners ready for a long-term collaboration.",
     body: "Provide technology, books, or learning materials, offer internships, or back teacher training and extracurricular programs. Partnerships are designed jointly and reviewed annually.",
-    cta: { label: "Become a partner", href: "/get-involved#partner" },
+    cta: { label: "Become a partner", href: "/apply/partner" },
   },
 ];
 
@@ -58,17 +61,17 @@ type VolunteerOption = {
 const VOLUNTEER_OPTIONS: readonly VolunteerOption[] = [
   {
     title: "Mentorship",
-    commitment: "≈ 1 hour / month",
+    commitment: "1 hour / month",
     body: "Guide a scholar with personal and professional advice over an academic year. Regular check-ins, motivation, and the steady contact that keeps a scholarship from feeling transactional.",
   },
   {
     title: "Tutoring",
-    commitment: "≈ 2 hours / week",
+    commitment: "2 hours / week",
     body: "Help scholars excel academically through subject-specific coaching, math, sciences, language, college prep. We match by subject and time zone to a scholar who needs it.",
   },
   {
     title: "Workshops",
-    commitment: "1–3 hours, one-off",
+    commitment: "1 to 3 hours, one-off",
     body: "Lead a session on leadership, life skills, or career readiness. Tell us what you'd teach and we'll find the right scholars to bring you into.",
   },
 ];
@@ -92,7 +95,7 @@ const PARTNER_OPTIONS: readonly PartnerOption[] = [
 
 export default function GetInvolvedPage() {
   return (
-    <>
+    <InnerPage>
       <GetInvolvedHero />
       <PathSelectionSection />
       <WhyItMattersSection />
@@ -100,7 +103,7 @@ export default function GetInvolvedPage() {
       <ThreePathsAnchorSection />
       <PartnershipDetailsSection />
       <ClosingCTASection />
-    </>
+    </InnerPage>
   );
 }
 
@@ -126,21 +129,36 @@ function PathSelectionSection() {
       >
         Choose how you want to help
       </Heading>
-      <div className="mt-8 grid gap-3 lg:grid-cols-3">
+      <div className="mt-10 grid gap-4 lg:grid-cols-3">
         {PATHS.map((path) => (
-          <Card key={path.id} className="flex h-full flex-col">
-            <h3 className="font-heading text-xl font-bold text-primary-900">
+          <Card
+            key={path.id}
+            className={[
+              "flex h-full flex-col p-5 md:p-6",
+              path.featured
+                ? "border-accent-400 ring-1 ring-accent-400"
+                : "",
+            ].join(" ")}
+          >
+            {path.featured && (
+              <span className="mb-3 self-start rounded-full bg-accent-500 px-2.5 py-0.5 font-heading text-xs font-semibold uppercase tracking-wider text-white">
+                Most direct
+              </span>
+            )}
+            <h3 className="text-xl font-bold text-primary-900">
               {path.title}
             </h3>
-            <p className="mt-2 text-sm font-medium text-primary-800">
+            <p className="mt-2 text-sm font-medium text-primary-700">
               Best for {path.audience}
             </p>
-            <p className="mt-2 text-sm text-neutral-600">{path.body}</p>
-            <div className="mt-auto pt-3">
+            <p className="mt-3 text-sm leading-relaxed text-neutral-600">
+              {path.body}
+            </p>
+            <div className="mt-auto pt-4">
               <Link
                 href={path.cta.href}
                 className={buttonStyles({
-                  variant: "primary",
+                  variant: path.featured ? "primary" : "outline",
                   size: "md",
                   className: "w-full",
                 })}
@@ -157,7 +175,7 @@ function PathSelectionSection() {
 
 function WhyItMattersSection() {
   return (
-    <Section className="py-8 md:py-10">
+    <Section className="py-10 md:py-14">
       <div className="mx-auto max-w-prose">
         <Heading
           level={2}
@@ -177,20 +195,22 @@ function VolunteerDetailsSection() {
       <Heading
         level={2}
         eyebrow="Volunteer in detail"
-        description="Three concrete shapes for volunteer work, each with the time investment we’d ask of you up front."
+        description="Three concrete shapes for volunteer work, each with the time investment we'd ask of you up front."
       >
         Where your time goes
       </Heading>
-      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-3">
         {VOLUNTEER_OPTIONS.map((option) => (
-          <Card key={option.title}>
-            <h3 className="font-heading text-lg font-semibold text-primary-900">
+          <Card key={option.title} className="p-5 md:p-6">
+            <h3 className="text-lg font-semibold text-primary-900">
               {option.title}
             </h3>
-            <p className="mt-1 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-secondary-600">
+            <p className="mt-1 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-accent-500">
               {option.commitment}
             </p>
-            <p className="mt-2 text-sm text-neutral-600">{option.body}</p>
+            <p className="mt-3 text-sm leading-relaxed text-neutral-600">
+              {option.body}
+            </p>
           </Card>
         ))}
       </div>
@@ -223,13 +243,15 @@ function PartnershipDetailsSection() {
       >
         How institutions plug in
       </Heading>
-      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-3">
         {PARTNER_OPTIONS.map((option) => (
-          <Card key={option.title}>
-            <h3 className="font-heading text-lg font-semibold text-primary-900">
+          <Card key={option.title} className="p-5 md:p-6">
+            <h3 className="text-lg font-semibold text-primary-900">
               {option.title}
             </h3>
-            <p className="mt-2 text-sm text-neutral-600">{option.body}</p>
+            <p className="mt-3 text-sm leading-relaxed text-neutral-600">
+              {option.body}
+            </p>
           </Card>
         ))}
       </div>
@@ -241,7 +263,7 @@ function ClosingCTASection() {
   return (
     <CTASection
       heading="Have a different idea?"
-      description="If your contribution doesn’t fit the paths above, write to us. Most partnerships start with a first email, and donations always work."
+      description="If your contribution doesn't fit the paths above, write to us. Most partnerships start with a first email, and donations always work."
       primary={{ label: "Talk to us", href: "/contact" }}
       secondary={{ label: "Donate", href: "/donate" }}
     />

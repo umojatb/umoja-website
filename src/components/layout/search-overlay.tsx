@@ -2,42 +2,8 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
-import { getAllPosts } from "@/lib/blog";
-import { mainNav } from "@/lib/navigation";
-import { getAllReports } from "@/lib/reports";
+import { getSearchIndex, searchEntries } from "@/lib/search";
 import { cn } from "@/lib/utils";
-
-type SearchablePage = {
-  readonly label: string;
-  readonly href: string;
-  readonly section: string;
-};
-
-const STATIC_PAGES: readonly SearchablePage[] = [
-  { label: "Home", href: "/", section: "Site" },
-  { label: "Donate", href: "/donate", section: "Site" },
-];
-
-function buildPageIndex(): readonly SearchablePage[] {
-  const navPages: readonly SearchablePage[] = mainNav.map((item) => ({
-    label: item.label,
-    href: item.href,
-    section: "Site",
-  }));
-  const blogPages: readonly SearchablePage[] = getAllPosts().map((post) => ({
-    label: post.title,
-    href: `/blog/${post.slug}`,
-    section: "Blog",
-  }));
-  const reportPages: readonly SearchablePage[] = getAllReports().map(
-    (report) => ({
-      label: report.title,
-      href: `/annual-reports#${report.slug}`,
-      section: "Reports",
-    }),
-  );
-  return [...STATIC_PAGES, ...navPages, ...blogPages, ...reportPages];
-}
 
 type SearchOverlayProps = {
   isOpen: boolean;
@@ -45,25 +11,19 @@ type SearchOverlayProps = {
 };
 
 /**
- * Modal overlay that lists every published page on the site, with a
- * client-side filter input. Replaces a real search backend, when one
- * exists, swap the page list for fetched results.
+ * Modal overlay that searches every page, navigation entry, program,
+ * blog post, and annual report. Empty query shows curated top entries
+ * (Donate, About, Programs, etc.) so users get something useful before
+ * they type.
  */
 export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const titleId = useId();
 
-  const allPages = useMemo(() => buildPageIndex(), []);
-  const filtered = useMemo(() => {
-    if (!query.trim()) return allPages;
-    const q = query.toLowerCase();
-    return allPages.filter(
-      (page) =>
-        page.label.toLowerCase().includes(q) ||
-        page.section.toLowerCase().includes(q),
-    );
-  }, [query, allPages]);
+  // getSearchIndex() returns a cached frozen array, no need for useMemo
+  // to memoize on top of it.
+  const results = useMemo(() => searchEntries(getSearchIndex(), query), [query]);
 
   const handleClose = useCallback(() => {
     setQuery("");
@@ -84,6 +44,10 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [isOpen, handleClose]);
+
+  const trimmed = query.trim();
+  const hasQuery = trimmed.length > 0;
+  const noMatches = hasQuery && results.length === 0;
 
   return (
     <div
@@ -107,7 +71,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
             id={titleId}
             className="font-heading text-lg font-semibold text-primary-900"
           >
-            Browse the site
+            Search the site
           </h2>
           <button
             type="button"
@@ -133,29 +97,53 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Filter pages by name…"
-          aria-label="Filter pages"
+          placeholder="Search pages, programs, posts, reports…"
+          aria-label="Search the site"
+          aria-controls={`${titleId}-results`}
           className="mt-4 w-full rounded-lg border border-neutral-300 bg-background px-4 py-3 text-base text-neutral-900 outline-none transition-colors placeholder:text-neutral-500 focus:border-primary-700 focus:ring-2 focus:ring-primary-700/20"
         />
-        {filtered.length === 0 ? (
+        {!hasQuery && (
+          <p className="mt-3 text-xs text-neutral-500">
+            Suggested pages, type to search.
+          </p>
+        )}
+        {noMatches ? (
           <p className="mt-6 text-sm text-neutral-600">
-            No pages match “{query}”.
+            No results match “{trimmed}”. Try a shorter query, or browse{" "}
+            <Link
+              href="/"
+              onClick={handleClose}
+              className="font-medium text-primary-700 underline"
+            >
+              the home page
+            </Link>
+            .
           </p>
         ) : (
-          <ul className="mt-6 max-h-[60vh] divide-y divide-neutral-200 overflow-y-auto rounded-lg border border-neutral-200 bg-background">
-            {filtered.map((page) => (
-              <li key={`${page.section}::${page.href}::${page.label}`}>
+          <ul
+            id={`${titleId}-results`}
+            className="mt-6 max-h-[60vh] divide-y divide-neutral-200 overflow-y-auto rounded-lg border border-neutral-200 bg-background"
+          >
+            {results.map((entry) => (
+              <li key={`${entry.section}::${entry.href}::${entry.label}`}>
                 <Link
-                  href={page.href}
+                  href={entry.href}
                   onClick={handleClose}
-                  className="flex items-center justify-between gap-4 px-4 py-3 transition-colors hover:bg-primary-50"
+                  className="flex flex-col gap-1 px-4 py-3 transition-colors hover:bg-primary-50 focus-visible:bg-primary-50 focus-visible:outline-none"
                 >
-                  <span className="text-sm font-medium text-primary-900">
-                    {page.label}
+                  <span className="flex items-center justify-between gap-4">
+                    <span className="text-sm font-medium text-primary-900">
+                      {entry.label}
+                    </span>
+                    <span className="font-heading text-xs font-semibold uppercase tracking-wider text-secondary-700">
+                      {entry.section}
+                    </span>
                   </span>
-                  <span className="font-heading text-xs font-semibold uppercase tracking-wider text-secondary-700">
-                    {page.section}
-                  </span>
+                  {entry.description && (
+                    <span className="line-clamp-1 text-xs text-neutral-600">
+                      {entry.description}
+                    </span>
+                  )}
                 </Link>
               </li>
             ))}
