@@ -56,8 +56,8 @@ Optional, but recommended for production:
 CONTACT_FROM_EMAIL=Umoja Africa <no-reply@umoja-africa.org>
 
 # Override the recipient if you want non-default behavior. Defaults to
-# tb@umoja.tbafrica.org.
-NEXT_PUBLIC_CONTACT_EMAIL=tb@umoja.tbafrica.org
+# info@umoja.tbafrica.org.
+NEXT_PUBLIC_CONTACT_EMAIL=info@umoja.tbafrica.org
 ```
 
 If you don't set `CONTACT_FROM_EMAIL`, the route uses Resend's
@@ -180,7 +180,7 @@ no-reply sender.
 | ---------------------------- | ---------------------------------- | ------------------------------------ |
 | `RESEND_API_KEY`             | Yes for production, no for dev     | unset (dev logs, prod 503)           |
 | `CONTACT_FROM_EMAIL`         | Recommended for production         | `Umoja Africa <onboarding@resend.dev>` |
-| `NEXT_PUBLIC_CONTACT_EMAIL`  | Optional override                  | `tb@umoja.tbafrica.org`              |
+| `NEXT_PUBLIC_CONTACT_EMAIL`  | Optional override                  | `info@umoja.tbafrica.org`              |
 
 `CONTACT_FROM_EMAIL` is server-only, no `NEXT_PUBLIC_` prefix —
 applicants don't need to know the sender, only the team does.

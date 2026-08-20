@@ -112,7 +112,7 @@ const SHEET_NAME = "Applications";
 
 // Where new-application notifications go. Override at runtime by setting a
 // `NOTIFY_EMAIL` Script Property (Project Settings -> Script properties).
-const DEFAULT_NOTIFY_EMAIL = "tb@umoja.tbafrica.org";
+const DEFAULT_NOTIFY_EMAIL = "info@umoja.tbafrica.org";
 
 // Optional: pin the destination spreadsheet by ID so the script always
 // writes to the same place even if it's run standalone or copied. Set the
@@ -365,7 +365,7 @@ so hitting "Reply" in Gmail goes to them.
    Script properties -> Add script property). Useful for staging vs prod
    without code changes.
 2. Otherwise the `DEFAULT_NOTIFY_EMAIL` constant at the top of the
-   script (`tb@umoja.tbafrica.org`).
+   script (`info@umoja.tbafrica.org`).
 
 **Failure behavior:** the call is wrapped in `try/catch` and logs to the
 Apps Script execution log on failure. A mail-quota error or transient

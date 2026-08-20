@@ -54,7 +54,7 @@ export const mainNav: readonly NavItem[] = [
         { label: "Our story", href: "/about#our-story" },
         { label: "Vision & mission", href: "/about#vision-mission" },
         { label: "Core values", href: "/about#core-values" },
-        { label: "Leadership", href: "/about#leadership" },
+        { label: "Leadership", href: "/about#team" },
       ],
       secondaryLinks: [
         { label: "Impact", href: "/impact" },
@@ -82,9 +82,9 @@ export const mainNav: readonly NavItem[] = [
       ctaLabel: "Learn more about our programs",
       ctaHref: "/programs",
       primaryLinks: [
-        { label: "Scholarships", href: "/programs#core-programs" },
-        { label: "Mentorship", href: "/programs#core-programs" },
-        { label: "Community engagement", href: "/programs#core-programs" },
+        { label: "Scholarships", href: "/programs#pillars" },
+        { label: "Mentorship", href: "/programs#pillars" },
+        { label: "Community engagement", href: "/programs#pillars" },
       ],
       secondaryLinks: [
         { label: "How it works", href: "/programs#how-it-works" },
