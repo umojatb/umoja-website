@@ -72,13 +72,35 @@ export function Navbar() {
   }, [openPanel, isMobileOpen]);
 
   /* Lock body scroll when a modal-style overlay is open (mobile drawer or
-     search). Mega panels don't lock, they sit inline like a hover menu. */
+     search). Mega panels don't lock, they sit inline like a hover menu.
+
+     We deliberately do NOT use `body { overflow: hidden }`. Overflow
+     propagates from body to the viewport, and because `<html>` carries
+     `h-full` (height: 100%) the scrollable area then collapses to the
+     viewport and the browser clamps scrollTop to 0. The page visibly
+     jumps to the top and the sticky header appears to "unstick",
+     because there is no longer any scroll offset for it to stick past.
+
+     Instead we pin the body at a negative offset equal to the current
+     scroll position. The page stays visually frozen exactly where the
+     user left it, and we restore the real scroll offset on cleanup. */
   useEffect(() => {
     if (!isMobileOpen && !isSearchOpen) return;
-    const original = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const scrollY = window.scrollY;
+    const { position, top, left, right, width } = document.body.style;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
     return () => {
-      document.body.style.overflow = original;
+      document.body.style.position = position;
+      document.body.style.top = top;
+      document.body.style.left = left;
+      document.body.style.right = right;
+      document.body.style.width = width;
+      // Jump straight back, no smooth-scroll animation on close.
+      window.scrollTo({ top: scrollY, behavior: "instant" });
     };
   }, [isMobileOpen, isSearchOpen]);
 

@@ -174,7 +174,7 @@ describe("POST /api/contact, send path", () => {
     expect(res.status).toBe(200);
     expect(sendMock).toHaveBeenCalledTimes(1);
     const args = sendMock.mock.calls[0][0];
-    expect(args.to).toContain("tb@umoja.tbafrica.org");
+    expect(args.to).toContain("info@umoja.tbafrica.org");
     expect(args.replyTo).toBe(VALID.email);
     expect(args.subject).toMatch(/Umoja contact form/i);
     expect(args.text).toContain(VALID.message);

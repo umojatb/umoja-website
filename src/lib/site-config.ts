@@ -15,7 +15,7 @@
  * a fully-populated `.env.local`. Set the env var to override.
  */
 
-const DEFAULT_CONTACT_EMAIL = "tb@umoja.tbafrica.org";
+const DEFAULT_CONTACT_EMAIL = "info@umoja.tbafrica.org";
 const DEFAULT_SITE_URL = "https://umoja-africa.org";
 const DEFAULT_CONTACT_FROM = "Umoja Africa <onboarding@resend.dev>";
 
