@@ -233,16 +233,45 @@ export async function POST(request: Request) {
 
   try {
     const upstream = await postWithRetry(webhook, JSON.stringify(enriched));
-    if (!upstream.ok) {
+
+    // The HTTP status alone is NOT sufficient to conclude the row was
+    // written. Apps Script's ContentService answers 200 on every code
+    // path, including all of its own error paths:
+    //
+    //   {"success":false,"error":"Invalid type."}        -> HTTP 200
+    //   {"success":false,"error":"Could not acquire lock."} -> HTTP 200
+    //   {"success":false,"error":<any thrown exception>} -> HTTP 200
+    //
+    // Trusting `upstream.ok` therefore reports "Application received"
+    // to the applicant while their data is silently discarded, with
+    // nothing logged anywhere. That is the worst failure mode this
+    // route has: invisible data loss on a submission the user believes
+    // succeeded. So we require an explicit `success: true` in the body.
+    //
+    // A non-JSON body (an Apps Script HTML error page, a login
+    // interstitial when the deployment is not public) also fails the
+    // check, which is correct: if we cannot confirm the write, we must
+    // not claim it happened.
+    const bodyText = await upstream.text().catch(() => "");
+    let payload: { success?: boolean; error?: string } | null = null;
+    try {
+      payload = JSON.parse(bodyText) as { success?: boolean; error?: string };
+    } catch {
+      payload = null;
+    }
+
+    if (!upstream.ok || payload?.success !== true) {
       console.error(
-        "[apply] webhook returned non-2xx after retries:",
+        "[apply] webhook did not confirm the write:",
+        "status=",
         upstream.status,
         "host=",
         safeHost(webhook),
         "elapsed=",
         Date.now() - startedAt,
         "ms",
-        await upstream.text().catch(() => ""),
+        "error=",
+        payload?.error ?? bodyText.slice(0, 200),
       );
       return NextResponse.json(
         { ok: false, message: "Could not save your application. Please try again." },
