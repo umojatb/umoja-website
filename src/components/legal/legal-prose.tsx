@@ -15,16 +15,22 @@ import type { ReactNode } from "react";
 /**
  * Organization identity shown on both legal pages.
  *
- * ACTION REQUIRED BEFORE LAUNCH: replace the address placeholder with
- * the real registered address, and confirm the legal entity name and
- * governing jurisdiction match your registration documents. These are
- * rendered verbatim on public legal pages, so a wrong value is worse
- * than an obviously blank one.
+ * There is deliberately no `address` or `jurisdiction` field. Umoja
+ * operates as an online initiative and is not yet formally registered
+ * at a physical address, so both pages state that plainly rather than
+ * asserting a registered office or a governing law that could not be
+ * substantiated. Claiming either on a public legal page is worse than
+ * omitting it.
+ *
+ * WHEN THE ORGANIZATION FORMALLY REGISTERS: add the registered address
+ * here and surface it in the Privacy Policy's "Who we are" section,
+ * and add a governing-law clause to the Terms. Until then the Terms
+ * intentionally carry no choice-of-law provision.
  */
 export const LEGAL_ENTITY = {
   name: "Umoja Africa",
-  address: "[REGISTERED ADDRESS, to be completed before launch]",
-  jurisdiction: "[GOVERNING JURISDICTION, to be completed before launch]",
+  /** Operating status, stated on both legal pages. */
+  status: "Umoja Africa currently operates as an online non-profit initiative.",
 } as const;
 
 /**
