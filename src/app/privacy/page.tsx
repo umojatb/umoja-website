@@ -59,7 +59,8 @@ export default function PrivacyPage() {
               data controller for the information described below.
             </LegalBody>
             <LegalBody>
-              Registered address: {LEGAL_ENTITY.address}. You can reach us at{" "}
+              {LEGAL_ENTITY.status} For questions regarding this Privacy Policy
+              or your personal information, contact us at{" "}
               <a href={`mailto:${CONTACT_EMAIL}`} className={legalLinkClasses}>
                 {CONTACT_EMAIL}
               </a>

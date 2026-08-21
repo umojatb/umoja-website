@@ -49,6 +49,13 @@ export default function TermsPage() {
               agree with them, please do not use the site. These terms are
               between you and {LEGAL_ENTITY.name}.
             </LegalBody>
+            <LegalBody>
+              {LEGAL_ENTITY.status} Questions about these terms can be sent to{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className={legalLinkClasses}>
+                {CONTACT_EMAIL}
+              </a>
+              .
+            </LegalBody>
           </LegalSection>
 
           <LegalSection title="What this website is">
@@ -193,15 +200,11 @@ export default function TermsPage() {
             </LegalBody>
           </LegalSection>
 
-          <LegalSection title="Changes and governing law">
+          <LegalSection title="Changes to these terms">
             <LegalBody>
               We may update these terms from time to time. The version
               published here is the one that applies, and the date at the top
               tells you when it last changed.
-            </LegalBody>
-            <LegalBody>
-              These terms are governed by the laws of{" "}
-              {LEGAL_ENTITY.jurisdiction}.
             </LegalBody>
           </LegalSection>
 
