@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { TeamMember } from "@/lib/team-data";
+import { useScrollLock } from "@/lib/use-scroll-lock";
 
 type Props = {
   member: TeamMember;
@@ -14,7 +15,15 @@ const FOCUSABLE_SELECTOR =
 export function QuickLookDrawer({ member, onClose }: Props) {
   const drawerRef = useRef<HTMLDivElement>(null);
   const onCloseRef = useRef(onClose);
-  onCloseRef.current = onClose;
+
+  // Keep the ref pointing at the latest `onClose` without re-binding
+  // the document-level Escape listener on every render. Assigning
+  // during render instead would be a render side effect, which breaks
+  // under StrictMode's double-render and concurrent rendering, and is
+  // what the react-hooks/refs rule was flagging.
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  });
 
   // Escape key to close
   useEffect(() => {
@@ -57,13 +66,11 @@ export function QuickLookDrawer({ member, onClose }: Props) {
     return () => drawer.removeEventListener("keydown", handleTab);
   }, []);
 
-  // Lock body scroll
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);
+  // Lock body scroll. See useScrollLock for why this is not
+  // `body { overflow: hidden }`, which jumps the page to the top. On
+  // the About page that means the drawer yanks the reader away from
+  // the team member they just clicked.
+  useScrollLock(true);
 
   return (
     <>

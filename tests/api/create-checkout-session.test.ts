@@ -277,3 +277,20 @@ describe("POST /api/create-checkout-session, error paths", () => {
     expect(res.status).toBe(500);
   });
 });
+
+describe("POST /api/create-checkout-session, execution budget", () => {
+  /**
+   * The Stripe client is configured with a 15s timeout and one retry,
+   * so the handler's worst case is roughly 32s. If `maxDuration` ever
+   * falls below that, the platform terminates the request before the
+   * SDK's own timeout can fire and the configured budget becomes
+   * decorative. Pinning the relationship here keeps the two from
+   * drifting apart silently.
+   */
+  it("declares a maxDuration above the Stripe client's worst case", async () => {
+    const mod = await loadRoute();
+    const maxDuration = (mod as { maxDuration?: number }).maxDuration;
+    expect(typeof maxDuration).toBe("number");
+    expect(maxDuration!).toBeGreaterThanOrEqual(35);
+  });
+});
