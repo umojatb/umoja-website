@@ -327,6 +327,21 @@ describe("POST /api/submit-application, webhook forwarding", () => {
     expect((await res.json()).ok).toBe(true);
   });
 
+  /**
+   * The route's own fetch timeout is only enforceable if the platform
+   * lets the function live longer than the timeout it is waiting on.
+   * If `maxDuration` ever drops below the internal budget, the host
+   * kills the request first and every timeout branch in the route
+   * becomes unreachable, silently. Worst case in the handler is
+   * 25s fetch + 0.5s backoff + 8s retry = 33.5s.
+   */
+  it("declares a maxDuration larger than its own timeout budget", async () => {
+    const mod = await loadRoute();
+    const maxDuration = (mod as { maxDuration?: number }).maxDuration;
+    expect(typeof maxDuration).toBe("number");
+    expect(maxDuration!).toBeGreaterThanOrEqual(35);
+  });
+
   it("returns 502 when fetch throws (network error)", async () => {
     vi.stubGlobal(
       "fetch",
