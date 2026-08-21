@@ -16,7 +16,7 @@
  */
 
 const DEFAULT_CONTACT_EMAIL = "info@umoja.tbafrica.org";
-const DEFAULT_SITE_URL = "https://umoja-africa.org";
+const DEFAULT_SITE_URL = "https://umoja.tbafrica.org";
 const DEFAULT_CONTACT_FROM = "Umoja Africa <onboarding@resend.dev>";
 
 /**
@@ -32,7 +32,7 @@ export const CONTACT_EMAIL_DEFAULT = DEFAULT_CONTACT_EMAIL;
  * `onboarding@resend.dev` works without domain verification and is fine
  * for development. For production, verify your domain in the Resend
  * dashboard and set `CONTACT_FROM_EMAIL` to e.g.
- * `"Umoja Africa <no-reply@umoja-africa.org>"`.
+ * `"Umoja Africa <no-reply@umoja.tbafrica.org>"`.
  */
 export const CONTACT_FROM_DEFAULT = DEFAULT_CONTACT_FROM;
 

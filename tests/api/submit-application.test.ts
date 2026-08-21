@@ -9,6 +9,22 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
  * mapping (5xx → 502, network throw → 502, 2xx → 200).
  */
 
+/**
+ * What the Apps Script actually returns on a successful append.
+ *
+ * Google's ContentService answers HTTP 200 on every code path, so the
+ * status line carries no information about whether the row was
+ * written. The `success` flag in the body is the only real signal, and
+ * these mocks must mirror that or the tests assert a contract the
+ * production webhook does not honour.
+ */
+const SUCCESS_RESPONSE = () =>
+  new Response(JSON.stringify({ success: true }), { status: 200 });
+
+/** An Apps Script failure: still HTTP 200, but success is false. */
+const SCRIPT_ERROR_RESPONSE = (error = "Could not acquire lock.") =>
+  new Response(JSON.stringify({ success: false, error }), { status: 200 });
+
 const VALID_VOLUNTEER = {
   type: "volunteer" as const,
   fullName: "Jane Doe",
@@ -206,7 +222,7 @@ describe("POST /api/submit-application, webhook forwarding", () => {
 
   it("forwards a valid volunteer payload via fetch and returns 200 on 2xx upstream", async () => {
     const fetchSpy = vi.fn().mockResolvedValue(
-      new Response(JSON.stringify({ ok: true }), { status: 200 }),
+      new Response(JSON.stringify({ success: true }), { status: 200 }),
     );
     vi.stubGlobal("fetch", fetchSpy);
     const { POST } = await loadRoute();
@@ -227,7 +243,7 @@ describe("POST /api/submit-application, webhook forwarding", () => {
   it("forwards a valid partner payload (with all partner fields)", async () => {
     const fetchSpy = vi
       .fn()
-      .mockResolvedValue(new Response("", { status: 200 }));
+      .mockResolvedValue(SUCCESS_RESPONSE());
     vi.stubGlobal("fetch", fetchSpy);
     const { POST } = await loadRoute();
     await POST(makeRequest(VALID_PARTNER));
@@ -249,6 +265,83 @@ describe("POST /api/submit-application, webhook forwarding", () => {
     expect((await res.json()).ok).toBe(false);
   });
 
+  /**
+   * Regression guard for silent data loss.
+   *
+   * Apps Script returns HTTP 200 even when it refuses to write the row,
+   * so a route that trusts `upstream.ok` tells the applicant
+   * "Application received" while their submission is discarded, with
+   * nothing logged. These cases pin the body-level check that prevents
+   * that. They were absent from the original suite, which is exactly
+   * why the bug shipped.
+   */
+  it("returns 502 when the script reports success:false despite HTTP 200", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(SCRIPT_ERROR_RESPONSE()));
+    const { POST } = await loadRoute();
+    const res = await POST(makeRequest(VALID_VOLUNTEER));
+    expect(res.status).toBe(502);
+    expect((await res.json()).ok).toBe(false);
+  });
+
+  it("returns 502 when the script echoes an Invalid type error on HTTP 200", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(SCRIPT_ERROR_RESPONSE("Invalid type.")),
+    );
+    const { POST } = await loadRoute();
+    const res = await POST(makeRequest(VALID_PARTNER));
+    expect(res.status).toBe(502);
+  });
+
+  it("returns 502 when the upstream body is HTML rather than JSON", async () => {
+    // Happens when the Web App deployment is not public: Google serves
+    // a login interstitial with a 200 instead of the script's JSON.
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValue(
+          new Response("<!DOCTYPE html><html>Sign in</html>", { status: 200 }),
+        ),
+    );
+    const { POST } = await loadRoute();
+    const res = await POST(makeRequest(VALID_VOLUNTEER));
+    expect(res.status).toBe(502);
+  });
+
+  it("returns 502 when the upstream body is empty", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(new Response("", { status: 200 })),
+    );
+    const { POST } = await loadRoute();
+    const res = await POST(makeRequest(VALID_VOLUNTEER));
+    expect(res.status).toBe(502);
+  });
+
+  it("returns 200 only when the script confirms success:true", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(SUCCESS_RESPONSE()));
+    const { POST } = await loadRoute();
+    const res = await POST(makeRequest(VALID_VOLUNTEER));
+    expect(res.status).toBe(200);
+    expect((await res.json()).ok).toBe(true);
+  });
+
+  /**
+   * The route's own fetch timeout is only enforceable if the platform
+   * lets the function live longer than the timeout it is waiting on.
+   * If `maxDuration` ever drops below the internal budget, the host
+   * kills the request first and every timeout branch in the route
+   * becomes unreachable, silently. Worst case in the handler is
+   * 25s fetch + 0.5s backoff + 8s retry = 33.5s.
+   */
+  it("declares a maxDuration larger than its own timeout budget", async () => {
+    const mod = await loadRoute();
+    const maxDuration = (mod as { maxDuration?: number }).maxDuration;
+    expect(typeof maxDuration).toBe("number");
+    expect(maxDuration!).toBeGreaterThanOrEqual(35);
+  });
+
   it("returns 502 when fetch throws (network error)", async () => {
     vi.stubGlobal(
       "fetch",
@@ -262,7 +355,7 @@ describe("POST /api/submit-application, webhook forwarding", () => {
   it("truncates oversized fields to 4000 chars before forwarding", async () => {
     const fetchSpy = vi
       .fn()
-      .mockResolvedValue(new Response("", { status: 200 }));
+      .mockResolvedValue(SUCCESS_RESPONSE());
     vi.stubGlobal("fetch", fetchSpy);
     const oversized = "x".repeat(10_000);
     const { POST } = await loadRoute();

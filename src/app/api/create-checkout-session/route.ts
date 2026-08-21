@@ -14,12 +14,47 @@ import { validateAmount, validateOneOf } from "@/lib/validation";
  * 503 with a friendly message so the UI can fall back to the email path.
  */
 
+/**
+ * Platform execution budget. Must exceed the Stripe client's own
+ * worst case (15s + backoff + 15s retry ≈ 32s) or the host kills the
+ * function first and the timeout settings below never take effect.
+ */
+export const maxDuration = 45;
+
+/**
+ * Pinned to the version the installed SDK's types are generated
+ * against. Without an explicit `apiVersion` the SDK follows the
+ * *account's* default, which Stripe can roll forward on their
+ * schedule. That turns a dashboard-side change into a behavioural
+ * change in production with no deploy and no warning on our side.
+ */
+const STRIPE_API_VERSION = "2026-04-22.dahlia";
+
+/**
+ * 15 seconds. The SDK default is 80s, which for a user-facing request
+ * means a donor can sit watching "Starting checkout…" for well over a
+ * minute before anything happens. Measured round trips to Stripe are
+ * around 1s on a healthy network, so 15s is generous while still
+ * failing in a timeframe a person will tolerate.
+ *
+ * One retry, not the default: retries apply to network-layer failures,
+ * and a donor's connection dropping twice in a row is better handled
+ * by letting them click the button again than by silently burning
+ * another 15s of their patience.
+ */
+const STRIPE_TIMEOUT_MS = 15_000;
+const STRIPE_MAX_RETRIES = 1;
+
 let cachedStripe: Stripe | null = null;
 function getStripe(): Stripe | null {
   if (cachedStripe) return cachedStripe;
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) return null;
-  cachedStripe = new Stripe(key);
+  cachedStripe = new Stripe(key, {
+    apiVersion: STRIPE_API_VERSION,
+    timeout: STRIPE_TIMEOUT_MS,
+    maxNetworkRetries: STRIPE_MAX_RETRIES,
+  });
   return cachedStripe;
 }
 

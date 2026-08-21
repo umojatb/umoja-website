@@ -53,7 +53,7 @@ Optional, but recommended for production:
 
 ```env
 # Branded sender. Required to use anything other than Resend's default.
-CONTACT_FROM_EMAIL=Umoja Africa <no-reply@umoja-africa.org>
+CONTACT_FROM_EMAIL=Umoja Africa <no-reply@umoja.tbafrica.org>
 
 # Override the recipient if you want non-default behavior. Defaults to
 # info@umoja.tbafrica.org.
@@ -67,13 +67,13 @@ verification but lands in spam more often.
 ### 3. (Production) Verify your domain in Resend
 
 1. Resend dashboard -> **Domains** -> **Add domain** -> enter
-   `umoja-africa.org` (or whatever your apex is).
+   `umoja.tbafrica.org` (the production domain).
 2. Resend gives you four DNS records to add (SPF, DKIM, DMARC,
    return-path). Add them at your DNS provider.
 3. Wait 5-30 minutes, then hit **Verify** in the Resend dashboard.
 4. Set `CONTACT_FROM_EMAIL` in your Vercel project env vars to a
    sender on the verified domain, e.g.
-   `Umoja Africa <no-reply@umoja-africa.org>`.
+   `Umoja Africa <no-reply@umoja.tbafrica.org>`.
 
 Until verified, **production sends will be rejected by Resend** if you
 try to use a non-`@resend.dev` sender. Domain verification is the only

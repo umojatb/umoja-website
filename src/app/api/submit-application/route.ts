@@ -188,6 +188,21 @@ function redactedSummary(payload: Clean): Record<string, unknown> {
   };
 }
 
+/**
+ * Platform-level execution budget for this route, in seconds.
+ *
+ * This MUST exceed `FETCH_TIMEOUT_MS` (plus retry and backoff), or the
+ * host kills the function before our own timeout can fire, and all the
+ * careful timeout classification below becomes unreachable code. On
+ * Vercel the default function duration is short enough to do exactly
+ * that, so raising `FETCH_TIMEOUT_MS` without also raising this would
+ * have changed nothing.
+ *
+ * Worst case inside the handler is 25s + 0.5s backoff + 8s = 33.5s,
+ * so 45s leaves margin for request parsing and the response itself.
+ */
+export const maxDuration = 45;
+
 export async function POST(request: Request) {
   let raw: Record<string, unknown>;
   try {
@@ -233,16 +248,45 @@ export async function POST(request: Request) {
 
   try {
     const upstream = await postWithRetry(webhook, JSON.stringify(enriched));
-    if (!upstream.ok) {
+
+    // The HTTP status alone is NOT sufficient to conclude the row was
+    // written. Apps Script's ContentService answers 200 on every code
+    // path, including all of its own error paths:
+    //
+    //   {"success":false,"error":"Invalid type."}        -> HTTP 200
+    //   {"success":false,"error":"Could not acquire lock."} -> HTTP 200
+    //   {"success":false,"error":<any thrown exception>} -> HTTP 200
+    //
+    // Trusting `upstream.ok` therefore reports "Application received"
+    // to the applicant while their data is silently discarded, with
+    // nothing logged anywhere. That is the worst failure mode this
+    // route has: invisible data loss on a submission the user believes
+    // succeeded. So we require an explicit `success: true` in the body.
+    //
+    // A non-JSON body (an Apps Script HTML error page, a login
+    // interstitial when the deployment is not public) also fails the
+    // check, which is correct: if we cannot confirm the write, we must
+    // not claim it happened.
+    const bodyText = await upstream.text().catch(() => "");
+    let payload: { success?: boolean; error?: string } | null = null;
+    try {
+      payload = JSON.parse(bodyText) as { success?: boolean; error?: string };
+    } catch {
+      payload = null;
+    }
+
+    if (!upstream.ok || payload?.success !== true) {
       console.error(
-        "[apply] webhook returned non-2xx after retries:",
+        "[apply] webhook did not confirm the write:",
+        "status=",
         upstream.status,
         "host=",
         safeHost(webhook),
         "elapsed=",
         Date.now() - startedAt,
         "ms",
-        await upstream.text().catch(() => ""),
+        "error=",
+        payload?.error ?? bodyText.slice(0, 200),
       );
       return NextResponse.json(
         { ok: false, message: "Could not save your application. Please try again." },
@@ -287,13 +331,37 @@ export async function POST(request: Request) {
   }
 }
 
-// 10 seconds. Apps Script Web Apps redirect through
-// script.googleusercontent.com and on cold start the script container
-// can take 5-10 seconds to spin up before our payload is even processed.
-// 6s left no margin and timed out on every cold start. Apps Script's
-// own response budget is 30s, so 10s is conservative.
-const FETCH_TIMEOUT_MS = 10_000;
-const RETRY_TIMEOUT_MS = 5_000;
+/**
+ * 25 seconds.
+ *
+ * History: 6s timed out on every cold start, so it was raised to 10s.
+ * Measurement against the live deployment showed 10s is still too
+ * tight. Five GET probes of `doGet` — which only serializes a small
+ * JSON object and touches neither the spreadsheet nor MailApp — came
+ * back at 3.0s, 2.5s, 2.6s, 6.0s and 9.3s. That 9.3s worst case is the
+ * floor, not the ceiling: a real POST additionally acquires a script
+ * lock, opens the spreadsheet, appends a row, and sends a notification
+ * email synchronously before responding.
+ *
+ * A response timeout here is worse than a slow request. The write
+ * usually completes on Google's side after we stop listening, so the
+ * applicant is told the submission failed when it actually succeeded.
+ * They either resubmit (duplicate row) or give up (a volunteer lost
+ * from a pipeline that in fact captured them). Waiting longer is
+ * strictly better than guessing wrong.
+ *
+ * 25s sits under Apps Script's own 30s response budget, so if we do
+ * time out the script was going to fail regardless.
+ */
+const FETCH_TIMEOUT_MS = 25_000;
+/**
+ * The retry only fires on connection-layer failures (DNS, refused,
+ * reset), never on timeout, so it is a fresh attempt at a host we
+ * could not reach rather than a second wait on a slow script. It stays
+ * short to keep the worst case inside `maxDuration`: 25s + 0.5s
+ * backoff + 8s = 33.5s, leaving headroom under the 45s function limit.
+ */
+const RETRY_TIMEOUT_MS = 8_000;
 const RETRY_BACKOFF_MS = 500;
 
 /**

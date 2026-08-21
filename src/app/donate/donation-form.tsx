@@ -24,6 +24,15 @@ const AMOUNT_CHOICES: readonly { value: AmountChoice; label: string }[] = [
 
 type SubmitState = "idle" | "submitting" | "redirecting" | "error";
 
+/**
+ * Client-side ceiling on the checkout request. Must stay above the
+ * route's own budget (15s Stripe timeout + backoff + one 15s retry) so
+ * this never cancels a request that was still going to succeed. It
+ * exists only so a lost connection surfaces as a clear message instead
+ * of a spinner that never resolves.
+ */
+const CLIENT_TIMEOUT_MS = 40_000;
+
 export function DonationForm() {
   const formId = useId();
   const [frequency, setFrequency] = useState<Frequency>("monthly");
@@ -67,9 +76,15 @@ export function DonationForm() {
     setErrorMessage("");
     setCheckoutUrl(null);
     try {
+      // Backstop so the browser never hangs indefinitely on a dropped
+      // connection. Deliberately longer than the server's own worst
+      // case (15s Stripe timeout + backoff + one 15s retry), so a slow
+      // but succeeding checkout is never cut off by the client. It only
+      // fires when the request is genuinely lost.
       const res = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: AbortSignal.timeout(CLIENT_TIMEOUT_MS),
         body: JSON.stringify({
           amount: effectiveAmount,
           frequency,
@@ -98,8 +113,18 @@ export function DonationForm() {
       window.location.assign(data.url);
     } catch (error) {
       setStatus("error");
+      // AbortSignal.timeout() rejects with a DOMException named
+      // "TimeoutError". Tell a donor whose connection stalled that the
+      // problem is the connection, not their card, and point them at
+      // the email fallback rather than leaving them to guess.
+      const timedOut =
+        error instanceof DOMException && error.name === "TimeoutError";
       setErrorMessage(
-        error instanceof Error ? error.message : "Could not start checkout.",
+        timedOut
+          ? "The connection timed out before checkout could start. Please check your connection and try again, or email us to give."
+          : error instanceof Error
+            ? error.message
+            : "Could not start checkout.",
       );
     }
   }
