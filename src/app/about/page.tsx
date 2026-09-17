@@ -210,12 +210,12 @@ function TeamSection() {
     <Section id="team" className="py-10 md:py-14">
       <Heading
         level={2}
-        eyebrow="Our Team"
-        description="Umoja was founded, and is still led day-to-day, by the two friends who started it in June 2021. Click Quick look on any card to read the full story."
+        eyebrow="Our team"
+        description="Our team is made up of the people who lead, coordinate, and carry Umoja's work forward. Select anyone to read their full profile."
       >
-        The founders
+        The people behind Umoja
       </Heading>
-      <div className="mt-8">
+      <div className="mt-10">
         <TeamDirectory />
       </div>
     </Section>
